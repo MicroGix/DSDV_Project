@@ -14,22 +14,6 @@ function rowConverter(d) {
   };
 }
 
-// since we use d3 v5 the API for fetching data has changed so the v4 version will not work:
-// d3.csv(
-//   "data.csv",
-//   rowConverter,
-//   function (error, data) {
-//     if (error) {
-//       console.log(error);
-//     } else {
-//       dataset = data;
-//       console.log(data);
-//       initChart();
-//     }
-//   },
-// );
-// Detail on this problem: https://stackoverflow.com/questions/52638816/d3-importing-csv-file-to-array
-
 const df_url =
   "https://raw.githubusercontent.com/MicroGix/Influence-of-factors-on-students-performence/main/main_data.csv";
 d3.csv(df_url, rowConverter).then(
@@ -71,26 +55,24 @@ function initPanel_3() {
     .attr("transform", "translate(0," + h + ")")
     .call(d3.axisBottom(x_stack).tickSizeOuter(0));
 
-  // function to calculate number of occurence 
-  let genderData = []; 
-  df.forEach(function(d) {
+  // generate a whole new dataset for gender
+  const genderCounts = {};
+  df.forEach(function (d) {
     const gender = d.gender;
-    genderData.push(gender);
-  })
-  let n_male = 0;
-  let n_female = 0;
-  genderData.forEach(genderCount);
-  function genderCount(item) {
-    if (item =="male") {
-      return n_male++;
+    if (genderCounts[gender]) {
+      genderCounts[gender]++;
     } else {
-      return n_female++;
+      genderCounts[gender] = 1;
     }
+  });
+  const genderData = [];
+  for (const gender in genderCounts) {
+    genderData.push({ gender: gender, count: genderCounts[gender] });
   }
-  const total = n_male + n_female;
+
   const y_stack = d3
     .scaleLinear()
-    .domain([0, total])
+    .domain([0, 1000])
     .range([h, 0]);
   stack
     .append("g")
@@ -105,29 +87,47 @@ function initPanel_3() {
 
   const stackedData = d3
     .stack()
-    .keys(genderGroup)(df);
-
-  stack
-    .append("g")
-    .selectAll("g")
-    .data(stackedData)
-    .enter().append("g")
-    .attr("fill", (d) => color(d.key))
-    .selectAll("rect")
-    .data((d) => d)
-    .enter().append("rect")
-    .attr("x", (d) => x_stack(d.data.group))
-    .attr("y", (d) => y_stack(d[1]))
-    .attr("heigt", function (d) {
-      return y_stack(d[0]) - y_stack(d[1]);
-    })
-    .attr("width", x_stack.bandwidth());
+    .keys(genderGroup)(genderData);
+  console.log(stackedData);
 }
 
 //-----------Summay of what i found-------------------------------------------------
 // 1. function to identify unique values: https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
-// function onlyUnique(value, index, array) {
-//   return array.indexOf(value) == index;
-// }
-//
+  // function onlyUnique(value, index, array) {
+  //   return array.indexOf(value) == index;
+  // }
 // 2. different API for fetching data v4 vs v5: https://stackoverflow.com/questions/52638816/d3-importing-csv-file-to-array
+// 3. function to calculate number of occurence -> not quite good 
+  // let genderData = []; 
+  // df.forEach(function(d) {
+  //   const gender = d.gender;
+  //   genderData.push(gender);
+  // })
+  // let n_male = 0;
+  // let n_female = 0;
+  // genderData.forEach(genderCount);
+  // function genderCount(item) {
+  //   if (item =="male") {
+  //     return n_male++;
+  //   } else {
+  //     return n_female++;
+  //   }
+  // }
+  // const total = n_male + n_female;
+// 4. Create stack barchart using stack layout (can only apply for v3): https://www.youtube.com/watch?v=iEV8ZdTd2rg
+// 5. Problems: since we use d3 v5 the API for fetching data has changed so the v4 version will not work:
+  // d3.csv(
+  //   "data.csv",
+  //   rowConverter,
+  //   function (error, data) {
+  //     if (error) {
+  //       console.log(error);
+  //     } else {
+  //       dataset = data;
+  //       console.log(data);
+  //       initChart();
+  //     }
+  //   },
+  // );
+  // Detail on this problem: https://stackoverflow.com/questions/52638816/d3-importing-csv-file-to-array
+
