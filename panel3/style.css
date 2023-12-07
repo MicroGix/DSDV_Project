@@ -18,7 +18,7 @@ h1 {
     padding: 20px;
 }
 
-.area{
+.left.area{
     width: 100%;
     padding: 10px;
     box-sizing: border-box; /* include padding in both width,height */
@@ -41,4 +41,15 @@ h1 {
 .right .area {
     display: flex;
     flex-wrap: wrap;
+}
+.right.area{
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box; /* include padding in both width,height */
+}
+#barplot {
+  height: 75%;
+}
+#conclusion {
+  height: 35%;
 }
