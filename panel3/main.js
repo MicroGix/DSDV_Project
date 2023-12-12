@@ -1,16 +1,16 @@
 function rowConverter(d) {
   return {
-    // name: d.name,
+    name: d.name,
     gender: d.gender,
-    // pdegrees: d["parent degrees"],
-    // lunch: d.lunch,
-    TPC: d["test prep"],
-    // math: parseFloat(d["math score"]),
-    // reading: parseFloat(d["reading score"]),
-    // writing: parseFloat(d["writing score"]),
-    // avg: parseFloat(d.avg),
-    // result: d.result,
-    // grade: d.grade,
+    pdegrees: d["parent degrees"],
+    lunch: d.lunch,
+    tpc: d["test prep"],
+    math: parseFloat(d["math score"]),
+    reading: parseFloat(d["reading score"]),
+    writing: parseFloat(d["writing score"]),
+    avg: parseFloat(d.avg),
+    result: d.result,
+    grade: d.grade,
     group: d.group,
   };
 }
@@ -19,20 +19,21 @@ const df_url =
   "https://raw.githubusercontent.com/MicroGix/Influence-of-factors-on-students-performence/main/main_data.csv";
 d3.csv(df_url, rowConverter).then(
   function (data) {
-    df = data;
-    console.log(df);
-    initPanel_3();
+    initPanel_3(data);
   },
 );
 
-function initPanel_3() {
+function initPanel_3(data) {
+
+  // SVG DIMENSION (SOLVE)
   const outer_w = 500;
   const outer_h = 300;
   const margin = { top: 20, right: 10, bottom: 50, left: 50 };
   const h = outer_h - margin.top - margin.bottom;
   const w = outer_w - margin.right - margin.left;
   const p = 20;
-  //------------------------stack-plot--------------------
+
+  // SVG CONTAINER (SOLVE)
   const stack = d3
     .select("#stack-plot")
     .append("svg")
@@ -41,82 +42,96 @@ function initPanel_3() {
     .append("g")
     .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
 
-  // groups data bases on tcp status
-  const tcpGroup = d3.map(df, function (d) {
-    return (d.TCP);
-  }).keys();
+  // CREATE FUNCTION TO COUNT NUMBERS OF TPC BY GROUP AND GENDER (SOLVE!!!)
+  function countTPCbyGender(data) {
+    const result = {};
+    data.forEach((d) => {
+      const genders = d.gender;
+      const tpc = d.tpc;
+      // For each gender element in the dataset, if it doesn't already exist then crete a new object with two properties n_tpc and groups:
+      result[genders] = result[genders] || { n_tpc: 0, groups: {} };
+      // For each tpc element coresponding with gender element in the dataset, if it hasn't existed, then create a new object with n_tpc property:
+      result[genders].groups[tpc] = result[genders].groups[tpc] || { n_tpc: 0 };
+      // For each gender elements in the dataset, if it hasn't existed then n_tpc increase by 1:
+      result[genders].n_tpc++;
+      // For each tpc element coresponding with gender element in the dataset, if it hasn't existed then n_tpc increase by 1:
+      result[genders].groups[tpc].n_tpc++;
+    });
+    return result;
+  }
 
+  function countTPCbyGroup(data) {
+    const result = {};
+    data.forEach((d) => {
+      const groups = d.group;
+      const tpc = d.tpc;
+      result[groups] = result[groups] || {n_tpc: 0, status: {}};
+      result[groups].status[tpc] = result[groups].status[tpc] || {n_tpc: 0};
+      result[groups].n_tpc++;
+      result[groups].status[tpc].n_tpc++;
+    });
+    return result;
+  }
+  
+  // INIT DATASET FOR CHARTS
+  const TPCbyGender = countTPCbyGender(data); // use for stack bar chart
+  const TPCbyGroup= countTPCbyGroup(data); // use for horizontal bar chart
+  console.log(TPCbyGender);
+  console.log(TPCbyGroup);
+
+  // SET UP SCALE
+  // Question: from the object create above how can i get the values that are needed for setting up scale of the chart (X and Y)?
+  // Question: what type of data do these scale accept?
+  // Question: how can i access value of an object within an object?
   // x scale
-  const x_stack = d3
+  const tpcStack= d3.map(data, (d) => d.tpc).keys();
+  const xStack = d3
     .scaleBand()
-    .domain(tcpGroup)
+    .domain(tpcStack)
     .range([0, w - p])
     .padding([0.2]);
   stack
     .append("g")
     .attr("transform", "translate(0," + h + ")")
-    .call(d3.axisBottom(x_stack).tickSizeOuter(0));
+    .call(d3.axisBottom(xStack).tickSizeOuter(0));
 
-  // generate a whole new dataset for gender
-  const genderCounts = {};
-  df.forEach(function (d) {
-    const gender = d.gender;
-    if (genderCounts[gender]) {
-      genderCounts[gender]++;
-    } else {
-      genderCounts[gender] = 1;
-    }
-  });
-
-  const genderData = [];
-  for (const gender in genderCounts) {
-    genderData.push({ gender: gender, count: genderCounts[gender] });
-  }
-  console.log(genderData);
-
-  const stackData = [];
-  df.forEach(function(obj) {
-    let values = Object.values(obj)
-    return stackData.push(values);
-  })
-  console.log(stackData);
-  const y_stack = d3
+  const yStack = d3
     .scaleLinear()
     .domain([0, 1000])
     .range([h, 0]);
   stack
     .append("g")
-    .call(d3.axisLeft(y_stack));
+    .call(d3.axisLeft(yStack));
 
-  const genderGroup = d3.map(genderData, (d) => d.gender).keys();
+  const genderStack = d3.map(data, (d) => d.gender).keys();
   const color = d3
     .scaleOrdinal()
-    .domain(genderGroup)
+    .domain(genderStack)
     .range(["red", "blue"]);
-
-  //---------------------barplot1-------------------------
-  const bar = d3
-    .select("#barplot")
-    .append("svg")
-    .attr("width", outer_w)
-    .attr("height", outer_h)
-    .append("g")
-    .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
-
-  const x_bar = d3
-    .scaleLinear()
-    .range([0, w - p])
-    .domain([0]);
-  bar
-    .append("g")
-    .attr("transform", "translate(0," + h + ")")
-    .call(d3.axisBottom(x_stack));
-
-  const y_bar = d3
-    .scaleBand()
-    .range([h, 0])
-    .domain(d3.map(df, (d) => d.group).keys())
-    .padding(0.2);
+  //
+  //   //---------------------barplot1-------------------------
+  //   const bar = d3
+  //     .select("#barplot")
+  //     .append("svg")
+  //     .attr("width", outer_w)
+  //     .attr("height", outer_h)
+  //     .append("g")
+  //     .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
+  //
+  //   const x_bar = d3
+  //     .scaleLinear()
+  //     .range([0, w - p])
+  //     .domain([0]);
+  //   bar
+  //     .append("g")
+  //     .attr("transform", "translate(0," + h + ")")
+  //     .call(d3.axisBottom(x_stack));
+  //
+  //   const y_bar = d3
+  //     .scaleBand()
+  //     .range([h, 0])
+  //     .domain(d3.map(df, (d) => d.group).keys())
+  //     .padding(0.2);
 }
 
 //-----------Summay of what i found-------------------------------------------------
