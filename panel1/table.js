@@ -40,14 +40,13 @@ function calculateSumByGenderAndGroup(data) {
 
 function createRow(label, values, isBold) {
   const row = document.createElement("tr");
-
-  // Add hover effect and background color styles
+  row.classList.add("hovered-row"); // Add hover effect and background color styles
   row.addEventListener("mouseover", function () {
-    this.style.backgroundColor = "lightgray";
+    this.classList.add("hovered-row");
   });
 
   row.addEventListener("mouseout", function () {
-    this.style.backgroundColor = "";
+    this.classList.remove("hovered-row");
   });
 
   row.innerHTML = `
@@ -61,14 +60,15 @@ function createRow(label, values, isBold) {
 }
 function createRow2(label, values, isBold) {
   const row = document.createElement("tr");
+  row.classList.add("hovered-row");
 
   // Add hover effect and background color styles
   row.addEventListener("mouseover", function () {
-    this.style.backgroundColor = "lightgray";
+    this.classList.add("hovered-row");
   });
 
   row.addEventListener("mouseout", function () {
-    this.style.backgroundColor = "";
+    this.classList.remove("hovered-row");
   });
 
   row.innerHTML = `
@@ -107,9 +107,6 @@ function renderTable(data) {
       }
     });
   });
-
-  // Thêm dòng cuối cùng với grand total
-  tableBody.appendChild(createRow("Total", grandTotal, true));
 }
 
 function calculateAverageByDegree(data) {
@@ -240,9 +237,9 @@ fetch("./main_data.csv")
       data: getDataFromTable("data-table"),
       columns: [
         { data: "Gender" },
-        { data: "Sum of math score" },
-        { data: "Sum of reading score" },
-        { data: "Sum of writing score" }, // Adjust column names accordingly
+        { data: "Sum of Math score" },
+        { data: "Sum of Reading score" },
+        { data: "Sum of Writing score" }, // Adjust column names accordingly
       ],
       searching: false,
       ordering: false,

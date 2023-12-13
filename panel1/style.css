@@ -191,3 +191,20 @@ width: 80%;
     text-align: center;
     margin: 0;
   }
+  .hovered-row {
+    background-color: rgb(28, 67, 222);
+    height: 50px; /* Set the initial height for the rows */
+    transition: height 0.3s, background-color 0.3s; /* Add smooth transition effects */
+}
+
+tr.hovered-row td {
+    background-color: lightgray;
+}
+
+tr.hovered-row:hover {
+    height: 70px; /* Set the desired height for the hovered rows */
+}
+
+tr.hovered-row:hover td {
+    height: 70px; /* Set the desired height for the hovered cells */
+}
