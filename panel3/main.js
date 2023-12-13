@@ -97,8 +97,6 @@ function initPanel_3(data) {
     .domain(subgroups)
     .range(["red", "blue"]);
 
-  console.log(genderData.map((d) => d.tpc));
-  console.log(data.map((d) => d.tpc));
 
   stack.append("g")
     .selectAll("g")
