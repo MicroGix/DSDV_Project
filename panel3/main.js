@@ -19,7 +19,6 @@ const df_url =
   "https://raw.githubusercontent.com/MicroGix/Influence-of-factors-on-students-performence/main/main_data.csv";
 d3.csv(df_url, rowConverter).then(
   function (data) {
-    console.log(data);
     initPanel_3(data);
   },
 );
@@ -42,66 +41,42 @@ function initPanel_3(data) {
     .append("g")
     .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
 
-  // CREATE FUNCTION TO COUNT NUMBERS OF TPC BY GROUP AND GENDER (NOTYET!!!)
+  // CREATE FUNCTION TO COUNT NUMBERS OF TPC BY GENDER (SOLVE)
   // See explaination at problem 6.
- 
+
   function countGenderbyTPC(data) {
     const result = {};
     data.forEach((d) => {
       const tpc = d.tpc;
       const genders = d.gender;
-      result[tpc] = result[tpc] || {total: 0, gender: {}};
-      result[tpc].gender[genders] = result[tpc].gender[genders] || {n: 0};
+      result[tpc] = result[tpc] || { total: 0, gender: {} };
+      result[tpc].gender[genders] = result[tpc].gender[genders] || { n: 0 };
       result[tpc].total++;
       result[tpc].gender[genders].n++;
     });
     return result;
   }
 
-  function countGroupbyTPC(data) {
-    const result = {};
-    data.forEach((d) => {
-      const tpc = d.tpc;
-      const groups = d.group;
-      result[tpc] = result[tpc] || {total: 0, group: {}};
-      result[tpc].group[groups] = result[tpc].group[groups] || { n: 0 };
-      result[tpc].total++;
-      result[tpc].group[groups].n++;
-    });
-    return result;
-  }
-
-  // INIT DATASET FOR CHARTS
-  const TPCbyGender = countGenderbyTPC(data); // use for stack bar chart
-  const TPCbyGroup = countGroupbyTPC(data); // use for horizontal bar chart
-  console.log(TPCbyGender);
-  console.log(TPCbyGroup);
-
-  const genderStack= Object.entries(TPCbyGender).map(([tpc, value]) => {
+  // CREATE DATASET FOR STACK CHARTS
+  const TPCbyGender = countGenderbyTPC(data);
+  const genderData= Object.entries(TPCbyGender).map(([tpc, value]) => {
     const gender = Object.values(value.gender);
     const female = Object.values(gender[0]);
     const male = Object.values(gender[1]);
-    return {tpc: tpc, female: female[0], male: male[0]};
+    return { tpc: tpc, female: female[0], male: male[0] };
   });
-  console.log(genderStack);
+  console.log(genderData);
 
-  const groupStack= Object.entries(TPCbyGroup).map(([tpc, value]) => {
-    const group = Object.values(value.group);
-    return {tpc: tpc};
-  });
-  console.log(groupStack);
-
-  //----------------------------stack-chart---------------------------------------
   // SET UP SCALE
-  // Question: from the object create above how can i get the values that are needed for setting up scale of the chart (X and Y)?
-  // Question: what type of data do these scale accept?
-  // Question: how can i access value of an object within an object?
-  
-  // x scale
-  const tpcStack = d3.map(data, (d) => d.tpc).keys();
+  const tpcLabels= genderData.map((d) => d.tpc);
+  const subgroups = genderData.map(({female, male})=> {
+    return {female: female, male: male};
+  });
+  const after_stackData = d3.stack().keys(["female", "male"])(genderData)
+
   const xStack = d3
     .scaleBand()
-    .domain(tpcStack)
+    .domain(tpcLabels)
     .range([0, w - p])
     .padding([0.2]);
   stack
@@ -117,16 +92,47 @@ function initPanel_3(data) {
     .append("g")
     .call(d3.axisLeft(yStack));
 
-  const genderKeys = d3.map(data, (d) => d.gender).keys();
   const color = d3
     .scaleOrdinal()
-    .domain(genderKeys)
+    .domain(subgroups)
     .range(["red", "blue"]);
 
-  const subgroups = 
+  console.log(genderData.map((d) => d.tpc));
+  console.log(data.map((d) => d.tpc));
+
+  stack.append("g")
+    .selectAll("g")
+    .data(after_stackData)
+    .enter().append("g")
+      .attr("fill", (d) => color(d.key))
+      .selectAll("rect")
+      .data((d) => d)
+      .enter().append("rect")
+        .attr("x", function (d, i) {
+          return xStack(d.genderData.tpc);
+        })
+        .attr("y", function (d) {
+          return yStack(d[1]);
+        })
+        .attr("height", function (d) {
+          return yStack(d[0]) - yStack(d[1]);
+        })
+        .attr("width", xStack.bandwidth());
 
   //
   //---------------------barplot1-------------------------
+  function countGroupbyTPC(data) {
+    const result = {};
+    data.forEach((d) => {
+      const tpc = d.tpc;
+      const groups = d.group;
+      result[tpc] = result[tpc] || { total: 0, group: {} };
+      result[tpc].group[groups] = result[tpc].group[groups] || { n: 0 };
+      result[tpc].total++;
+      result[tpc].group[groups].n++;
+    });
+    return result;
+  }
   // const bar = d3
   //   .select("#barplot")
   //   .append("svg")
