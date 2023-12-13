@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="utf-8">
+    <title>Data Visualization</title>
+<head>
+    
+    </style>
+      <link rel="stylesheet" type="text/css" href="./pivot.min.css">
+      <link rel="stylesheet" type="text/css" href="./style.css">
+      <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.21/jquery.csv.min.js" integrity="sha512-Y8iWYJDo6HiTo5xtml1g4QqHtl/PO1w+dmUpQfQSOTqKNsMhExfyPN2ncNAe9JuJUSKzwK/b6oaNPop4MXzkwg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script src="./pivot.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sortable/0.9.13/jquery-sortable-min.js" integrity="sha512-9pm50HHbDIEyz2RV/g2tn1ZbBdiTlgV7FwcQhIhvykX6qbQitydd6rF19iLmOqmJVUYq90VL2HiIUHjUMQA5fw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script src="https://d3js.org/d3.v5.min.js"></script>
+      <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+</head>
+<body>
+    <div id="o2"></div>
+    <!-- Header -->
+    <div class="header">
+        <h1>Lunch type vs performance</h1>
+    </div>
+
+    <!-- Container chứa body -->
+    <div class="container">
+        <!-- Mảng trái -->
+        <div class="left">
+            <div class="row" id="rowtren">
+                <div class="box mangtren margintong" id="o1">
+                    <!-- <h1>CSV Data Row Count</h1> -->
+                    <div id="row-count"></div>
+                    Total Students</div>
+                <div class="box mangtren margintong" id="o2">select genger</div>
+            </div>
+            <div class="row">
+                <div class="box margintong" id="o3">
+                    lunch type preferred by gender
+                    <div id="table-container"></div>
+                </div>
+                <div class="box margintong" id="o4">
+                <h3>Conclusion</h3>
+                <p1>• Students Prefer "Standard Lunch" over "Free/ Reduced".<br></p1>
+                <p1>• Group D has most number of Students opted for "Standard Lunch".<br></p1>
+                <p1>• Students who prefer "Standard Lunch" scored higher marks as compared to "Free/Reduced".<br></p1>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mảng phải -->
+        <div class="right">
+            
+            
+            <div class="row">
+                <div class="small-box margintong" id="on2">
+                    <div id="groupA"></div>
+                    <div id="groupA"></div>
+                </div>
+                <div class="small-box margintong" id="on3">Ô B</div>
+                
+            </div>
+            <div class="row">
+                <div class="small-box margintong" id="on4">Ô C</div>
+                <div class="small-box margintong" id="on5">Ô D</div>
+            </div>
+            <div class="row">
+                <div class="small-box margintong" id="on6">Ô E</div>
+                <div class="small-box margintong" id="on7">Ô F</div>
+            </div>
+        </div>
+    </div>
+    <script src="./main.js"></script>
+    <script src="./table.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
+    
+</body>
+</html>
