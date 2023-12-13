@@ -33,7 +33,7 @@ d3.csv("main_data.csv")
       .attr("x", 0) // Center the text
       .attr("y", -customHeight / 2 + 20) // Position the text at the top
       .attr("text-anchor", "middle")
-      .style("font-size", "16px")
+      .style("font-size", "18px")
       .style("font-weight", "bold")
       .text("Proportion of Students by Parent's Degree");
 
@@ -127,15 +127,15 @@ var color = d3.scaleOrdinal()
     var legend2 = d3
       .select("#o1") // Change the selection to the desired element
       .append("svg")
-      .attr("width", customWidth)
-      .attr("height", customHeight) // Adjust the height as needed
+      .attr("width", customWidth-150)
+      .attr("height", customHeight-150) // Adjust the height as needed
       .selectAll(".legend2")
       .data(pieData)
       .enter()
       .append("g")
       .attr("class", "legend2")
       .attr("transform", function (d, i) {
-        return "translate(" + (customWidth - 100) + "," + (i * 20 + 10) + ")"; // Adjust the translation as needed
+        return "translate(" + (customWidth - 200) + "," + (i * 20 + 10) + ")"; // Adjust the translation as needed
       });
 
     // Add colored squares to the legend
@@ -189,7 +189,7 @@ d3.csv("main_data.csv")
     barData.sort(function(a, b) { return b.avg - a.avg; });
 
     // Define the dimensions of the chart
-    var margin = { top: 150, right: 50, bottom: 30, left: 100 },
+    var margin = { top: 50, right: 50, bottom: 80, left: 100 },
         width = 800 - margin.left - margin.right,  // Adjust the width here
         height = 400 - margin.top - margin.bottom; // Adjust the height here
 
@@ -274,7 +274,61 @@ d3.csv("main_data.csv")
 
 
   });
+  d3.csv("main_data.csv")
+  .then(function (data) {
+    // Calculate the total score for each student
+    data.forEach(function (d) {
+      d.totalScore = parseFloat(d["math score"]) + parseFloat(d["reading score"]) + parseFloat(d["writing score"]);
+    });
+
+    // Sort the data in descending order of total score
+    data.sort(function(a, b) { return b.totalScore - a.totalScore; });
+
+    // Get the top 3 students
+    var topStudents = data.slice(0, 3);
+
+    // Select the location to draw the table
+    var div = d3.select("#o4");
 
 
+    // Create the table
+    var table = div.append("table");
+    // Add a title to the table
+    table.append("caption")
+    .html("Top 3 scoring students") // Replace with your actual title
+    .style("caption-side", "top") // Position the title at the top
+    .style("text-align", "center") // Center the title
+    .style("font-size", "18px")
+    .style("font-weight", "bold");
 
 
+    // Create the table header
+    var thead = table.append("thead");
+    thead.append("tr")
+      .selectAll("th")
+      .data(["Name", "Total Marks", "Parental Level of Education"])
+      .enter()
+      .append("th")
+      .text(function(d) { return d; });
+
+    // Create the table body
+    var tbody = table.append("tbody");
+
+    // Add a row for each student
+    var rows = tbody.selectAll("tr")
+      .data(topStudents)
+      .enter()
+      .append("tr");
+
+    // Add a cell for the student ID
+    rows.append("td")
+      .text(function(d) { return d["name"]; });
+
+    // Add a cell for the total marks
+    rows.append("td")
+      .text(function(d) { return d.totalScore; });
+
+    // Add a cell for the parental level of education
+    rows.append("td")
+      .text(function(d) { return d["parent degrees"]; });
+  });
