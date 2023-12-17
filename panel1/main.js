@@ -186,7 +186,7 @@ function drawGenderPieChart(csvFilePath, width, height) {
 }
 
 // Sử dụng hàm
-drawGenderPieChart("./main_data.csv", 500, 300);
+drawGenderPieChart("./main_data.csv", 500 , 300);
 // sơ đồ 2
 function drawGroupPieChart(csvFilePath, width, height) {
   var customWidth = width;
