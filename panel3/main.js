@@ -59,25 +59,25 @@ function initPanel_3(data) {
 
   // CREATE DATASET FOR STACK CHARTS
   const TPCbyGender = countGenderbyTPC(data);
-  const genderData= Object.entries(TPCbyGender).map(([tpc, value]) => {
+  const genderData = Object.entries(TPCbyGender).map(([tpc, value]) => {
     const gender = Object.values(value.gender);
     const female = Object.values(gender[0]);
     const male = Object.values(gender[1]);
-    return { tpc: tpc, female: female[0], male: male[0] };
+    return { "tpc": tpc, "female": female[0], "male": male[0] };
   });
   console.log(genderData);
 
   // SET UP SCALE
-  const tpcLabels= genderData.map((d) => d.tpc);
-  const subgroups = genderData.map(({female, male})=> {
-    return {female: female, male: male};
+  const tpcLabelStack = genderData.map((d) => d.tpc);
+  const subgroups = genderData.map(({ female, male }) => {
+    return { female: female, male: male };
   });
-  const after_stackData = d3.stack().keys(["female", "male"])(genderData)
+  const after_stackData = d3.stack().keys(["female", "male"])(genderData);
 
   const xStack = d3
     .scaleBand()
-    .domain(tpcLabels)
-    .range([0, w - p])
+    .domain(tpcLabelStack)
+    .range([0, w])
     .padding([0.2]);
   stack
     .append("g")
@@ -97,62 +97,103 @@ function initPanel_3(data) {
     .domain(subgroups)
     .range(["red", "blue"]);
 
-
+  // INITIATE STACK CHART (SOLVE)
+  // New problems: how can i make it more beautiful
   stack.append("g")
     .selectAll("g")
     .data(after_stackData)
     .enter().append("g")
-      .attr("fill", (d) => color(d.key))
-      .selectAll("rect")
-      .data((d) => d)
-      .enter().append("rect")
-        .attr("x", function (d, i) {
-          return xStack(d.genderData.tpc);
-        })
-        .attr("y", function (d) {
-          return yStack(d[1]);
-        })
-        .attr("height", function (d) {
-          return yStack(d[0]) - yStack(d[1]);
-        })
-        .attr("width", xStack.bandwidth());
+    .attr("fill", (d) => color(d.key))
+    .selectAll("rect")
+    .data((d) => d)
+    .enter().append("rect")
+    .attr("x", function (d) {
+      return xStack(d.data.tpc); // data here mean the .data(after_stackData) you add above
+    })
+    .attr("y", function (d) {
+      return yStack(d[1]);
+    })
+    .attr("height", function (d) {
+      return yStack(d[0]) - yStack(d[1]);
+    })
+    .attr("width", xStack.bandwidth());
 
-  //
   //---------------------barplot1-------------------------
-  function countGroupbyTPC(data) {
+  // SETUP DATASET FOR BARCHART (SOLVE)
+  function countTPCbyGroup(data) { // a great approach but very hard to inegrate when need to access certain data
     const result = {};
     data.forEach((d) => {
       const tpc = d.tpc;
       const groups = d.group;
-      result[tpc] = result[tpc] || { total: 0, group: {} };
-      result[tpc].group[groups] = result[tpc].group[groups] || { n: 0 };
-      result[tpc].total++;
-      result[tpc].group[groups].n++;
+      result[groups] = result[groups] || { tpc: {} };
+      result[groups].tpc[tpc] = result[groups].tpc[tpc] || { n: 0 };
+      result[groups].tpc[tpc].n++;
     });
     return result;
   }
-  // const bar = d3
-  //   .select("#barplot")
-  //   .append("svg")
-  //   .attr("width", outer_w)
-  //   .attr("height", outer_h)
-  //   .append("g")
-  //   .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
-  //
-  // const x_bar = d3
-  //   .scaleLinear()
-  //   .range([0, w - p])
-  //   .domain([0]);
-  // bar
-  //   .append("g")
-  //   .attr("transform", "translate(0," + h + ")")
-  //   .call(d3.axisBottom(x_stack));
-  //
-  // const y_bar = d3
-  //   .scaleBand()
-  //   .range([h, 0])
-  //   .domain(d3.map(df, (d) => d.group).keys())
-  //   .padding(0.2);
+
+  const TPCbyGroup = countTPCbyGroup(data);
+
+  const groupData = Object.entries(TPCbyGroup).map(([group, value]) => {
+    const counts = Object.entries(value).map(([key, innerObj]) => { // dont understand why here we must use Object.entries instead of Object.values
+      const tpcObj = Object.entries(innerObj).map(([tpc, nObj]) => {
+        const nArray = Object.values(nObj);
+        return [[tpc, nArray[0]]];
+      });
+      const countArray = tpcObj.flat();
+      return countArray;
+    });
+    const countTPC = counts.flat();
+    let result = Object.assign(
+      { group: group },
+      Object.fromEntries(countTPC),
+    );
+    return result;
+  });
+
+  console.log(groupData);
+
+  // SETUP
+  const bar = d3
+    .select("#barplot")
+    .append("svg")
+    .attr("width", outer_w)
+    .attr("height", outer_h)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
+
+  const xBar = d3
+    .scaleLinear()
+    .domain([0, 1000])
+    .range([0, w - p]);
+  bar
+    .append("g")
+    .attr("transform", "translate(0," + h + ")")
+    .call(d3.axisBottom(xBar));
+
+  const yBar = d3
+    .scaleBand()
+    .domain(groupData.map((d) => d.group))
+    .range([h, 0])
+    .padding(0.2);
+  bar
+    .append("g")
+    .call(d3.axisLeft(yBar));
+
+  bar 
+    .selectAll("rect")
+    .data(groupData)
+    .enter()
+    .append("rect")
+    .attr("x", xBar(5))
+    .attr("y", function (d) {
+      return yBar(d.group);
+    })
+    .attr("width", function (d) {
+      return xBar(d.none);
+    })
+    .attr("height", yBar.bandwidth())
+    .attr("fill", "lightgreen");
 }
 
 //-----------Summay of what i found-------------------------------------------------
@@ -211,3 +252,17 @@ function initPanel_3(data) {
 //   });
 //   return result;
 // }
+// 7. Another approach only downside is unsuable data in this case
+// const groupData = Object.entries(TPCbyGroup).map(([tpc, value]) => {
+//   const values = Object.entries(value).map(([key, groupValue]) => { // not a very good solution since in group parameter both total and group are contained here so when use with Object.entries() only the "object" part get return other get by passed;
+//     const groups = Object.entries(groupValue).map(([groupName, n_count]) => {
+//       const countArray = Object.values(n_count);
+//       return [[groupName, countArray[0]]];
+//     });
+//     const groupArray = groups.flat();
+//     return groupArray;
+//   });
+//   const counts = values.flat();
+//   let result = Object.assign({ tpc: tpc }, Object.fromEntries(counts));
+//   return result;
+// });
