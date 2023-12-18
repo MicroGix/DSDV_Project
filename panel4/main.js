@@ -33,7 +33,7 @@ d3.csv("main_data.csv")
       .attr("x", 0) // Center the text
       .attr("y", -customHeight / 2 + 20) // Position the text at the top
       .attr("text-anchor", "middle")
-      .style("font-size", "16px")
+      .style("font-size", "18px")
       .style("font-weight", "bold")
       .text("Proportion of Students by Parent's Degree");
 
@@ -127,15 +127,15 @@ var color = d3.scaleOrdinal()
     var legend2 = d3
       .select("#o1") // Change the selection to the desired element
       .append("svg")
-      .attr("width", customWidth)
-      .attr("height", customHeight) // Adjust the height as needed
+      .attr("width", customWidth-150)
+      .attr("height", customHeight-150) // Adjust the height as needed
       .selectAll(".legend2")
       .data(pieData)
       .enter()
       .append("g")
       .attr("class", "legend2")
       .attr("transform", function (d, i) {
-        return "translate(" + (customWidth - 100) + "," + (i * 20 + 10) + ")"; // Adjust the translation as needed
+        return "translate(" + (customWidth - 200) + "," + (i * 20 + 10) + ")"; // Adjust the translation as needed
       });
 
     // Add colored squares to the legend
@@ -189,7 +189,7 @@ d3.csv("main_data.csv")
     barData.sort(function(a, b) { return b.avg - a.avg; });
 
     // Define the dimensions of the chart
-    var margin = { top: 150, right: 50, bottom: 30, left: 100 },
+    var margin = { top: 50, right: 50, bottom: 80, left: 100 },
         width = 800 - margin.left - margin.right,  // Adjust the width here
         height = 400 - margin.top - margin.bottom; // Adjust the height here
 
@@ -197,7 +197,6 @@ d3.csv("main_data.csv")
     var x = d3.scaleLinear().range([0, width]);
     var y = d3.scaleBand().range([height, 0]).domain(barData.map(function(d) { return d.group; })).padding(0.1);
 
-    // Define the color scale
     // Define the color scale
     var color = d3.scaleOrdinal()
 .domain(["master's degree", "bachelor's degree", "associate's degree", "some college", "some high school", "high school"])
@@ -272,8 +271,91 @@ d3.csv("main_data.csv")
       .attr("fill", function (arcData) { return color(arcData.data.customGroup); });
   });
 
-
   });
+
+// Load the data from the CSV file
+d3.csv("main_data.csv").then(function (data) {
+  // Calculate the total score for each student and add it to the data
+  data.forEach(function(d) {
+    d.totalScore = +d["math score"] + +d["reading score"] + +d["writing score"];
+  });
+
+  // Function to update the table
+  function updateTable(sortedData) {
+    // Select the div with id "o4" and remove any existing table
+    var div = d3.select("#o4");
+    div.selectAll("*").remove();
+
+    // Create a new table in the selected div
+    var table = div.append("table");
+    var thead = table.append("thead");
+    var tbody = table.append("tbody");
+
+    // Append the header row
+    var header = thead.append("tr")
+      .selectAll("th")
+      .data(["Name", "Total Score", "Parent's Degree"])
+      .enter()
+      .append("th");
+
+    // Add sorting buttons to the "Total Score" column header
+    header.each(function(column) {
+      if (column === "Total Score") {
+        var parent = d3.select(this);
+        var container = parent.append("div").style("display", "flex");
+        
+        container.append("span").text(column);
+
+        var buttonContainer = container.append("div").style("display", "flex").style("flex-direction", "column");
+        
+        buttonContainer.append("button")
+          .text("▲")
+          .attr("class", "sort-asc")
+          .on("click", function() { updateTable(bottomStudents); });
+
+        buttonContainer.append("button")
+          .text("▼")
+          .attr("class", "sort-desc")
+          .on("click", function() { updateTable(topStudents); });
+      } else {
+        d3.select(this).text(column);
+      }
+    });
+
+    // Create a row for each object in the data and perform an action for each row
+    var rows = tbody.selectAll("tr")
+      .data(sortedData)
+      .enter()
+      .append("tr");
+
+    // Create a cell in each row for each column and update the text of each cell with the data
+    var cells = rows.selectAll("td")
+      .data(function(row) {
+        return ["name", "totalScore", "parent degrees"].map(function(column) {
+          return {column: column, value: row[column]};
+        });
+      })
+      .enter()
+      .append("td")
+      .text(function(d) { return d.value; });
+  }
+
+  // Sort the data by total score in descending order and take the top 5
+  var topStudents = data.sort(function(a, b) {
+    return b.totalScore - a.totalScore;
+  }).slice(0, 5);
+
+  // Sort the data by total score in ascending order and take the top 5
+  var bottomStudents = data.sort(function(a, b) {
+    return a.totalScore - b.totalScore;
+  }).slice(0, 5);
+
+  // Initially display the top students
+  updateTable(topStudents);
+});
+
+
+
 
 
 

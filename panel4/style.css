@@ -33,12 +33,16 @@
 
 /* Second part (40%) */
 .container .right {
-    flex: 0.4; 
-    /* This will make the second part take up 40% of the container's height */
+    flex: 0.4; /* This will make the second part take up 40% of the container's height */
+    display: flex; /* This will make the second part's children lay out in a row */
+}
+
+.container .right .half-box {
+    flex: 1; /* This will make the half-boxes each take up an equal amount of space */
 }
 
 /* Content boxes */
-.box, .large-box, .small-box {
+.box, .large-box, .small-box, .half-box {
     border: 1px solid #ccc;
     padding: 10px;
 }
@@ -52,3 +56,35 @@
     border-radius: 4px;
     pointer-events: none;
 }
+table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th
+  {
+    font-size: 20px;
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+  td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  tr:nth-child(even) {background-color: #f2f2f2;}
+
+/* Sorting buttons */
+button.sort-asc, button.sort-desc {
+    border: none;
+    color: black;
+    padding: 3px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 8px;
+    margin: 2px 2px;
+    cursor: pointer;
+}
+
