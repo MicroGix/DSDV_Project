@@ -343,12 +343,12 @@ d3.csv("main_data.csv").then(function (data) {
   // Sort the data by total score in descending order and take the top 5
   var topStudents = data.sort(function(a, b) {
     return b.totalScore - a.totalScore;
-  }).slice(0, 5);
+  }).slice(0, 3);
 
   // Sort the data by total score in ascending order and take the top 5
   var bottomStudents = data.sort(function(a, b) {
     return a.totalScore - b.totalScore;
-  }).slice(0, 5);
+  }).slice(0, 3);
 
   // Initially display the top students
   updateTable(topStudents);

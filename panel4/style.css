@@ -65,7 +65,7 @@ table {
   {
     font-size: 20px;
     text-align: left;
-    padding: 8px;
+    padding: 5px;
     border-bottom: 1px solid #ddd;
   }
   td {
@@ -84,7 +84,7 @@ button.sort-asc, button.sort-desc {
     text-align: center;
     text-decoration: none;
     font-size: 8px;
-    margin: 2px 2px;
+    margin: 3px 3px;
     cursor: pointer;
 }
 
