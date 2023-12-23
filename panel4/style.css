@@ -41,11 +41,13 @@
 }
 
 .container .right #o3 {
-    width: 60% ; /* This will make the #o3 take up less space */
+    width: 45% ; /* This will make the #o3 take up less space */
+
 }
 
 .container .right #o4 {
-    width: 40% ; /* This will make the #o4 take up more space */
+  
+    height: 100%; /* This will make the #o4 take up more space */
 }
 
 /* Content boxes */
@@ -109,6 +111,7 @@ button.sort-asc, button.sort-desc {
  #o4 {
     padding: 0;
     margin: 0;
+    width: 205% ;
   }
   
     

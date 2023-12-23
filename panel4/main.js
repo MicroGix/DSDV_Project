@@ -335,11 +335,3 @@ d3.csv("main_data.csv").then(function (data) {
     searching: false
   });
 });
-
-
-
-
-
-
-
-
