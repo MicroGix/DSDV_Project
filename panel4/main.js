@@ -292,79 +292,50 @@ d3.csv("main_data.csv").then(function (data) {
     d.totalScore = +d["math score"] + +d["reading score"] + +d["writing score"];
   });
 
-  // Function to update the table
-  function updateTable(sortedData) {
-    // Select the div with id "o4" and remove any existing table
-    var div = d3.select("#o4");
-    div.selectAll("*").remove();
-
-    // Create a new table in the selected div
-    var table = div.append("table");
-    var thead = table.append("thead");
-    var tbody = table.append("tbody");
-
-    // Append the header row
-    var header = thead.append("tr")
-      .selectAll("th")
-      .data(["Name", "Total Score", "Parent's Degree"])
-      .enter()
-      .append("th");
-
-    // Add sorting buttons to the "Total Score" column header
-    header.each(function(column) {
-      if (column === "Total Score") {
-        var parent = d3.select(this);
-        var container = parent.append("div").style("display", "flex");
-        
-        container.append("span").text(column);
-
-        var buttonContainer = container.append("div").style("display", "flex").style("flex-direction", "column");
-        
-        buttonContainer.append("button")
-          .text("▲")
-          .attr("class", "sort-asc")
-          .on("click", function() { updateTable(bottomStudents); });
-
-        buttonContainer.append("button")
-          .text("▼")
-          .attr("class", "sort-desc")
-          .on("click", function() { updateTable(topStudents); });
-      } else {
-        d3.select(this).text(column);
-      }
-    });
-
-    // Create a row for each object in the data and perform an action for each row
-    var rows = tbody.selectAll("tr")
-      .data(sortedData)
-      .enter()
-      .append("tr");
-
-    // Create a cell in each row for each column and update the text of each cell with the data
-    var cells = rows.selectAll("td")
-      .data(function(row) {
-        return ["name", "totalScore", "parent degrees"].map(function(column) {
-          return {column: column, value: row[column]};
-        });
-      })
-      .enter()
-      .append("td")
-      .text(function(d) { return d.value; });
-  }
-
   // Sort the data by total score in descending order and take the top 5
   var topStudents = data.sort(function(a, b) {
     return b.totalScore - a.totalScore;
-  }).slice(0, 3);
+  }).slice(0, 5);
 
   // Sort the data by total score in ascending order and take the top 5
   var bottomStudents = data.sort(function(a, b) {
     return a.totalScore - b.totalScore;
-  }).slice(0, 3);
+  }).slice(0, 5);
 
-  // Initially display the top students
-  updateTable(topStudents);
+  // Create the DataTable
+  $('#o4').DataTable({
+    data: topStudents,
+    columns: [
+      { data: "name", title: "Name" },
+      { data: "totalScore", title: "Total Score" },
+      { data: "parent degrees", title: "Parent's Degree" }
+    ],
+    order: [[1, 'desc']],
+    dom: 'Bfrtip',
+    buttons: [
+      {
+        text: 'Sort Ascending',
+        action: function ( e, dt, node, config ) {
+            dt.clear();
+            dt.rows.add(bottomStudents);
+            dt.draw();
+        }
+      },
+      {
+        text: 'Sort Descending',
+        action: function ( e, dt, node, config ) {
+            dt.clear();
+            dt.rows.add(topStudents);
+            dt.draw();
+        }
+      }
+    ],
+    paging: false,
+    info: false ,
+    searching: false
+  });
 });
+
 
 
 

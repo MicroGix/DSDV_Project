@@ -21,31 +21,31 @@
 
 /* First part (60%) */
 .container .left {
-    flex: 0.6; /* This will make the first part take up 60% of the container's height */
+    flex: 0.5; /* This will make the first part take up 60% of the container's height */
     display: flex; /* This will make the first part's children lay out in a row */
 }
 
-.container .left .row .box:first-child {
-    flex: 0.45; /* This will make the first box in each row take up 45% of the row's width */
+/* First part's children */
+.container .left .row {
+    flex: 1; /* This will make the first part's children each take up an equal amount of space */
+    display: flex; /* This will make the row's children lay out in a row */
 }
 
-.container .left .row .box:last-child {
-    flex: 0.55; /* This will make the second box in each row take up 55% of the row's width */
+.container .left .row .box {
+    flex: 1; /* This will make the boxes each take up an equal amount of space */
 }
-
-
 /* Second part (40%) */
 .container .right {
-    flex: 0.4; /* This will make the second part take up 40% of the container's height */
+    flex: 0.5; /* This will make the second part take up 40% of the container's height */
     display: flex; /* This will make the second part's children lay out in a row */
 }
 
-.container .right .half-box:first-child {
-    flex: 0.45; /* This will make the first half-box in the right part take up 45% of the part's width */
+.container .right #o3 {
+    width: 60% ; /* This will make the #o3 take up less space */
 }
 
-.container .right .half-box:last-child {
-    flex: 0.55; /* This will make the second half-box in the right part take up 55% of the part's width */
+.container .right #o4 {
+    width: 40% ; /* This will make the #o4 take up more space */
 }
 
 /* Content boxes */
@@ -106,4 +106,12 @@ button.sort-asc, button.sort-desc {
     margin: 3px 3px;
     cursor: pointer;
 }
+ #o4 {
+    padding: 0;
+    margin: 0;
+  }
+  
+    
 
+  
+  
