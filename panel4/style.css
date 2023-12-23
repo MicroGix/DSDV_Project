@@ -8,6 +8,7 @@
     text-align: center;
     font-family: "Segoe UI", wf_segoe-ui_normal, helvetica, arial, sans-serif;
     border-radius: 15px;
+    border-radius: 15px;
     font-size: large;
 }
 
@@ -24,15 +25,14 @@
     display: flex; /* This will make the first part's children lay out in a row */
 }
 
-/* First part's children */
-.container .left .row {
-    flex: 1; /* This will make the first part's children each take up an equal amount of space */
-    display: flex; /* This will make the row's children lay out in a row */
+.container .left .row .box:first-child {
+    flex: 0.45; /* This will make the first box in each row take up 45% of the row's width */
 }
 
-.container .left .row .box {
-    flex: 1; /* This will make the boxes each take up an equal amount of space */
+.container .left .row .box:last-child {
+    flex: 0.55; /* This will make the second box in each row take up 55% of the row's width */
 }
+
 
 /* Second part (40%) */
 .container .right {
@@ -40,8 +40,12 @@
     display: flex; /* This will make the second part's children lay out in a row */
 }
 
-.container .right .half-box {
-    flex: 1; /* This will make the half-boxes each take up an equal amount of space */
+.container .right .half-box:first-child {
+    flex: 0.45; /* This will make the first half-box in the right part take up 45% of the part's width */
+}
+
+.container .right .half-box:last-child {
+    flex: 0.55; /* This will make the second half-box in the right part take up 55% of the part's width */
 }
 
 /* Content boxes */
@@ -49,14 +53,24 @@
     border: 1px solid #ccc;
     padding: 10px;
 }
+.left .row .box {
+    width: 100%;
+    padding: 0px;
+    border: 1px solid #312222;
+    border-radius: 5px;
+}
+.box {
+    border: 1px solid #312222;
+    border-radius: 10px; 
+}
 .tooltip {
     position: absolute;
     text-align: center;
-    padding: 3px;
-    font: 13px sans-serif;
-    background: rgba(224, 229, 229, 0.966);
+    padding: 2px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
     border: 0px;
-    border-radius: 4px;
+    border-radius: 8px;
     pointer-events: none;
 }
 table {
