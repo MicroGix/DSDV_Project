@@ -13,7 +13,7 @@
   
   /* Slideshow container */
   .slideshow-container {
-    max-width: 80%;
+    max-width: 0.9;
     position: relative;
     margin: auto;
     /* height:; */
@@ -26,9 +26,9 @@
     cursor: pointer;
     position: absolute;
     top: 50%;
+    transform: translateY(-50%);
     width: auto;
     padding: 16px;
-    margin-top: -22px;
     color: white;
     font-weight: bold;
     font-size: 18px;
@@ -46,7 +46,7 @@
   /* On hover, add a black background color with a little bit see-through */
   .prev:hover,
   .next:hover {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(30, 59, 154, 0.8);
   }
   
   /* Caption text */
@@ -104,7 +104,6 @@
   
   /* On smaller screens, decrease text size */
   @media only screen and (max-width: 300px) {
-  
     .prev,
     .next,
     .text {
