@@ -198,7 +198,7 @@ width: 80%;
 }
 
 tr.hovered-row td {
-    background-color: lightgray;
+    background-color: rgb(124, 111, 111);
 }
 
 tr.hovered-row:hover {

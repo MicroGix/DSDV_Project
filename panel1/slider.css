@@ -13,7 +13,7 @@
   
   /* Slideshow container */
   .slideshow-container {
-    max-width: 80%;
+    max-width: 0.9;
     position: relative;
     margin: auto;
     /* height:; */
@@ -46,7 +46,7 @@
   /* On hover, add a black background color with a little bit see-through */
   .prev:hover,
   .next:hover {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(30, 59, 154, 0.8);
   }
   
   /* Caption text */

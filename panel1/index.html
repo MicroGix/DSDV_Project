@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>Student Performance Dashboard</title>
     <meta charset="utf-8" />
@@ -41,7 +41,7 @@
       </h1>
     </div>
     <div class="slideshow-container">
-      <div class="mySlides fade" style="height: 800px">
+      <div class="mySlides fade" style="height: 900px; display: block; margin: auto;">
         <!-- Container chứa body -->
         <div class="container">
           <!-- Mảng trái -->
@@ -131,17 +131,17 @@
           style="width: 100%; height: 100%"
         />
       </div>
-
+      <!-- add button to interact -->
       <a class="prev" onclick="plusSlides(-1)">❮</a>
       <a class="next" onclick="plusSlides(1)">❯</a>
     </div>
     <br />
 
     <div style="text-align: center">
-      <span class="dot" onclick="currentSlide(1)"></span>
-      <span class="dot" onclick="currentSlide(2)"></span>
-      <span class="dot" onclick="currentSlide(3)"></span>
-      <span class="dot" onclick="currentSlide(4)"></span>
+      <span  onclick="currentSlide(1)"></span>
+      <span  onclick="currentSlide(2)"></span>
+      <span  onclick="currentSlide(3)"></span>
+      <span  onclick="currentSlide(4)"></span>
     </div>
 
     <script src="./main.js"></script>
