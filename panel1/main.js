@@ -186,7 +186,7 @@ function drawGenderPieChart(csvFilePath, width, height) {
 }
 
 // Sử dụng hàm
-drawGenderPieChart("./main_data.csv", 500 , 300);
+drawGenderPieChart("./main_data.csv", 500, 300);
 // sơ đồ 2
 function drawGroupPieChart(csvFilePath, width, height) {
   var customWidth = width;
@@ -254,7 +254,6 @@ function drawGroupPieChart(csvFilePath, width, height) {
           return color(d.data.customGroup);
         })
         .on("mouseover", function (d) {
-          // Hiển thị tooltip khi rê chuột qua
           tooltip.transition().duration(350).style("opacity", 0.9);
           tooltip
             .html(
@@ -298,7 +297,7 @@ function drawGroupPieChart(csvFilePath, width, height) {
       // Add colored squares to the legend
       legend2
         .append("circle")
-        .attr("cx", 9)
+        .attr("cx", 37)
         .attr("cy", 9)
         .attr("r", 9) // Đặt bán kính để tạo hình tròn
         .attr("fill", function (d) {
@@ -307,7 +306,7 @@ function drawGroupPieChart(csvFilePath, width, height) {
       // Add text labels to the legend
       legend2
         .append("text")
-        .attr("x", 25)
+        .attr("x", 50)
         .attr("y", 15)
         .text(function (d) {
           return d.customGroup;
@@ -317,7 +316,7 @@ function drawGroupPieChart(csvFilePath, width, height) {
       svg
         .append("text")
         .attr("x", customWidth - 490)
-        .attr("y", -130)
+        .attr("y", -125)
         .attr("text-anchor", "middle")
         .style("font-size", "25px")
         .style("font-weight", "bold")

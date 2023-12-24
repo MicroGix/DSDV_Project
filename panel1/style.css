@@ -92,6 +92,7 @@ body{
 width: 100%; 
 height: 450px; 
 overflow: auto;
+margin-left: 0;
 }
 
 #on1 {
