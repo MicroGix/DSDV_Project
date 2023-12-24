@@ -284,8 +284,8 @@ d3.csv("main_data.csv")
 
   });
 
-  
-// Load the data from the CSV file
+
+  // Load the data from the CSV file
 d3.csv("main_data.csv").then(function (data) {
   // Calculate the total score for each student and add it to the data
   data.forEach(function(d) {

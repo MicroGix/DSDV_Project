@@ -113,6 +113,10 @@ button.sort-asc, button.sort-desc {
     margin: 0;
     width: 205% ;
   }
+.table-title {
+    text-align: center;
+    font-family: "Segoe UI", wf_segoe-ui_normal, helvetica, arial, sans-serif;
+}
   
     
 
