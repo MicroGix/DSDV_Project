@@ -8,7 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 
       <link rel="stylesheet" type="text/css" href="./pivot.min.css">
-      <link rel="stylesheet" type="text/css" href="./panel4_style.css">
+      <link rel="stylesheet" type="text/css" href="./style.css">
       <link
       href="https://cdn.datatables.net/v/ju/dt-1.13.8/af-2.6.0/b-2.4.2/b-colvis-2.4.2/b-html5-2.4.2/b-print-2.4.2/cr-1.7.0/date-1.5.1/fc-4.3.0/fh-3.4.0/kt-2.11.0/r-2.5.0/rg-1.4.1/rr-1.4.1/sc-2.3.0/sp-2.2.0/sl-1.7.0/sr-1.3.0/datatables.min.css"
       rel="stylesheet" /> 
@@ -21,43 +21,47 @@
       <script src="https://d3js.org/d3.v5.min.js"></script>
       <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 
-      <body>
-        <!-- Header -->
-        <div class="panel4_header">
-            <h1>
-                <i class="fa fa-school-circle-xmark"></i> Parental vs Performance
-                <i class="fa fa-school-circle-xmark"></i>
-            </h1>
-        </div>
-    
-        <!-- Container -->
-        <div class="panel4_container">
-            <!-- First part (60%) -->
-            <div class="panel4_left">
-                <!-- First row -->
-                <div class="panel4_row" id="panel4_rowtren">
-                    <div class="panel4_box panel4_mangtren panel4_margintong" id="panel4_o1"></div>
-                </div>
-                <!-- Second row -->
-                <div class="panel4_row">
-                    <div class="panel4_box panel4_margintong" id="panel4_o2"></div>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>
+            <i class="fa fa-school-circle-xmark"></i> Parental vs Performance
+            <i class="fa fa-school-circle-xmark"></i>
+          </h1>
+    </div>
+
+    <!-- Container -->
+    <div class="panel4_container">
+        <!-- First part (60%) -->
+        <div class="panel4_left">
+            <!-- First row -->
+            <div class="panel4_row" id="panel4_row-top">
+                <div class="panel4_box panel4_top-margin" id="panel4_box-1">
                 </div>
             </div>
+            <!-- Second row -->
+            <div class="panel4_row">
+                <div class="panel4_box panel4_margin" id="panel4_box-2"></div>
+            </div>
+        </div>
     
-            <!-- Second part (40%) -->
-            <div class="panel4_right">
-                <div class="panel4_half-box panel4_margintong" id="panel4_o3" style="font-size: 20px; line-height: 1.6;">
-                    Conclusion:<br>
-                    • Students whose parents completed Masters Degrees have scored the highest Average Marks.<br>
-                    • Parents attended/completed only High School, their Children have not scored good marks.<br>
-                    • All Top 3 Scorers belong to parents who completed Bachelor's & Associate Degree.
-                </div>
-    
-                <table class="panel4_half-box panel4_margintong" id="panel4_o4"></table>
+        <!-- Second part (40%) -->
+        <div class="panel4_right">
+            <div class="panel4_half-box panel4_margin" id="panel4_box-3" style="font-size: 20px; line-height: 1.6;">
+                Conclusion:<br>
+                • Students whose parents completed Masters Degrees have scored the highest Average Marks.<br>
+                • Parents attended/completed only High School, their Children have not scored good marks.<br>
+                • All Top 3 Scorers belong to parents who completed Bachelor's & Associate Degree.
             </div>
     
+            <div class="panel4_half-box panel4_margin">
+                <h2 class="panel4_table-title">Student Performance</h2> <!-- Your title here -->
+                <table id="panel4_box-4"></table>
+            </div>
         </div>
-        <script src="./panel4_main.js"></script>
-    </body>
-    </html>
+    </div>
     
+    <script src="./main.js"></script>
+</body>
+</html>

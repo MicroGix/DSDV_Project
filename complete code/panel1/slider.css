@@ -29,10 +29,10 @@
     transform: translateY(-50%);
     width: auto;
     padding: 5px;
-    color: rgb(207, 11, 11) !important;
+    color: black !important;
     font-weight: bold;
     font-size: 18px;
-    transition: 0.5s ease;
+    transition: 0.6s ease;
     border-radius: 0 3px 3px 0;
     user-select: none;
   }
@@ -93,7 +93,7 @@
   /* Fading animation */
   .fade {
     animation-name: fade;
-    animation-duration: 1s;
+    animation-duration: 1.5s;
   }
   
   @keyframes fade {
