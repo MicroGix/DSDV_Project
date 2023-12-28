@@ -1,14 +1,16 @@
+// set the initial value of panel
 let slideIndex = 1;
 showSlides(slideIndex);
-
+// move the next slide
 function plusSlides(n) {
   showSlides((slideIndex += n));
 }
+// move the previous slide
 
 function currentSlide(n) {
   showSlides((slideIndex = n));
 }
-
+// show slide
 function showSlides(n) {
   let i;
   let slides = document.getElementsByClassName("mySlides");
