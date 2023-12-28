@@ -1,5 +1,5 @@
 // Load the data from the CSV file
-d3.csv("main_data.csv")
+d3.csv("../panel4/main_data.csv")
   .then(function (data) {
     // Calculate the count for each "parent degrees" value
     var counts = {};
@@ -18,7 +18,7 @@ d3.csv("main_data.csv")
 
     // Select the location to draw the chart
     var svg = d3
-      .select("#o1")
+      .select("#panel4_box-1")
       .append("svg")
       .attr("width", customWidth)
       .attr("height", customHeight)
@@ -90,7 +90,7 @@ var color = d3.scaleOrdinal()
       .style("top", (d3.event.pageY - 28) + "px");
 
     // Highlight the corresponding bar in the bar chart
-    d3.select("#o2").selectAll(".bar")
+    d3.select("#panel4_box-2").selectAll(".bar")
       .attr("fill", function (barData) {
         return barData.group === d.data.customGroup ? color(barData.group) : "#ccc"; // Change the color as needed
       });
@@ -106,7 +106,7 @@ var color = d3.scaleOrdinal()
     tooltip.transition().duration(500).style("opacity", 0);
 
     // Reset the color of the corresponding bar in the bar chart
-    d3.select("#o2").selectAll(".bar")
+    d3.select("#panel4_box-2").selectAll(".bar")
       .attr("fill", function (barData) { return color(barData.group); });
 
     // Reset the scale
@@ -125,7 +125,7 @@ var color = d3.scaleOrdinal()
     }
 
     var svgLegend = d3
-  .select("#o1") // Change the selection to the desired element
+  .select("#panel4_box-1") // Change the selection to the desired element
   .append("svg")
   .attr("width", customWidth-200)
   .attr("height", customHeight-200); // Adjust the height as needed
@@ -176,7 +176,7 @@ legend2
 // Create bar chart
 
 // Load the data from the CSV file
-d3.csv("main_data.csv")
+d3.csv("../panel4/main_data.csv")
   .then(function (data) {
     // Filter the data to include only those rows where the parent's degree is one of the specified groups
     var filteredData = data.filter(function (d) {
@@ -221,7 +221,7 @@ d3.csv("main_data.csv")
 
 
     // Define the SVG element
-    var svg = d3.select("#o2").append("svg")
+    var svg = d3.select("#panel4_box-2").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
       .append("g")
@@ -280,7 +280,7 @@ d3.csv("main_data.csv")
     bars
   .on("mouseover", function (d) {
     // Highlight the corresponding arc in the pie chart
-    d3.select("#o1").selectAll(".arc")
+    d3.select("#panel4_box-1").selectAll(".arc")
       .select("path")
       .attr("fill", function (arcData) {
         return arcData.data.customGroup === d.group ? color(arcData.data.customGroup) : "#ccc"; // Change the color as needed
@@ -288,7 +288,7 @@ d3.csv("main_data.csv")
   })
   .on("mouseout", function (d) {
     // Reset the color of the corresponding arc in the pie chart
-    d3.select("#o1").selectAll(".arc")
+    d3.select("#panel4_box-1").selectAll(".arc")
       .select("path")
       .attr("fill", function (arcData) { return color(arcData.data.customGroup); });
   });
@@ -297,7 +297,7 @@ d3.csv("main_data.csv")
 
 
   // Load the data from the CSV file
-d3.csv("main_data.csv").then(function (data) {
+d3.csv("../panel4/main_data.csv").then(function (data) {
   // Calculate the total score for each student and add it to the data
   data.forEach(function(d) {
     d.totalScore = +d["math score"] + +d["reading score"] + +d["writing score"];
@@ -314,7 +314,7 @@ d3.csv("main_data.csv").then(function (data) {
   }).slice(0, 5);
 
   // Create the DataTable
-  $('#o4').DataTable({
+  $('#panel4_box-4').DataTable({
     data: topStudents,
     columns: [
       { data: "name", title: "Name" },
