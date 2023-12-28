@@ -124,20 +124,31 @@ var color = d3.scaleOrdinal()
       return ((d.data.customCount / totalCount) * 100).toFixed(2);
     }
 
-    // Create legend
-    var legend2 = d3
-      .select("#o1") // Change the selection to the desired element
-      .append("svg")
-      .attr("width", customWidth-200)
-      .attr("height", customHeight-200) // Adjust the height as needed
-      .selectAll(".legend2")
-      .data(pieData)
-      .enter()
-      .append("g")
-      .attr("class", "legend2")
-      .attr("transform", function (d, i) {
-        return "translate(" + (customWidth - 300) + "," + (i * 25 + 10) + ")"; // Adjust the translation as needed
-      });
+    var svgLegend = d3
+  .select("#o1") // Change the selection to the desired element
+  .append("svg")
+  .attr("width", customWidth-200)
+  .attr("height", customHeight-200); // Adjust the height as needed
+
+svgLegend.append("text") // Add this line
+  .attr("x", 0)
+  .attr("y", 20)
+  .style("font-size", "15px")
+  .style("font-weight", "bold")
+  .style("font-family", "Segoe UI")
+  .text("Parental level of education");
+
+var legend2 = svgLegend.selectAll(".legend2")
+  .data(pieData)
+  .enter()
+  .append("g")
+  .attr("class", "legend2")
+  .attr("transform", function (d, i) {
+    return "translate(" + (customWidth - 300) + "," + (i * 25 + 40) + ")"; // Adjust the translation as needed
+  });
+
+// Rest of your legend code...
+
 
     // Add colored squares to the legend
     legend2

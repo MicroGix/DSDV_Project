@@ -117,8 +117,12 @@ button.sort-asc, button.sort-desc {
     text-align: center;
     font-family: "Segoe UI", wf_segoe-ui_normal, helvetica, arial, sans-serif;
 }
-  
-    
+/* Content boxes */
+/* Content boxes */
+.box, #o3, #o4 {
+    border: 1px solid #312222; /* Increase border width and change color */
+    padding: 10px;
+    border-radius: 10px; 
+}
 
-  
-  
+
