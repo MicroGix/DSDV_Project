@@ -13,59 +13,60 @@
 }
 
 /* Container */
-.container {
+.panel4_container {
     display: flex;
     flex-direction: column;
     height: 100vh; /* This will make the container take up the full height of the viewport */
 }
 
 /* First part (60%) */
-.container .left {
+.panel4_container .panel4_left {
     flex: 0.5; /* This will make the first part take up 60% of the container's height */
     display: flex; /* This will make the first part's children lay out in a row */
 }
 
 /* First part's children */
-.container .left .row {
+.panel4_container .panel4_left .panel4_row {
     flex: 1; /* This will make the first part's children each take up an equal amount of space */
     display: flex; /* This will make the row's children lay out in a row */
 }
 
-.container .left .row .box {
+.panel4_container .panel4_left .panel4_row .panel4_box {
     flex: 1; /* This will make the boxes each take up an equal amount of space */
 }
 /* Second part (40%) */
-.container .right {
+.panel4_container .panel4_right {
     flex: 0.5; /* This will make the second part take up 40% of the container's height */
     display: flex; /* This will make the second part's children lay out in a row */
 }
 
-.container .right #o3 {
+.panel4_container .panel4_right #panel4_box-3 {
     width: 45% ; /* This will make the #o3 take up less space */
 
 }
 
-.container .right #o4 {
+
+.panel4_container .panel4_right #panel4_box-4 {
   
     height: 100%; /* This will make the #o4 take up more space */
 }
 
 /* Content boxes */
-.box, .large-box, .small-box, .half-box {
+.panel4_box, .panel4_large-box, .panel4_small-box, .panel4_half-box {
     border: 1px solid #ccc;
     padding: 10px;
 }
-.left .row .box {
+.panel4_left .panel4_row .panel4_box {
     width: 100%;
     padding: 0px;
     border: 1px solid #312222;
     border-radius: 5px;
 }
-.box {
+.panel4_box {
     border: 1px solid #312222;
     border-radius: 10px; 
 }
-.tooltip {
+.panel4_tooltip {
     position: absolute;
     text-align: center;
     padding: 2px;
@@ -108,16 +109,22 @@ button.sort-asc, button.sort-desc {
     margin: 3px 3px;
     cursor: pointer;
 }
- #o4 {
+#panel4_box-4 {
     padding: 0;
     margin: 0;
     width: 205% ;
   }
-.table-title {
+  .panel4_table-title {
     text-align: center;
     font-family: "Segoe UI", wf_segoe-ui_normal, helvetica, arial, sans-serif;
 }
-  
+/* Content boxes */
+.box, #panel4_box-3, #panel4_box-4 {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 10px; 
+}
+
     
 
   

@@ -1,4 +1,4 @@
-// bieu do 1
+// donut chart
 function drawGenderPieChart(csvFilePath, width, height) {
   var radius = Math.min(width, height) / 3;
 
@@ -13,13 +13,12 @@ function drawGenderPieChart(csvFilePath, width, height) {
   var g = svg
     .append("g")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-  // Đọc giá trị của genderFilter từ HTML
+  //read values of genderFilter from HTML
   var genderFilterSelect = d3.select("#genderFilter");
 
-  // Đọc file CSV và vẽ biểu đồ
+  // Read csv file and draw chart
   d3.csv(csvFilePath).then(function (data) {
-    // Tạo một đối tượng để đếm số lần xuất hiện của từng giới tính
+    // create a new gender counter
     var genderCounts = {};
 
     data.forEach(function (d) {
@@ -31,7 +30,7 @@ function drawGenderPieChart(csvFilePath, width, height) {
       }
     });
 
-    // Chuyển đổi dữ liệu thành mảng để sử dụng cho biểu đồ Donut
+    // convert data into array for chart
     var genderData = [];
     for (var gender in genderCounts) {
       genderData.push({ gender: gender, count: genderCounts[gender] });
@@ -122,22 +121,21 @@ function drawGenderPieChart(csvFilePath, width, height) {
       return ((d.data.count / totalCount) * 100).toFixed(2);
     }
 
-    // Thêm tiêu đề lớn và cách biểu đồ một khoảng
+    // add title for donut chart
     svg
       .append("text")
       .attr("x", width / 2)
-      .attr("y", 20) // Điều chỉnh khoảng cách từ biểu đồ
+      .attr("y", 20)
       .attr("text-anchor", "middle")
-      .style("font-size", "25px") // font size
+      .style("font-size", "25px")
       .style("font-weight", "bold")
       .text("Proportion of student genders");
     // add number label
-
     arc
       .append("text")
       .attr("transform", function (d) {
-        var x = path.centroid(d)[0] * 1.5; // Điều chỉnh vị trí x của nhãn (tùy ý)
-        var y = path.centroid(d)[1] * 1.5; // Điều chỉnh vị trí y của nhãn (tùy ý)
+        var x = path.centroid(d)[0] * 1.5;
+        var y = path.centroid(d)[1] * 1.5;
         return "translate(" + x + "," + y + ")";
       })
       .attr("dy", ".35em")
@@ -147,7 +145,7 @@ function drawGenderPieChart(csvFilePath, width, height) {
       .text(function (d) {
         return d.data.count;
       });
-    var legendWidth = genderData.length * 100; // 100 is the space allocated for each legend item
+    var legendWidth = genderData.length * 100;
     // Create a legend
     var legend = svg
       .selectAll(".legend")
@@ -185,14 +183,14 @@ function drawGenderPieChart(csvFilePath, width, height) {
   });
 }
 
-// Sử dụng hàm
+// Pie chart
 drawGenderPieChart("./main_data.csv", 500, 300);
-// sơ đồ 2
+
 function drawGroupPieChart(csvFilePath, width, height) {
   var customWidth = width;
   var customHeight = height;
 
-  // Chọn vị trí để vẽ biểu đồ
+  //allocate position for chart
   var svg = d3
     .select("#o4")
     .append("svg")
@@ -208,7 +206,6 @@ function drawGroupPieChart(csvFilePath, width, height) {
   d3.csv(csvFilePath)
     .then(function (data) {
       var counts = {};
-
       data.forEach(function (d) {
         var customGroup = d.group;
         counts[customGroup] = (counts[customGroup] || 0) + 1;
@@ -229,7 +226,6 @@ function drawGroupPieChart(csvFilePath, width, height) {
         .arc()
         .outerRadius(customWidth / 4.5)
         .innerRadius(0);
-
       var color = d3.scaleOrdinal(d3.schemeCategory10);
 
       // Add tooltip
@@ -246,7 +242,7 @@ function drawGroupPieChart(csvFilePath, width, height) {
         .append("g")
         .attr("class", "arc");
 
-      // Vẽ các phần tử của biểu đồ tròn
+      // draw components of the chart
       arc
         .append("path")
         .attr("d", path)
@@ -269,7 +265,7 @@ function drawGroupPieChart(csvFilePath, width, height) {
             .attr("transform", "scale(1.150)");
         })
         .on("mouseout", function () {
-          // Ẩn tooltip khi rê chuột ra khỏi
+          // remove tooltip on mouseout
           tooltip.transition().duration(500).style("opacity", 0);
 
           // Reset the scale
@@ -312,7 +308,7 @@ function drawGroupPieChart(csvFilePath, width, height) {
           return d.customGroup;
         });
 
-      // Thêm tiêu đề
+      // add title for the chart
       svg
         .append("text")
         .attr("x", customWidth - 490)
@@ -342,22 +338,18 @@ function drawGroupPieChart(csvFilePath, width, height) {
     return ((d.data.customCount / totalCount) * 100).toFixed(2);
   }
 }
-
-// Sử dụng hàm
+// count the number of students in dataset
 drawGroupPieChart("main_data.csv", 500, 300);
 
 function countRows(csvFilePath) {
   d3.csv(csvFilePath).then(function (data) {
     var rowCount = data.length;
-
     // Update the DOM element with the row count and apply styling
     d3.select("#row-count")
       .html("<strong>Total Students:</strong> " + rowCount)
-      .style("font-size", "18px") // Thay đổi kích thước font chữ
-      .style("font-weight", "bold") // Làm đậm chữ
+      .style("font-size", "18px")
+      .style("font-weight", "bold")
       .style("text-align", "center");
   });
 }
-
-// Sử dụng hàm với đường dẫn đến tệp CSV của bạn
 countRows("./main_data.csv");
