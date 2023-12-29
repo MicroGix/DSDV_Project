@@ -1,6 +1,6 @@
 function calculateSumByGenderAndGroup(data) {
   const result = {};
-
+  // assign groups to data
   data.forEach((entry) => {
     const genderKey = entry.gender;
     const groupKey = entry.group;
@@ -44,11 +44,11 @@ function createRow(label, values, isBold) {
   row.addEventListener("mouseover", function () {
     this.classList.add("hovered-row");
   });
-
+  // add hover effect and background color styles
   row.addEventListener("mouseout", function () {
     this.classList.remove("hovered-row");
   });
-
+  // add label and values to row
   row.innerHTML = `
         <td ${isBold ? 'style="font-weight: bold;"' : ""}>${label}</td>
         <td ${isBold ? 'style="font-weight: bold;"' : ""}>${values.math}</td>
@@ -87,7 +87,7 @@ function renderTable(data) {
   const sumByGenderAndGroup = calculateSumByGenderAndGroup(data);
   const tableBody = document.getElementById("data-table-body");
 
-  let grandTotal = { math: 0, reading: 0, writing: 0 }; // Khởi tạo giá trị grand total
+  let grandTotal = { math: 0, reading: 0, writing: 0 };
 
   Object.entries(sumByGenderAndGroup).forEach(([gender, values]) => {
     if (["male", "female"].includes(gender)) {
@@ -108,7 +108,7 @@ function renderTable(data) {
     });
   });
 }
-
+// 2nd table
 function calculateAverageByDegree(data) {
   const result = {};
 
@@ -116,7 +116,7 @@ function calculateAverageByDegree(data) {
     const genderKey = entry.gender;
     const groupKey = entry.parent_degrees;
     const sumAvg = parseFloat(entry["Sum_avg"]);
-
+    // set initial values
     result[groupKey] = result[groupKey] || {
       male: 0,
       female: 0,
@@ -131,10 +131,10 @@ function calculateAverageByDegree(data) {
     result[groupKey].female += genderKey === "female" ? sumAvg : 0;
     result[groupKey].countfemale += genderKey === "female" ? 1 : 0;
     result[groupKey].Grand_Total += sumAvg;
-    result[groupKey].count += 1; // Tăng số mục
+    result[groupKey].count += 1;
   });
 
-  // Tính trung bình và làm tròn số
+  // calculate the average for each group and round up to 2 decimal places
   Object.keys(result).forEach((groupKey) => {
     const group = result[groupKey];
     if (group.count > 0) {
@@ -144,12 +144,12 @@ function calculateAverageByDegree(data) {
         (group.Grand_Total / group.count).toFixed(2)
       );
     }
-    delete group.count; // Xóa số mục để tránh in ra trong bảng
+    delete group.count; // remove the group from the object
   });
 
   return result;
 }
-
+// read data in the table
 function getDataFromTable(tableId) {
   var table = document.getElementById(tableId);
 
@@ -161,12 +161,12 @@ function getDataFromTable(tableId) {
   var rows = table.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
   var dataTable = [];
 
-  // Lặp qua từng hàng và lấy dữ liệu
+  // loop to obtain data from each row
   for (var i = 0; i < rows.length; i++) {
     var cells = rows[i].getElementsByTagName("td");
     var rowData = {};
 
-    // Lặp qua từng ô trong hàng và lấy giá trị
+    // loop to obtain data from each cell
     for (var j = 0; j < cells.length; j++) {
       var columnName = table
         .getElementsByTagName("thead")[0]
@@ -176,12 +176,9 @@ function getDataFromTable(tableId) {
 
     dataTable.push(rowData);
   }
-
   return dataTable;
-
-  // Bạn có thể thêm các xử lý khác ở đây nếu cần
 }
-
+// show the table
 function renderDegreeTable(data) {
   const sumByDegree = calculateAverageByDegree(data);
   const degreeTableBody = document.getElementById("data_table_2");
@@ -207,7 +204,7 @@ function renderDegreeTable(data) {
     degreeGrandTotal.Grand_Total += values.Grand_Total || 0;
   });
 
-  // Tính trung bình cho Grand Total
+  // calculate the average for Grand Total
   degreeGrandTotal.male /= 6;
   degreeGrandTotal.female /= 6;
   degreeGrandTotal.Grand_Total /= 6;
@@ -239,7 +236,7 @@ fetch("./main_data.csv")
         { data: "Gender" },
         { data: "Sum of Math score" },
         { data: "Sum of Reading score" },
-        { data: "Sum of Writing score" }, // Adjust column names accordingly
+        { data: "Sum of Writing score" },
       ],
       searching: false,
       ordering: false,
@@ -286,27 +283,26 @@ fetch("./main_data.csv")
 
 function calculateAndDisplayAverages(csvFilePath) {
   d3.csv(csvFilePath).then(function (data) {
-    // Tính trung bình cho nhóm "Free/Reduced"
+    // calculate average for free/reduced lunch
     var freeReduceData = data.filter(function (d) {
       return d.lunch === "free/reduced";
     });
     var freeReduceAvg = d3.mean(freeReduceData, function (d) {
-      return +d.Sum_avg; // Chuyển đổi sang số
+      return +d.Sum_avg;
     });
 
-    // Tính trung bình cho nhóm "Standard"
+    // calculate average for standard lunch
     var standardData = data.filter(function (d) {
       return d.lunch === "standard";
     });
     var standardAvg = d3.mean(standardData, function (d) {
-      return +d.Sum_avg; // Chuyển đổi sang số
+      return +d.Sum_avg;
     });
 
-    // Cập nhật giá trị vào các id tương ứng trên trang
+    // show id values with corresponding averages
     d3.select(".Free_Reduce").text(freeReduceAvg.toFixed(2));
     d3.select(".Standard").text(standardAvg.toFixed(2));
   });
 }
 
-// Sử dụng hàm với đường dẫn đến tệp CSV của bạn
 calculateAndDisplayAverages("./main_data.csv");
