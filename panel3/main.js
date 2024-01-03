@@ -1,199 +1,248 @@
 function rowConverter(d) {
-  return {
-    name: d.name,
-    gender: d.gender,
-    pdegrees: d["parent degrees"],
-    lunch: d.lunch,
-    tpc: d["test prep"],
-    math: parseFloat(d["math score"]),
-    reading: parseFloat(d["reading score"]),
-    writing: parseFloat(d["writing score"]),
-    avg: parseFloat(d.avg),
-    result: d.result,
-    grade: d.grade,
-    group: d.group,
-  };
+    return {
+        avg: parseFloat(d.avg),
+        gender: d.gender,
+        grade: d.grade,
+        group: d.group,
+        lunch: d.lunch,
+        math: parseFloat(d["math score"]),
+        name: d.name,
+        parentD: d["parent degrees"],
+        reading: parseFloat(d["reading score"]),
+        result: d.result,
+        tpc: d["test prep"],
+        writing: parseFloat(d["writing score"]),
+    };
 }
 
 const df_url =
-  "https://raw.githubusercontent.com/MicroGix/Influence-of-factors-on-students-performence/main/main_data.csv";
+    "https://raw.githubusercontent.com/MicroGix/Influence-of-factors-on-students-performence/main/main_data.csv";
 d3.csv(df_url, rowConverter).then(
-  function (data) {
-    initPanel_3(data);
-  },
+    function (data) {
+        initPanel_3(data);
+    },
 );
 
 function initPanel_3(data) {
-  // SVG DIMENSION (SOLVE)
-  const outer_w = 500;
-  const outer_h = 300;
-  const margin = { top: 20, right: 10, bottom: 50, left: 50 };
-  const h = outer_h - margin.top - margin.bottom;
-  const w = outer_w - margin.right - margin.left;
-  const p = 20;
+    // SVG DIMENSION
+    const outer_w = 500;
+    const outer_h = 300;
+    const margin = {top: 20, right: 10, bottom: 50, left: 50};
+    const h = outer_h - margin.top - margin.bottom;
+    const w = outer_w - margin.right - margin.left;
+    const p = 20;
 
-  // SVG CONTAINER (SOLVE)
-  const stack = d3
-    .select("#stack-plot")
-    .append("svg")
-    .attr("width", outer_w)
-    .attr("height", outer_h)
-    .append("g")
-    .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
+    //--STACK BAR CHART--
 
-  // CREATE FUNCTION TO COUNT NUMBERS OF TPC BY GENDER (SOLVE)
-  // See explaination at problem 6.
+    // set up svg container
+    const stack = d3
+        .select("#stack-plot")
+        .append("svg")
+        .attr("width", outer_w)
+        .attr("height", outer_h)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
 
-  function countGenderbyTPC(data) {
-    const result = {};
-    data.forEach((d) => {
-      const tpc = d.tpc;
-      const genders = d.gender;
-      result[tpc] = result[tpc] || { total: 0, gender: {} };
-      result[tpc].gender[genders] = result[tpc].gender[genders] || { n: 0 };
-      result[tpc].total++;
-      result[tpc].gender[genders].n++;
+    // create function to count numbers of tpc by gender
+    // See explanation at problem 6.
+    function countGenderbyTPC(data) {
+        const result = {};
+        data.forEach((d) => {
+            const tpc = d.tpc;
+            const genders = d.gender;
+            result[tpc] = result[tpc] || {total: 0, gender: {}};
+            result[tpc].gender[genders] = result[tpc].gender[genders] || {n: 0};
+            result[tpc].total++;
+            result[tpc].gender[genders].n++;
+        });
+        return result;
+    }
+
+    // create dataset
+    const TPCbyGender = countGenderbyTPC(data);
+    const genderData = Object.entries(TPCbyGender).map(([tpc, value]) => {
+        const gender = Object.values(value.gender);
+        const female = Object.values(gender[0]);
+        const male = Object.values(gender[1]);
+        return {"tpc": tpc, "female": female[0], "male": male[0]};
     });
-    return result;
-  }
 
-  // CREATE DATASET FOR STACK CHARTS
-  const TPCbyGender = countGenderbyTPC(data);
-  const genderData = Object.entries(TPCbyGender).map(([tpc, value]) => {
-    const gender = Object.values(value.gender);
-    const female = Object.values(gender[0]);
-    const male = Object.values(gender[1]);
-    return { "tpc": tpc, "female": female[0], "male": male[0] };
-  });
-  console.log(genderData);
-
-  // SET UP SCALE
-  const tpcLabelStack = genderData.map((d) => d.tpc);
-  const subgroups = genderData.map(({ female, male }) => {
-    return { female: female, male: male };
-  });
-  const after_stackData = d3.stack().keys(["female", "male"])(genderData);
-
-  const xStack = d3
-    .scaleBand()
-    .domain(tpcLabelStack)
-    .range([0, w])
-    .padding([0.2]);
-  stack
-    .append("g")
-    .attr("transform", "translate(0," + h + ")")
-    .call(d3.axisBottom(xStack).tickSizeOuter(0));
-
-  const yStack = d3
-    .scaleLinear()
-    .domain([0, 1000])
-    .range([h, 0]);
-  stack
-    .append("g")
-    .call(d3.axisLeft(yStack));
-
-  const color = d3
-    .scaleOrdinal()
-    .domain(subgroups)
-    .range(["red", "blue"]);
-
-  // INITIATE STACK CHART (SOLVE)
-  // New problems: how can i make it more beautiful
-  stack.append("g")
-    .selectAll("g")
-    .data(after_stackData)
-    .enter().append("g")
-    .attr("fill", (d) => color(d.key))
-    .selectAll("rect")
-    .data((d) => d)
-    .enter().append("rect")
-    .attr("x", function (d) {
-      return xStack(d.data.tpc); // data here mean the .data(after_stackData) you add above
-    })
-    .attr("y", function (d) {
-      return yStack(d[1]);
-    })
-    .attr("height", function (d) {
-      return yStack(d[0]) - yStack(d[1]);
-    })
-    .attr("width", xStack.bandwidth());
-
-  //---------------------barplot1-------------------------
-  // SETUP DATASET FOR BARCHART (SOLVE)
-  function countTPCbyGroup(data) { // a great approach but very hard to inegrate when need to access certain data
-    const result = {};
-    data.forEach((d) => {
-      const tpc = d.tpc;
-      const groups = d.group;
-      result[groups] = result[groups] || { tpc: {} };
-      result[groups].tpc[tpc] = result[groups].tpc[tpc] || { n: 0 };
-      result[groups].tpc[tpc].n++;
+    // set up scale
+    const tpcLabelStack = genderData.map((d) => d.tpc);
+    const subgroups = genderData.map(({female, male}) => {
+        return {female: female, male: male};
     });
-    return result;
-  }
 
-  const TPCbyGroup = countTPCbyGroup(data);
+    const after_stackData = d3.stack().keys(["female", "male"])(genderData);
 
-  const groupData = Object.entries(TPCbyGroup).map(([group, value]) => {
-    const counts = Object.entries(value).map(([key, innerObj]) => { // dont understand why here we must use Object.entries instead of Object.values
-      const tpcObj = Object.entries(innerObj).map(([tpc, nObj]) => {
-        const nArray = Object.values(nObj);
-        return [[tpc, nArray[0]]];
-      });
-      const countArray = tpcObj.flat();
-      return countArray;
+    const xStack = d3
+        .scaleBand()
+        .domain(tpcLabelStack)
+        .range([0, w])
+        .padding([0.2]);
+
+    stack
+        .append("g")
+        .attr("transform", "translate(0," + h + ")")
+        .call(d3.axisBottom(xStack).tickSizeOuter(0));
+
+    const yStack = d3
+        .scaleLinear()
+        .domain([0, 1000])
+        .range([h, 0]);
+    stack
+        .append("g")
+        .call(d3.axisLeft(yStack));
+
+    const colorStack = d3
+        .scaleOrdinal()
+        .domain(subgroups)
+        .range(['#e41a1c','#377eb8'])
+
+    // append rect element to chart
+    stack
+        .append("g")
+        .selectAll("g")
+        .data(after_stackData)
+        .enter().append("g")
+        .attr("fill", (d) => colorStack(d.key))
+        .selectAll("rect")
+        .data((d) => d)
+        .enter().append("rect")
+        .attr("x", function (d) {
+            return xStack(d.data.tpc); // data here mean the .data(after_stackData) you add above
+        })
+        .attr("y", function (d) {
+            return yStack(d[1]);
+        })
+        .attr("height", function (d) {
+            return yStack(d[0]) - yStack(d[1]);
+        })
+        .attr("width", xStack.bandwidth());
+
+    //--HORIZONTAL GROUP BAR CHART--
+
+    // init svg container
+    const bar = d3
+        .select("#bar-plot")
+        .append("svg")
+        .attr("width", outer_w)
+        .attr("height", outer_h)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
+
+    // create data set
+    function countTPCbyGroup(data) {
+        const result = {};
+        data.forEach((d) => {
+            const tpc = d.tpc;
+            const groups = d.group;
+            result[groups] = result[groups] || {tpc: {}};
+            result[groups].tpc[tpc] = result[groups].tpc[tpc] || {n: 0};
+            result[groups].tpc[tpc].n++;
+        });
+        return result;
+    }
+
+    const TPCbyGroup = countTPCbyGroup(data);
+    const groupData = Object.entries(TPCbyGroup).map(([group, groupObj]) => {
+        const counts = Object.entries(groupObj).map(([tpc, tpcObj]) => { // don't understand why here we must use Object.entries instead of Object.values
+            const tpcCounts = Object.entries(tpcObj).map(([tpc, nObj]) => {
+                const nArray = Object.values(nObj);
+                return [[tpc, nArray[0]]];
+            });
+            const countArray = tpcCounts.flat();
+            return countArray;
+        });
+        const countTPC = counts.flat();
+        let result = Object.assign(
+            {group: group},
+            Object.fromEntries(countTPC),
+        );
+        return result;
     });
-    const countTPC = counts.flat();
-    let result = Object.assign(
-      { group: group },
-      Object.fromEntries(countTPC),
-    );
-    return result;
-  });
 
-  console.log(groupData);
+    // set up scale
+    // const x0Bar = d3
+    //     .scaleBand()
+    //     .rangeRound([0, w])
+    //     .domain(d3.map(groupData, (d) => d.group).keys())
+    //     .padding(0.2);
+    // bar
+    //     .append("g")
+    //     .attr("transform", "translate(0," + h + ")")
+    //     .call(d3.axisBottom(x0Bar));
 
-  // SETUP
-  const bar = d3
-    .select("#barplot")
-    .append("svg")
-    .attr("width", outer_w)
-    .attr("height", outer_h)
-    .append("g")
-    .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
+    const y0Bar = d3
+        .scaleBand()
+        .rangeRound([h,0])
+        .domain(d3.map(groupData, (d) => d.group).keys())
+        .padding(0.2)
+    bar
+        .append("g")
+        .call(d3.axisLeft(y0Bar));
 
-  const xBar = d3
-    .scaleLinear()
-    .domain([0, 1000])
-    .range([0, w - p]);
-  bar
-    .append("g")
-    .attr("transform", "translate(0," + h + ")")
-    .call(d3.axisBottom(xBar));
+    // const yBar = d3
+    //     .scaleLinear()
+    //     .domain([0, 200])
+    //     .range([h, 0]);
+    // bar
+    //     .append("g")
+    //     .call(d3.axisLeft(yBar));
 
-  const yBar = d3
-    .scaleBand()
-    .domain(groupData.map((d) => d.group))
-    .range([h, 0])
-    .padding(0.2);
-  bar
-    .append("g")
-    .call(d3.axisLeft(yBar));
+    const xBar = d3
+        .scaleLinear()
+        .domain([0,200])
+        .range([0, w])
+    bar
+        .append("g")
+        .attr("transform", "translate(0," + h + ")")
+        .call(d3.axisBottom(xBar));
 
-  bar 
-    .selectAll("rect")
-    .data(groupData)
-    .enter()
-    .append("rect")
-    .attr("x", xBar(5))
-    .attr("y", function (d) {
-      return yBar(d.group);
-    })
-    .attr("width", function (d) {
-      return xBar(d.none);
-    })
-    .attr("height", yBar.bandwidth())
-    .attr("fill", "lightgreen");
+    const innerGroup = d3.keys(groupData[0]).filter((key) => key !== "group")
+    // const x1Bar = d3
+    //     .scaleBand()
+    //     .domain(innerGroup)
+    //     .range([0, x0Bar.bandwidth()])
+    //     .padding([0.05]);
+    const y1Bar = d3
+        .scaleBand()
+        .domain(innerGroup)
+        .range([0, y0Bar.bandwidth()])
+        .padding([0.05]);
+
+    const colorBar = d3
+        .scaleOrdinal()
+        .domain(innerGroup)
+        .range(['#e41a1c','#377eb8'])
+
+    // bar.selectAll(".barchart")
+    //     .data(groupData)
+    //     .enter().append("g")
+    //     .attr("transform", (d) => "translate(" + x0Bar(d.group) + ",0)")
+    //     .selectAll("rect")
+    //     .data(function(d) { return innerGroup.map(function(key) { return {key: key, value: d[key]}; }); })
+    //     .enter().append("rect")
+    //     .attr("x", (d) => x1Bar(d.key))
+    //     .attr("y", (d) => yBar(d.value))
+    //     .attr("width", x1Bar.bandwidth())
+    //     .attr("height", (d) => h - yBar(d.value))
+    //     .attr("fill", (d) => colorBar(d.key))
+
+    bar.selectAll(".barchart")
+        .data(groupData)
+        .enter().append("g")
+        .attr("transform", (d) => "translate(0, " + y0Bar(d.group) + ")")
+        .selectAll("rect")
+        .data(function(d) { return innerGroup.map(function(key) { return {key: key, value: d[key]}; }); })
+        .enter().append("rect")
+        .attr("x", xBar(0.5))
+        .attr("y", (d) => y0Bar(d.key))
+        .attr("width", (d) => xBar(d.value))
+        .attr("height", y1Bar.bandwidth())
+        .attr("fill", (d) => colorBar(d.key))
+
+    //--TABLE OF AVERAGE OF TOTAL MARKS--
 }
 
 //-----------Summay of what i found-------------------------------------------------
