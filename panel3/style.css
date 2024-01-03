@@ -47,7 +47,7 @@ h1 {
     padding: 10px;
     box-sizing: border-box; /* include padding in both width,height */
 }
-#barplot {
+#bar-plot {
   height: 75%;
 }
 #conclusion {

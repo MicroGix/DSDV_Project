@@ -16,17 +16,24 @@
     <div class="container">
       <!-- Left-side panel-->
       <div class="left">
-        <div class="area" id="l-box1">Total Students:</div>
-        <div class="area" id="l-box2">Gender:</div>
-        <div class="area" id="stack-plot"></div>
-        <div class="area" id="l-box3"></div>
+        <div id="total&gender" class="area">
+          <div class="element" id="total">Total Students:</div>
+          <div class="element" id="genderSelection">Gender:</div>
+        </div>
+        <div class="area" id="averageTable">
+          <p>Average of total marks table goes here</p>
+        </div>
+        <div class="area" id="conclusion">
+          <p>
+            Conclusion: <br>
+            - Something to commit here.
+          </p>
+        </div>
       </div>
       <!-- Right-side panel-->
       <div class="right">
-        <div class="area" id="barplot">
-          A plot to show distribution of fail students
-        </div>
-        <div class="area" id="conclusion"></div>
+        <div class="area" id="stack-plot"></div>
+        <div class="area" id="bar-plot"></div>
       </div>
     </div>
     <script src="./main.js"></script>
