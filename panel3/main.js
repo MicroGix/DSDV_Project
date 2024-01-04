@@ -33,7 +33,6 @@ function initPanel_3(data) {
     const p = 20;
 
     //--STACK BAR CHART--
-
     // set up svg container
     const stack = d3
         .select("#stack-plot")
@@ -97,7 +96,7 @@ function initPanel_3(data) {
     const colorStack = d3
         .scaleOrdinal()
         .domain(subgroups)
-        .range(['#e41a1c','#377eb8'])
+        .range(['#e41a1c', '#377eb8'])
 
     // append rect element to chart
     stack
@@ -121,7 +120,6 @@ function initPanel_3(data) {
         .attr("width", xStack.bandwidth());
 
     //--HORIZONTAL GROUP BAR CHART--
-
     // init svg container
     const bar = d3
         .select("#bar-plot")
@@ -165,7 +163,7 @@ function initPanel_3(data) {
     //set up scale
     const y0Bar = d3
         .scaleBand()
-        .rangeRound([h,0])
+        .rangeRound([h, 0])
         .domain(d3.map(groupData, (d) => d.group).keys())
         .paddingInner(0.2)
     bar
@@ -174,7 +172,7 @@ function initPanel_3(data) {
 
     const xBar = d3
         .scaleLinear()
-        .domain([0,250])
+        .domain([0, 250])
         .range([0, w])
     bar
         .append("g")
@@ -192,14 +190,18 @@ function initPanel_3(data) {
     const colorBar = d3
         .scaleOrdinal()
         .domain(innerGroup)
-        .range(['#e41a1c','#377eb8'])
+        .range(['#e41a1c', '#377eb8'])
 
     bar.selectAll(".barchart")
         .data(groupData)
         .enter().append("g")
         .attr("transform", (d) => "translate(0, " + y0Bar(d.group) + ")")
         .selectAll("rect")
-        .data(function(d) { return innerGroup.map(function(key) { return {key: key, value: d[key]}; }); })
+        .data(function (d) {
+            return innerGroup.map(function (key) {
+                return {key: key, value: d[key]};
+            });
+        })
         .enter().append("rect")
         .attr("x", xBar(0.5))
         .attr("y", (d) => y1Bar(d.key))
@@ -208,9 +210,41 @@ function initPanel_3(data) {
         .attr("fill", (d) => colorBar(d.key))
 
     //--TABLE OF AVERAGE OF TOTAL MARKS--
+    //create dataset
+    function getData(data) {
+        const result = [];
+        data.forEach(d => {
+            const avg = d.avg;
+            const gender = d.gender;
+            const tpc = d.tpc;
+            result.push({avg: avg, gender: gender, tpc: tpc})
+        })
+        return result;
+    }
+
+    const testData = getData(data);
+
+    function average(data) {
+        let sum = 0
+        data.forEach(e => {
+            sum += e.avg;
+        })
+        return sum / data.length;
+    }
+
+    // none: female, male
+    const fnAvg = average(testData.filter((d) => d.tpc === "none" && d.gender ==="female"))
+    const mnAvg = average(testData.filter((d) => d.tpc === "none" && d.gender ==="male"))
+    // completed: female, male
+    const fcAvg = average(testData.filter((d) => d.tpc === "completed" && d.gender ==="female"))
+    const mcAvg = average(testData.filter((d) => d.tpc === "completed" && d.gender ==="male"))
+    console.log(fnAvg)
+    console.log(mnAvg)
+    console.log(fcAvg)
+    console.log(mcAvg)
 }
 
-//-----------Summay of what i found-------------------------------------------------
+//---------------------------------Summary of what i found-------------------------------------------------
 // 1. function to identify unique values: https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
 // function onlyUnique(value, index, array) {
 //   return array.indexOf(value) == index;
