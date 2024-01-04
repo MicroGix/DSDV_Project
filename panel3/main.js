@@ -162,37 +162,19 @@ function initPanel_3(data) {
         return result;
     });
 
-    // set up scale
-    // const x0Bar = d3
-    //     .scaleBand()
-    //     .rangeRound([0, w])
-    //     .domain(d3.map(groupData, (d) => d.group).keys())
-    //     .padding(0.2);
-    // bar
-    //     .append("g")
-    //     .attr("transform", "translate(0," + h + ")")
-    //     .call(d3.axisBottom(x0Bar));
-
+    //set up scale
     const y0Bar = d3
         .scaleBand()
         .rangeRound([h,0])
         .domain(d3.map(groupData, (d) => d.group).keys())
-        .padding(0.2)
+        .paddingInner(0.2)
     bar
         .append("g")
         .call(d3.axisLeft(y0Bar));
 
-    // const yBar = d3
-    //     .scaleLinear()
-    //     .domain([0, 200])
-    //     .range([h, 0]);
-    // bar
-    //     .append("g")
-    //     .call(d3.axisLeft(yBar));
-
     const xBar = d3
         .scaleLinear()
-        .domain([0,200])
+        .domain([0,250])
         .range([0, w])
     bar
         .append("g")
@@ -200,34 +182,17 @@ function initPanel_3(data) {
         .call(d3.axisBottom(xBar));
 
     const innerGroup = d3.keys(groupData[0]).filter((key) => key !== "group")
-    // const x1Bar = d3
-    //     .scaleBand()
-    //     .domain(innerGroup)
-    //     .range([0, x0Bar.bandwidth()])
-    //     .padding([0.05]);
+
     const y1Bar = d3
         .scaleBand()
         .domain(innerGroup)
-        .range([0, y0Bar.bandwidth()])
+        .range([y0Bar.bandwidth(), 0])
         .padding([0.05]);
 
     const colorBar = d3
         .scaleOrdinal()
         .domain(innerGroup)
         .range(['#e41a1c','#377eb8'])
-
-    // bar.selectAll(".barchart")
-    //     .data(groupData)
-    //     .enter().append("g")
-    //     .attr("transform", (d) => "translate(" + x0Bar(d.group) + ",0)")
-    //     .selectAll("rect")
-    //     .data(function(d) { return innerGroup.map(function(key) { return {key: key, value: d[key]}; }); })
-    //     .enter().append("rect")
-    //     .attr("x", (d) => x1Bar(d.key))
-    //     .attr("y", (d) => yBar(d.value))
-    //     .attr("width", x1Bar.bandwidth())
-    //     .attr("height", (d) => h - yBar(d.value))
-    //     .attr("fill", (d) => colorBar(d.key))
 
     bar.selectAll(".barchart")
         .data(groupData)
@@ -237,9 +202,9 @@ function initPanel_3(data) {
         .data(function(d) { return innerGroup.map(function(key) { return {key: key, value: d[key]}; }); })
         .enter().append("rect")
         .attr("x", xBar(0.5))
-        .attr("y", (d) => y0Bar(d.key))
-        .attr("width", (d) => xBar(d.value))
+        .attr("y", (d) => y1Bar(d.key))
         .attr("height", y1Bar.bandwidth())
+        .attr("width", (d) => xBar(d.value) - xBar(0))
         .attr("fill", (d) => colorBar(d.key))
 
     //--TABLE OF AVERAGE OF TOTAL MARKS--
@@ -315,3 +280,37 @@ function initPanel_3(data) {
 //   let result = Object.assign({ tpc: tpc }, Object.fromEntries(counts));
 //   return result;
 // });
+// 8. Vertical version of group chart
+// const x0Bar = d3
+//     .scaleBand()
+//     .rangeRound([0, w])
+//     .domain(d3.map(groupData, (d) => d.group).keys())
+//     .padding(0.2);
+// bar
+//     .append("g")
+//     .attr("transform", "translate(0," + h + ")")
+//     .call(d3.axisBottom(x0Bar));
+// const yBar = d3
+//     .scaleLinear()
+//     .domain([0, 200])
+//     .range([h, 0]);
+// bar
+//     .append("g")
+//     .call(d3.axisLeft(yBar));
+// const x1Bar = d3
+//     .scaleBand()
+//     .domain(innerGroup)
+//     .range([0, x0Bar.bandwidth()])
+//     .padding([0.05]);
+// bar.selectAll(".barchart")
+//     .data(groupData)
+//     .enter().append("g")
+//     .attr("transform", (d) => "translate(" + x0Bar(d.group) + ",0)")
+//     .selectAll("rect")
+//     .data(function(d) { return innerGroup.map(function(key) { return {key: key, value: d[key]}; }); })
+//     .enter().append("rect")
+//     .attr("x", (d) => x1Bar(d.key))
+//     .attr("y", (d) => yBar(d.value))
+//     .attr("width", x1Bar.bandwidth())
+//     .attr("height", (d) => h - yBar(d.value))
+//     .attr("fill", (d) => colorBar(d.key))
