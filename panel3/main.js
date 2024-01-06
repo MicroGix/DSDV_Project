@@ -32,6 +32,9 @@ function initPanel_3(data) {
     const w = outer_w - margin.right - margin.left;
     const p = 20;
 
+    // SHOW TOTAL STUDENTS
+    document.getElementById("totalDisplay").innerHTML = "Total Students: " + data.length;
+
     //--STACK BAR CHART--
     // set up svg container
     const stack = d3
@@ -226,22 +229,7 @@ function initPanel_3(data) {
         return avg.toFixed(2)
     }
 
-    // female: none, completed
-    const fnAvg = average(data.filter((d) => d.tpc === "none" && d.gender === "female"))
-    const fcAvg = average(data.filter((d) => d.tpc === "completed" && d.gender === "female"))
-    const fmAvg = average(data.filter((d) => d.gender === "female"))
-    // male: none, completed
-    const mnAvg = average(data.filter((d) => d.tpc === "none" && d.gender === "male"))
-    const mcAvg = average(data.filter((d) => d.tpc === "completed" && d.gender === "male"))
-    const mmAvg = average(data.filter((d) => d.gender === "male"))
 
-    const total = average(data)
-
-    const tableData = [
-        {TPC: "none", Female: fnAvg, Male: mnAvg},
-        {TPC: "completed", Female: fcAvg, Male: mcAvg},
-    ]
-    console.log(tableData)
 
     function createTable(data, columns) {
         const table = d3.select('#avgTable').append('table');
@@ -281,6 +269,17 @@ function initPanel_3(data) {
         return table.node();
     }
 
-    createTable(tableData, ['TPC', 'Female', 'Male'])
+    // female: none, completed
+    const fnAvg = average(data.filter((d) => d.tpc === "none" && d.gender === "female"))
+    const fcAvg = average(data.filter((d) => d.tpc === "completed" && d.gender === "female"))
+    const fmAvg = average(data.filter((d) => d.gender === "female"))
+    // male: none, completed
+    const mnAvg = average(data.filter((d) => d.tpc === "none" && d.gender === "male"))
+    const mcAvg = average(data.filter((d) => d.tpc === "completed" && d.gender === "male"))
+    const mmAvg = average(data.filter((d) => d.gender === "male"))
+    // total
+    const total = average(data)
+
 }
+
 

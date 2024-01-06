@@ -1,5 +1,5 @@
 body {
-    font-family: "Segoe UI", serif;
+    font-family: "Arial", serif;
     background: whitesmoke;
 }
 
@@ -12,46 +12,63 @@ body {
     border-radius: 5px;
     font-size: large;
 }
+
 .container {
+    max-height: 100%;
     display: flex;
-    overflow: auto;
+    flex-wrap: wrap;
+    overflow: scroll;
+    padding-top: 20px;
 }
 
-/*LEFT-SIDE*/
-.left {
-    width: 50%;
-    padding: 20px;
-}
-.left.area {
-    display: flex;
-    box-sizing: border-box; /* include padding in both width,height */
-    flex-wrap: wrap;
-}
-    /*TOTAL AND GENDER*/
-#total-gender {
+/*TOTAL AND GENDER*/
+.upper {
     height: 10%;
+    width: 100%;
     display: flex;
-    flex-wrap: nowrap;
+    overflow: auto;
     padding: 10px;
-    font-size: 20px;
+    font-size: medium;
     font-weight: bold;
     border: 1px solid #312222;
     border-radius: 5px;
 }
-#total-gender #totalDisplay {
+#totalDisplay {
     width: 50%;
-    text-align: left;
+    text-align: center;
     margin: auto
 }
-#total-gender #genderSelection {
+#genderSelection {
     width: 50%;
-    text-align: left;
+    text-align: center;
     margin: auto;
+}
+
+/*LOWER*/
+.lower {
+    height: 90%;
+    width: 100%;
+    padding-top: 20px;
+    display: flex;
+    overflow: scroll;
+}
+
+/*LEFT-SIDE*/
+.lower #left {
+    width: 50%;
+    padding-right: 10px;
+}
+#left.area {
+    display: block;
+    flex-wrap: wrap;
+}
+#left h2 {
+    font-size: 20px;
 }
 
 /*STACK-PLOT*/
 #stack-plot {
-    height: 50%;
+    height: 70%;
     border: 1px solid #312222;
     border-radius: 5px;
     text-align: left;
@@ -63,12 +80,11 @@ body {
 }
 #stack-plot .chart-axis {
     font-size: 15px;
-    font-family: "Segoe UI", serif;
 }
 
     /*TABLE*/
 #avgTable {
-    height: 40%;
+    height: 30%;
     text-align: left;
     padding: 10px;
     font-family: "Segoe UI", serif;
@@ -97,19 +113,22 @@ body {
 }
 
 /*RIGHT-SIDE*/
-.right {
+.lower #right {
     width: 50%;
-    padding: 20px;
+    padding-left: 10px;
 }
-.right.area {
+#right.area {
     display: flex;
     padding: 10px;
     box-sizing: border-box; /* include padding in both width,height */
 }
+#right h2 {
+    font-size: 20px;
+}
 
     /*BAR-PLOT*/
 #bar-plot {
-    height: 60%;
+    height: 70%;
     overflow: scroll;
     padding: 10px;
     border: 1px solid #312222;
@@ -117,7 +136,6 @@ body {
 }
 #bar-plot .chart-axis {
     font-size: 15px;
-    font-family: "Segoe UI", serif;
 }
 #bar-plot .diagram {
     display: block;
@@ -126,7 +144,7 @@ body {
 
     /*CONCLUSION*/
 #conclusion {
-    height: 40%;
+    height: 30%;
     font-size: 25px;
     padding: 10px;
     border: 1px solid #312222;
