@@ -1,10 +1,14 @@
+body {
+    font-family: "Segoe UI", serif;
+    background: whitesmoke;
+}
+
 /*HEADER*/
 .header {
-    background-color: #12239e;
+    background-color: brown;
     color: white;
     padding: 20px;
     text-align: center;
-    font-family: "Segoe UI", serif;
     border-radius: 5px;
     font-size: large;
 }
@@ -12,40 +16,54 @@
     display: flex;
     overflow: auto;
 }
-/*BODY*/
+
 /*LEFT-SIDE*/
 .left {
-    width: 40%;
+    width: 50%;
     padding: 20px;
 }
 .left.area {
     display: flex;
-    padding: 10px;
     box-sizing: border-box; /* include padding in both width,height */
+    flex-wrap: wrap;
 }
     /*TOTAL AND GENDER*/
 #total-gender {
     height: 10%;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     padding: 10px;
     font-size: 20px;
-    font-family: "Segoe UI", serif;
     font-weight: bold;
+    border: 1px solid #312222;
+    border-radius: 5px;
 }
 #total-gender #totalDisplay {
-    width: 30%;
+    width: 50%;
     text-align: left;
+    margin: auto
 }
 #total-gender #genderSelection {
-    width: 80%;
+    width: 50%;
     text-align: left;
-    padding: 10px;
+    margin: auto;
 }
 
 /*STACK-PLOT*/
 #stack-plot {
     height: 50%;
+    border: 1px solid #312222;
+    border-radius: 5px;
+    text-align: left;
+    padding: 10px;
+    overflow: auto;
+}
+#stack-plot .diagram {
+    margin: auto;
+}
+#stack-plot .chart-axis {
+    font-size: 15px;
+    font-family: "Segoe UI", serif;
 }
 
     /*TABLE*/
@@ -55,15 +73,15 @@
     padding: 10px;
     font-family: "Segoe UI", serif;
     font-size: 20px;
+    overflow: scroll;
+    border: 1px solid #312222;
+    border-radius: 5px;
 }
 #avgTable th {
     background: #12239e;
     color: white;
     padding: 5px 10px;
     min-width: 10%;
-}
-#avgTable td {
-    padding: 5px 10px;
 }
 #avgTable tbody tr:nth-child(even) {
     background: whitesmoke;
@@ -74,9 +92,13 @@
 #avgTable tbody tr:hover {
     background-color: lightgrey;
 }
+#avgTable td {
+    padding: 5px 10px;
+}
+
 /*RIGHT-SIDE*/
 .right {
-    width: 60%;
+    width: 50%;
     padding: 20px;
 }
 .right.area {
@@ -84,7 +106,29 @@
     padding: 10px;
     box-sizing: border-box; /* include padding in both width,height */
 }
+
     /*BAR-PLOT*/
 #bar-plot {
-    height: 50%;
+    height: 60%;
+    overflow: scroll;
+    padding: 10px;
+    border: 1px solid #312222;
+    border-radius: 5px;
+}
+#bar-plot .chart-axis {
+    font-size: 15px;
+    font-family: "Segoe UI", serif;
+}
+#bar-plot .diagram {
+    display: block;
+    margin: auto;
+}
+
+    /*CONCLUSION*/
+#conclusion {
+    height: 40%;
+    font-size: 25px;
+    padding: 10px;
+    border: 1px solid #312222;
+    border-radius: 5px;
 }

@@ -25,9 +25,9 @@ d3.csv(df_url, rowConverter).then(
 
 function initPanel_3(data) {
     // SVG DIMENSION
-    const outer_w = 500;
+    const outer_w = 600;
     const outer_h = 300;
-    const margin = {top: 20, right: 10, bottom: 50, left: 50};
+    const margin = {top: 20, right: 10, bottom: 50, left: 70};
     const h = outer_h - margin.top - margin.bottom;
     const w = outer_w - margin.right - margin.left;
     const p = 20;
@@ -39,6 +39,7 @@ function initPanel_3(data) {
         .append("svg")
         .attr("width", outer_w)
         .attr("height", outer_h)
+        .attr("class", "diagram")
         .append("g")
         .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
 
@@ -83,7 +84,8 @@ function initPanel_3(data) {
     stack
         .append("g")
         .attr("transform", "translate(0," + h + ")")
-        .call(d3.axisBottom(xStack).tickSizeOuter(0));
+        .call(d3.axisBottom(xStack).tickSizeOuter(0))
+        .attr("class", "chart-axis");
 
     const yStack = d3
         .scaleLinear()
@@ -91,7 +93,8 @@ function initPanel_3(data) {
         .range([h, 0]);
     stack
         .append("g")
-        .call(d3.axisLeft(yStack));
+        .call(d3.axisLeft(yStack))
+        .attr("class", "chart-axis");
 
     const colorStack = d3
         .scaleOrdinal()
@@ -126,6 +129,7 @@ function initPanel_3(data) {
         .append("svg")
         .attr("width", outer_w)
         .attr("height", outer_h)
+        .attr("class", "diagram")
         .append("g")
         .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
 
@@ -168,7 +172,8 @@ function initPanel_3(data) {
         .paddingInner(0.2)
     bar
         .append("g")
-        .call(d3.axisLeft(y0Bar));
+        .call(d3.axisLeft(y0Bar))
+        .attr("class", "chart-axis");
 
     const xBar = d3
         .scaleLinear()
@@ -177,7 +182,8 @@ function initPanel_3(data) {
     bar
         .append("g")
         .attr("transform", "translate(0," + h + ")")
-        .call(d3.axisBottom(xBar));
+        .call(d3.axisBottom(xBar))
+        .attr("class", "chart-axis");
 
     const innerGroup = d3.keys(groupData[0]).filter((key) => key !== "groups")
 
@@ -221,12 +227,12 @@ function initPanel_3(data) {
     }
 
     // female: none, completed
-    const fnAvg = average(data.filter((d) => d.tpc === "none" && d.gender ==="female"))
-    const fcAvg = average(data.filter((d) => d.tpc === "completed" && d.gender ==="female"))
-    const fmAvg = average(data.filter((d) => d.gender ==="female"))
+    const fnAvg = average(data.filter((d) => d.tpc === "none" && d.gender === "female"))
+    const fcAvg = average(data.filter((d) => d.tpc === "completed" && d.gender === "female"))
+    const fmAvg = average(data.filter((d) => d.gender === "female"))
     // male: none, completed
-    const mnAvg = average(data.filter((d) => d.tpc === "none" && d.gender ==="male"))
-    const mcAvg = average(data.filter((d) => d.tpc === "completed" && d.gender ==="male"))
+    const mnAvg = average(data.filter((d) => d.tpc === "none" && d.gender === "male"))
+    const mcAvg = average(data.filter((d) => d.tpc === "completed" && d.gender === "male"))
     const mmAvg = average(data.filter((d) => d.gender === "male"))
 
     const total = average(data)
@@ -247,7 +253,9 @@ function initPanel_3(data) {
             .selectAll('th')
             .data(columns).enter()
             .append('th')
-            .text(function (column) { return column; })
+            .text(function (column) {
+                return column;
+            })
             .style("text-align", "left");
 
         // create a row for each object in the data
@@ -265,7 +273,9 @@ function initPanel_3(data) {
             })
             .enter()
             .append('td')
-            .text(function (d) { return d.value; })
+            .text(function (d) {
+                return d.value;
+            })
             .style("text-align", "left");
 
         return table.node();
