@@ -1,55 +1,90 @@
-h1 {
-    text-align: center;
-}
-
+/*HEADER*/
 .header {
-    background-color: #333;
+    background-color: #12239e;
     color: white;
     padding: 20px;
+    text-align: center;
+    font-family: "Segoe UI", serif;
+    border-radius: 5px;
+    font-size: large;
 }
-
 .container {
     display: flex;
+    overflow: auto;
 }
-
-/* left-side */
+/*BODY*/
+/*LEFT-SIDE*/
 .left {
     width: 40%;
     padding: 20px;
 }
-
-.left.area{
-    width: 100%;
+.left.area {
+    display: flex;
     padding: 10px;
     box-sizing: border-box; /* include padding in both width,height */
 }
+    /*TOTAL AND GENDER*/
+#total-gender {
+    height: 10%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    font-size: 20px;
+    font-family: "Segoe UI", serif;
+    font-weight: bold;
+}
+#total-gender #totalDisplay {
+    width: 30%;
+    text-align: left;
+}
+#total-gender #genderSelection {
+    width: 80%;
+    text-align: left;
+    padding: 10px;
+}
 
+/*STACK-PLOT*/
 #stack-plot {
-    height: 65%;
+    height: 50%;
 }
 
-#l-box3 {
-    height: 25%;
+    /*TABLE*/
+#avgTable {
+    height: 40%;
+    text-align: left;
+    padding: 10px;
+    font-family: "Segoe UI", serif;
+    font-size: 20px;
 }
-
-/* right-side */
+#avgTable th {
+    background: #12239e;
+    color: white;
+    padding: 5px 10px;
+    min-width: 10%;
+}
+#avgTable td {
+    padding: 5px 10px;
+}
+#avgTable tbody tr:nth-child(even) {
+    background: whitesmoke;
+}
+#avgTable tbody tr:nth-child(odd) {
+    background-color: white;
+}
+#avgTable tbody tr:hover {
+    background-color: lightgrey;
+}
+/*RIGHT-SIDE*/
 .right {
     width: 60%;
     padding: 20px;
 }
-
-.right .area {
+.right.area {
     display: flex;
-    flex-wrap: wrap;
-}
-.right.area{
-    width: 100%;
     padding: 10px;
     box-sizing: border-box; /* include padding in both width,height */
 }
+    /*BAR-PLOT*/
 #bar-plot {
-  height: 75%;
-}
-#conclusion {
-  height: 35%;
+    height: 50%;
 }

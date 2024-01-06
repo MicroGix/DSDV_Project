@@ -1,41 +1,44 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
+<head>
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Visualization</title>
-    <link rel="stylesheet" type="text/css" href="./style.css" />
+    <link rel="stylesheet" type="text/css" href="./style.css"/>
     <script src="https://d3js.org/d3.v5.min.js"></script>
-  </head>
-  <body>
-    <!-- Header -->
-    <div class="header">
-      <h1>Student Performance Dashboard</h1>
+</head>
+<body>
+<!-- Header -->
+<div class="header">
+    <h1>Student Performance Dashboard</h1>
+</div>
+
+<div class="container">
+    <!-- Left-side panel-->
+    <div class="left">
+
+        <div class="area" id="total-gender">
+            <div class="element" id="totalDisplay">Total Students:</div>
+            <div class="element" id="genderSelection">Gender:</div>
+        </div>
+
+        <div class="area" id="stack-plot"></div>
+        <div class="area" id="avgTable"></div>
+
     </div>
 
-    <div class="container">
-      <!-- Left-side panel-->
-      <div class="left">
-        <div id="total&gender" class="area">
-          <div class="element" id="total">Total Students:</div>
-          <div class="element" id="genderSelection">Gender:</div>
-        </div>
-        <div class="area" id="averageTable">
-          <p>Average of total marks table.</p>
-        </div>
-        <div class="area" id="conclusion">
-          <p>
-            Conclusion: <br>
-            - Something to commit here.
-          </p>
-        </div>
-      </div>
-      <!-- Right-side panel-->
-      <div class="right">
-        <div class="area" id="stack-plot"></div>
+    <!-- Right-side panel-->
+    <div class="right">
         <div class="area" id="bar-plot"></div>
-      </div>
+        <div class="area" id="conclusion">
+            <p>
+                Conclusion: <br>
+                - Something to commit here.
+            </p>
+        </div>
     </div>
-    <script src="./main.js"></script>
-  </body>
+
+</div>
+<script src="./main.js"></script>
+</body>
 </html>

@@ -3,7 +3,7 @@ function rowConverter(d) {
         avg: parseFloat(d.avg),
         gender: d.gender,
         grade: d.grade,
-        group: d.group,
+        groups: d["group"],
         lunch: d.lunch,
         math: parseFloat(d["math score"]),
         name: d.name,
@@ -134,7 +134,7 @@ function initPanel_3(data) {
         const result = {};
         data.forEach((d) => {
             const tpc = d.tpc;
-            const groups = d.group;
+            const groups = d.groups;
             result[groups] = result[groups] || {tpc: {}};
             result[groups].tpc[tpc] = result[groups].tpc[tpc] || {n: 0};
             result[groups].tpc[tpc].n++;
@@ -154,7 +154,7 @@ function initPanel_3(data) {
         });
         const countTPC = counts.flat();
         let result = Object.assign(
-            {group: group},
+            {groups: group},
             Object.fromEntries(countTPC),
         );
         return result;
@@ -164,7 +164,7 @@ function initPanel_3(data) {
     const y0Bar = d3
         .scaleBand()
         .rangeRound([h, 0])
-        .domain(d3.map(groupData, (d) => d.group).keys())
+        .domain(d3.map(groupData, (d) => d.groups).keys())
         .paddingInner(0.2)
     bar
         .append("g")
@@ -179,7 +179,7 @@ function initPanel_3(data) {
         .attr("transform", "translate(0," + h + ")")
         .call(d3.axisBottom(xBar));
 
-    const innerGroup = d3.keys(groupData[0]).filter((key) => key !== "group")
+    const innerGroup = d3.keys(groupData[0]).filter((key) => key !== "groups")
 
     const y1Bar = d3
         .scaleBand()
@@ -195,7 +195,7 @@ function initPanel_3(data) {
     bar.selectAll(".barchart")
         .data(groupData)
         .enter().append("g")
-        .attr("transform", (d) => "translate(0, " + y0Bar(d.group) + ")")
+        .attr("transform", (d) => "translate(0, " + y0Bar(d.groups) + ")")
         .selectAll("rect")
         .data(function (d) {
             return innerGroup.map(function (key) {
@@ -211,140 +211,66 @@ function initPanel_3(data) {
 
     //--TABLE OF AVERAGE OF TOTAL MARKS--
     //create dataset
-    function getData(data) {
-        const result = [];
-        data.forEach(d => {
-            const avg = d.avg;
-            const gender = d.gender;
-            const tpc = d.tpc;
-            result.push({avg: avg, gender: gender, tpc: tpc})
-        })
-        return result;
-    }
-
-    const testData = getData(data);
-
     function average(data) {
         let sum = 0
         data.forEach(e => {
-            sum += e.avg;
+            sum += e.math + e.writing + e.reading;
         })
-        return sum / data.length;
+        let avg = sum / data.length;
+        return avg.toFixed(2)
     }
 
-    // none: female, male
-    const fnAvg = average(testData.filter((d) => d.tpc === "none" && d.gender ==="female"))
-    const mnAvg = average(testData.filter((d) => d.tpc === "none" && d.gender ==="male"))
-    // completed: female, male
-    const fcAvg = average(testData.filter((d) => d.tpc === "completed" && d.gender ==="female"))
-    const mcAvg = average(testData.filter((d) => d.tpc === "completed" && d.gender ==="male"))
-    console.log(fnAvg)
-    console.log(mnAvg)
-    console.log(fcAvg)
-    console.log(mcAvg)
+    // female: none, completed
+    const fnAvg = average(data.filter((d) => d.tpc === "none" && d.gender ==="female"))
+    const fcAvg = average(data.filter((d) => d.tpc === "completed" && d.gender ==="female"))
+    const fmAvg = average(data.filter((d) => d.gender ==="female"))
+    // male: none, completed
+    const mnAvg = average(data.filter((d) => d.tpc === "none" && d.gender ==="male"))
+    const mcAvg = average(data.filter((d) => d.tpc === "completed" && d.gender ==="male"))
+    const mmAvg = average(data.filter((d) => d.gender === "male"))
+
+    const total = average(data)
+
+    const tableData = [
+        {TPC: "none", Female: fnAvg, Male: mnAvg},
+        {TPC: "completed", Female: fcAvg, Male: mcAvg},
+    ]
+    console.log(tableData)
+
+    function createTable(data, columns) {
+        const table = d3.select('#avgTable').append('table');
+        const thead = table.append('thead')
+        const tbody = table.append('tbody');
+
+        // append the header row
+        thead.append('tr')
+            .selectAll('th')
+            .data(columns).enter()
+            .append('th')
+            .text(function (column) { return column; })
+            .style("text-align", "left");
+
+        // create a row for each object in the data
+        const rows = tbody.selectAll('tr')
+            .data(data)
+            .enter()
+            .append('tr');
+
+        // create a cell in each row for each column
+        rows.selectAll('td')
+            .data(function (row) {
+                return columns.map(function (column) {
+                    return {column: column, value: row[column]};
+                });
+            })
+            .enter()
+            .append('td')
+            .text(function (d) { return d.value; })
+            .style("text-align", "left");
+
+        return table.node();
+    }
+
+    createTable(tableData, ['TPC', 'Female', 'Male'])
 }
 
-//---------------------------------Summary of what i found-------------------------------------------------
-// 1. function to identify unique values: https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
-// function onlyUnique(value, index, array) {
-//   return array.indexOf(value) == index;
-// }
-// 2. different API for fetching data v4 vs v5: https://stackoverflow.com/questions/52638816/d3-importing-csv-file-to-array
-// 3. function to calculate number of occurence -> not quite good
-// let genderData = [];
-// df.forEach(function(d) {
-//   const gender = d.gender;
-//   genderData.push(gender);
-// })
-// let n_male = 0;
-// let n_female = 0;
-// genderData.forEach(genderCount);
-// function genderCount(item) {
-//   if (item =="male") {
-//     return n_male++;
-//   } else {
-//     return n_female++;
-//   }
-// }
-// const total = n_male + n_female;
-// 4. Create stack barchart using stack layout (can only apply for v3): https://www.youtube.com/watch?v=iEV8ZdTd2rg
-// 5. Problems: since we use d3 v5 the API for fetching data has changed so the v4 version will not work:
-// d3.csv(
-//   "data.csv",
-//   rowConverter,
-//   function (error, data) {
-//     if (error) {
-//       console.log(error);
-//     } else {
-//       dataset = data;
-//       console.log(data);
-//       initChart();
-//     }
-//   },
-// );
-// Detail on this problem: https://stackoverflow.com/questions/52638816/d3-importing-csv-file-to-array
-// 6. Example to create count function:
-// function countTPCbyGender(data) {
-//   const result = {};
-//   data.forEach((d) => {
-//     const genders = d.gender;
-//     const tpc = d.tpc;
-//     // For each gender element in the dataset, if it doesn't already exist then crete a new object with two properties n_tpc and groups:
-//     result[genders] = result[genders] || { n_tpc: 0, groups: {} };
-//     // For each tpc element coresponding with gender element in the dataset, if it hasn't existed, then create a new object with n_tpc property:
-//     result[genders].groups[tpc] = result[genders].groups[tpc] || { n_tpc: 0 };
-//     // For each gender elements in the dataset, if it hasn't existed then n_tpc increase by 1:
-//     result[genders].n_tpc++;
-//     // For each tpc element coresponding with gender element in the dataset, if it hasn't existed then n_tpc increase by 1:
-//     result[genders].groups[tpc].n_tpc++;
-//   });
-//   return result;
-// }
-// 7. Another approach only downside is unsuable data in this case
-// const groupData = Object.entries(TPCbyGroup).map(([tpc, value]) => {
-//   const values = Object.entries(value).map(([key, groupValue]) => { // not a very good solution since in group parameter both total and group are contained here so when use with Object.entries() only the "object" part get return other get by passed;
-//     const groups = Object.entries(groupValue).map(([groupName, n_count]) => {
-//       const countArray = Object.values(n_count);
-//       return [[groupName, countArray[0]]];
-//     });
-//     const groupArray = groups.flat();
-//     return groupArray;
-//   });
-//   const counts = values.flat();
-//   let result = Object.assign({ tpc: tpc }, Object.fromEntries(counts));
-//   return result;
-// });
-// 8. Vertical version of group chart
-// const x0Bar = d3
-//     .scaleBand()
-//     .rangeRound([0, w])
-//     .domain(d3.map(groupData, (d) => d.group).keys())
-//     .padding(0.2);
-// bar
-//     .append("g")
-//     .attr("transform", "translate(0," + h + ")")
-//     .call(d3.axisBottom(x0Bar));
-// const yBar = d3
-//     .scaleLinear()
-//     .domain([0, 200])
-//     .range([h, 0]);
-// bar
-//     .append("g")
-//     .call(d3.axisLeft(yBar));
-// const x1Bar = d3
-//     .scaleBand()
-//     .domain(innerGroup)
-//     .range([0, x0Bar.bandwidth()])
-//     .padding([0.05]);
-// bar.selectAll(".barchart")
-//     .data(groupData)
-//     .enter().append("g")
-//     .attr("transform", (d) => "translate(" + x0Bar(d.group) + ",0)")
-//     .selectAll("rect")
-//     .data(function(d) { return innerGroup.map(function(key) { return {key: key, value: d[key]}; }); })
-//     .enter().append("rect")
-//     .attr("x", (d) => x1Bar(d.key))
-//     .attr("y", (d) => yBar(d.value))
-//     .attr("width", x1Bar.bandwidth())
-//     .attr("height", (d) => h - yBar(d.value))
-//     .attr("fill", (d) => colorBar(d.key))
