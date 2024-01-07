@@ -1,0 +1,156 @@
+body {
+    font-family: "Arial", serif;
+    background: #ffffff;
+}
+
+/*HEADER*/
+.header {
+    background-color: #12239EFF;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+    font-size: large;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: scroll;
+    padding: 20px;
+}
+
+/*TOTAL AND GENDER*/
+.upper {
+    height: 10%;
+    width: 100%;
+    display: flex;
+    overflow: auto;
+    font-size: medium;
+    font-weight: bold;
+    border: 1px solid #312222;
+    border-radius: 5px;
+}
+#totalDisplay {
+    width: 50%;
+    height: 100%;
+    text-align: center;
+    margin: auto;
+    padding: 10px 0 10px 0;
+    overflow: inherit;
+}
+#genderSelection {
+    width: 50%;
+    height: 100%;
+    text-align: center;
+    margin: auto;
+    padding: 10px 0 10px 0;
+    overflow: inherit;
+}
+
+/*LOWER*/
+.lower {
+    height: 90%;
+    width: 100%;
+    display: flex;
+    overflow: scroll;
+    padding-top: 20px;
+}
+
+/*LEFT-SIDE*/
+.lower #left {
+    width: 50%;
+    padding-right: 10px;
+}
+#left.area {
+    display: block;
+    flex-wrap: wrap;
+}
+#left h2 {
+    font-size: 20px;
+}
+
+/*STACK-PLOT*/
+#stack-plot {
+    height: 50%;
+    border: 1px solid #312222;
+    border-radius: 5px;
+    text-align: left;
+    padding: 10px;
+    overflow: auto;
+}
+#stack-plot .diagram {
+    margin: auto;
+}
+#stack-plot .chart-axis {
+    font-size: 15px;
+}
+
+    /*TABLE*/
+#avgTable {
+    height: 50%;
+    text-align: left;
+    padding: 10px;
+    font-family: "Segoe UI", serif;
+    font-size: 20px;
+    overflow: scroll;
+    border: 1px solid #312222;
+    border-radius: 5px;
+}
+#avgTable th {
+    background: #12239e;
+    color: white;
+    padding: 5px 10px;
+    min-width: 10%;
+}
+#avgTable tbody tr:nth-child(even) {
+    background: whitesmoke;
+}
+#avgTable tbody tr:nth-child(odd) {
+    background-color: white;
+}
+#avgTable tbody tr:hover {
+    background-color: lightgrey;
+}
+#avgTable td {
+    padding: 5px 10px;
+}
+
+/*RIGHT-SIDE*/
+.lower #right {
+    width: 50%;
+    padding-left: 10px;
+}
+#right.area {
+    display: flex;
+    padding: 10px;
+    box-sizing: border-box; /* include padding in both width,height */
+}
+#right h2 {
+    font-size: 20px;
+}
+
+    /*BAR-PLOT*/
+#bar-plot {
+    height: 50%;
+    overflow: scroll;
+    padding: 10px;
+    border: 1px solid #312222;
+    border-radius: 5px;
+}
+#bar-plot .chart-axis {
+    font-size: 15px;
+}
+#bar-plot .diagram {
+    display: block;
+    margin: auto;
+}
+
+    /*CONCLUSION*/
+#conclusion {
+    height: 50%;
+    font-size: 25px;
+    padding: 10px;
+    border: 1px solid #312222;
+    border-radius: 5px;
+}

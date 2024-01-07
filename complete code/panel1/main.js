@@ -184,7 +184,7 @@ function drawGenderPieChart(csvFilePath, width, height) {
 }
 
 // Pie chart
-drawGenderPieChart("./main_data.csv", 500, 300);
+drawGenderPieChart("https://raw.githubusercontent.com/MicroGix/Influence-of-factors-on-students-performence/main/main_data.csv", 500, 300);
 
 function drawGroupPieChart(csvFilePath, width, height) {
   var customWidth = width;
@@ -339,7 +339,7 @@ function drawGroupPieChart(csvFilePath, width, height) {
   }
 }
 // count the number of students in dataset
-drawGroupPieChart("main_data.csv", 500, 300);
+drawGroupPieChart("https://raw.githubusercontent.com/MicroGix/Influence-of-factors-on-students-performence/main/main_data.csv", 500, 300);
 
 function countRows(csvFilePath) {
   d3.csv(csvFilePath).then(function (data) {
@@ -352,4 +352,4 @@ function countRows(csvFilePath) {
       .style("text-align", "center");
   });
 }
-countRows("./main_data.csv");
+countRows("https://raw.githubusercontent.com/MicroGix/Influence-of-factors-on-students-performence/main/main_data.csv");
