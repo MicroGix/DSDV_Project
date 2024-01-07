@@ -12,7 +12,7 @@ d3.csv(csvFilePath).then(function (data) {
     },
     sort: true,
     search: true
-  }).render(document.getElementById("table-container"));
+  }).render(document.getElementById("panel2_table-container"));
 });
 
 //------------------------------------------------------
@@ -54,7 +54,7 @@ d3.csv(csvFilePath).then(function (data) {
   
     // SVG CONTAINER (SOLVE)
     const stack = d3
-      .select("#on2")
+      .select("#panel2_smbox2")
       .append("svg")
       .attr("width", outer_w)
       .attr("height", outer_h)
@@ -189,7 +189,7 @@ function initPanel_2_B(data) {
 
   // SVG CONTAINER (SOLVE)
   const stack = d3
-    .select("#on3")
+    .select("#panel2_smbox3")
     .append("svg")
     .attr("width", outer_w)
     .attr("height", outer_h)
@@ -300,7 +300,7 @@ function initPanel_2_C(data) {
 
   // SVG CONTAINER (SOLVE)
   const stack = d3
-    .select("#on4")
+    .select("#panel2_smbox4")
     .append("svg")
     .attr("width", outer_w)
     .attr("height", outer_h)
@@ -411,7 +411,7 @@ function initPanel_2_D(data) {
 
   // SVG CONTAINER (SOLVE)
   const stack = d3
-    .select("#on5")
+    .select("#panel2_smbox5")
     .append("svg")
     .attr("width", outer_w)
     .attr("height", outer_h)
@@ -522,7 +522,7 @@ function initPanel_2_E(data) {
 
   // SVG CONTAINER (SOLVE)
   const stack = d3
-    .select("#on6")
+    .select("#panel2_smbox6")
     .append("svg")
     .attr("width", outer_w)
     .attr("height", outer_h)
@@ -632,7 +632,7 @@ function initPanel_2(data) {
 
   // SVG CONTAINER (SOLVE)
   const stack = d3
-    .select("#on7")
+    .select("#panel2_smbox7")
     .append("svg")
     .attr("width", outer_w)
     .attr("height", outer_h)
