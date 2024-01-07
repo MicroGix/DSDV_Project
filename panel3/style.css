@@ -1,11 +1,11 @@
 body {
     font-family: "Arial", serif;
-    background: whitesmoke;
+    background: #ffffff;
 }
 
 /*HEADER*/
 .header {
-    background-color: brown;
+    background-color: #12239EFF;
     color: white;
     padding: 20px;
     text-align: center;
@@ -14,11 +14,10 @@ body {
 }
 
 .container {
-    max-height: 100%;
     display: flex;
     flex-wrap: wrap;
     overflow: scroll;
-    padding-top: 20px;
+    padding: 20px;
 }
 
 /*TOTAL AND GENDER*/
@@ -27,7 +26,6 @@ body {
     width: 100%;
     display: flex;
     overflow: auto;
-    padding: 10px;
     font-size: medium;
     font-weight: bold;
     border: 1px solid #312222;
@@ -35,22 +33,28 @@ body {
 }
 #totalDisplay {
     width: 50%;
+    height: 100%;
     text-align: center;
-    margin: auto
+    margin: auto;
+    padding: 10px 0 10px 0;
+    overflow: inherit;
 }
 #genderSelection {
     width: 50%;
+    height: 100%;
     text-align: center;
     margin: auto;
+    padding: 10px 0 10px 0;
+    overflow: inherit;
 }
 
 /*LOWER*/
 .lower {
     height: 90%;
     width: 100%;
-    padding-top: 20px;
     display: flex;
     overflow: scroll;
+    padding-top: 20px;
 }
 
 /*LEFT-SIDE*/
@@ -68,7 +72,7 @@ body {
 
 /*STACK-PLOT*/
 #stack-plot {
-    height: 70%;
+    height: 50%;
     border: 1px solid #312222;
     border-radius: 5px;
     text-align: left;
@@ -84,7 +88,7 @@ body {
 
     /*TABLE*/
 #avgTable {
-    height: 30%;
+    height: 50%;
     text-align: left;
     padding: 10px;
     font-family: "Segoe UI", serif;
@@ -128,7 +132,7 @@ body {
 
     /*BAR-PLOT*/
 #bar-plot {
-    height: 70%;
+    height: 50%;
     overflow: scroll;
     padding: 10px;
     border: 1px solid #312222;
@@ -144,7 +148,7 @@ body {
 
     /*CONCLUSION*/
 #conclusion {
-    height: 30%;
+    height: 50%;
     font-size: 25px;
     padding: 10px;
     border: 1px solid #312222;
