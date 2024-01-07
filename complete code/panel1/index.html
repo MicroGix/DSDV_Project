@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./slider.css" />
     <!-- link to Panel2 css -->
     <link rel="stylesheet" href="../panel2/style.css" />
+    <link rel="stylesheet" href="../panel2/pivot.min.css" />
     <!-- link to Panel3 css -->
     <link rel="stylesheet" href="../panel3/style.css" />
     <!-- link to Panel4 css -->
@@ -37,7 +38,6 @@
       referrerpolicy="no-referrer"
     />
   </head>
-
   <body>
     <!-- Header -->
     <div class="header">
@@ -50,9 +50,9 @@
         class="mySlides fade"
         style="height: 900px; display: block; margin: auto"
       >
-        <!-- Container chứa body -->
+        <!-- Container -->
         <div class="container">
-          <!-- Mảng trái -->
+          <!-- Left Array -->
           <div class="left">
             <div class="row" id="rowtren">
               <div class="box box1 mangtren margintong" id="o1">
@@ -116,14 +116,62 @@
           </div>
         </div>
       </div>
-      <!-- Panel anh Son add vao day -->
+      <!-- Panel 2 here -->
       <div class="mySlides fade" style="height: 900px">
-        <img
-          src="https://i.kym-cdn.com/entries/icons/original/000/030/971/Screen_Shot_2019-08-29_at_2.44.51_PM.jpg"
-          style="width: 100%; height: 100%"
-        />
+        <div class="container">
+          <!-- left array -->
+          <div class="left">
+            <div class="row" id="rowtren">
+              <div class="box mangtren margintong" id="o1">
+                <!-- <h1>CSV Data Row Count</h1> -->
+                <div id="row-count"></div>
+                Total Students
+              </div>
+              <div class="box mangtren margintong" id="o2">select gender</div>
+            </div>
+            <div class="row">
+              <div class="box margintong" id="o3">
+                lunch type preferred by gender
+                <div id="table-container"></div>
+              </div>
+              <div class="box margintong" id="o4">
+                <h3>Conclusion</h3>
+                <p1
+                  >• Students Prefer "Standard Lunch" over "Free/ Reduced".<br
+                /></p1>
+                <p1
+                  >• Group D has most number of Students opted for "Standard
+                  Lunch".<br
+                /></p1>
+                <p1
+                  >• Students who prefer "Standard Lunch" scored higher marks as
+                  compared to "Free/Reduced".<br
+                /></p1>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right array -->
+          <div class="right">
+            <div class="row">
+              <div class="small-box margintong" id="on2">
+                <div id="groupA"></div>
+                <div id="groupA"></div>
+              </div>
+              <div class="small-box margintong" id="on3">Ô B</div>
+            </div>
+            <div class="row">
+              <div class="small-box margintong" id="on4">Ô C</div>
+              <div class="small-box margintong" id="on5">Ô D</div>
+            </div>
+            <div class="row">
+              <div class="small-box margintong" id="on6">Ô E</div>
+              <div class="small-box margintong" id="on7">Ô F</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <!-- Panel anh Tin add vao day -->
+      <!-- Panel 3 here -->
       <div class="mySlides fade" style="height: 900px">
         <div class="container">
           <div class="upper">
@@ -154,7 +202,7 @@
           </div>
         </div>
       </div>
-      <!-- Panel Bing Duong Vo Tan add vao day -->
+      <!-- Panel 4 here -->
       <div class="mySlides fade" style="height: 900px">
         <div class="panel4_container">
           <!-- First part (60%) -->
@@ -184,7 +232,6 @@
               • All Top 3 Scorers belong to parents who completed Bachelor's &
               Associate Degree.
             </div>
-
             <div class="panel4_half-box panel4_margin" style="width: 53%">
               <h2 class="panel4_table-title">Student Performance</h2>
               <!-- Your title here -->
@@ -209,6 +256,10 @@
     <script src="./main.js"></script>
     <script src="./table.js"></script>
     <script src="./slider.js"></script>
+    <!-- Link to panel2 -->
+    <script src="../panel2/main.js"></script>
+    <script src="../panel2/table.js"></script>
+    <script src="../panel2/pivot.min.js"></script>
     <!-- Link to panel3 -->
     <script src="../panel3/main.js"></script>
     <!-- Link to panel4 -->
