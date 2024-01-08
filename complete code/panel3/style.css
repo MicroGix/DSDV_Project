@@ -16,7 +16,6 @@ body {
 .container {
     display: flex;
     flex-wrap: wrap;
-    overflow: scroll;
     padding: 20px;
 }
 
@@ -25,7 +24,6 @@ body {
     height: 10%;
     width: 100%;
     display: flex;
-    overflow: auto;
     font-size: medium;
     font-weight: bold;
     border: 1px solid #312222;
@@ -53,13 +51,13 @@ body {
     height: 90%;
     width: 100%;
     display: flex;
-    overflow: scroll;
     padding-top: 20px;
 }
 
 /*LEFT-SIDE*/
 .lower #left {
     width: 50%;
+    height: 100%;
     padding-right: 10px;
 }
 #left.area {
@@ -119,6 +117,7 @@ body {
 /*RIGHT-SIDE*/
 .lower #right {
     width: 50%;
+    height: 100%;
     padding-left: 10px;
 }
 #right.area {
