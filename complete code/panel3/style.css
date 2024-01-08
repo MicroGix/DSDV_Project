@@ -1,9 +1,8 @@
+/*HEADER*/
 body {
     font-family: "Arial", serif;
-    background: #ffffff;
+    background: white;
 }
-
-/*HEADER*/
 .header {
     background-color: #12239EFF;
     color: white;
@@ -15,85 +14,52 @@ body {
 
 .container {
     display: flex;
-    flex-wrap: wrap;
     padding: 20px;
 }
-
-/*TOTAL AND GENDER*/
-.upper {
-    height: 10%;
-    width: 100%;
-    display: flex;
-    font-size: medium;
-    font-weight: bold;
-    border: 1px solid #312222;
-    border-radius: 5px;
-}
-#totalDisplay {
-    width: 50%;
-    height: 100%;
-    text-align: center;
-    margin: auto;
-    padding: 10px 0 10px 0;
-    overflow: inherit;
-}
-#genderSelection {
-    width: 50%;
-    height: 100%;
-    text-align: center;
-    margin: auto;
-    padding: 10px 0 10px 0;
-    overflow: inherit;
-}
-
-/*LOWER*/
-.lower {
-    height: 90%;
-    width: 100%;
-    display: flex;
-    padding-top: 20px;
-}
-
-/*LEFT-SIDE*/
-.lower #left {
+/*LAYOUT SETTING*/
+#left {
     width: 50%;
     height: 100%;
     padding-right: 10px;
 }
-#left.area {
+#right {
+    width: 50%;
+    height: 100%;
+    padding-left: 10px;
+}
+.area {
     display: block;
-    flex-wrap: wrap;
-}
-#left h2 {
-    font-size: 20px;
-}
-
-/*STACK-PLOT*/
-#stack-plot {
-    height: 50%;
-    border: 1px solid #312222;
+    border: 1px solid black;
     border-radius: 5px;
-    text-align: left;
+}
+/*CHART SETTING*/
+.chart-axis {
+    font-size: 14px;
+}
+/*LEFT*/
+    /*TOTAL AND GENDER*/
+#totalDisplay{
+    min-height: fit-content;
+    max-height: 10%;
+    margin: auto;
     padding: 10px;
     overflow: auto;
 }
-#stack-plot .diagram {
-    margin: auto;
-}
-#stack-plot .chart-axis {
-    font-size: 15px;
-}
-
-    /*TABLE*/
-#avgTable {
-    height: 50%;
+    /*STACK-PLOT*/
+#stack-plot {
+    min-height: fit-content;
+    max-height: 50%;
     text-align: left;
     padding: 10px;
-    font-family: "Segoe UI", serif;
-    font-size: 20px;
     overflow: scroll;
-    border: 1px solid #312222;
-    border-radius: 5px;
+}
+    /*TABLE*/
+#avgTable {
+    min-height: fit-content;
+    max-height: 40%;
+    text-align: left;
+    padding: 10px;
+    overflow: scroll;
 }
 #avgTable th {
     background: #12239e;
@@ -114,42 +80,19 @@ body {
     padding: 5px 10px;
 }
 
-/*RIGHT-SIDE*/
-.lower #right {
-    width: 50%;
-    height: 100%;
-    padding-left: 10px;
-}
-#right.area {
-    display: flex;
-    padding: 10px;
-    box-sizing: border-box; /* include padding in both width,height */
-}
-#right h2 {
-    font-size: 20px;
-}
-
+/*RIGHT*/
     /*BAR-PLOT*/
 #bar-plot {
-    height: 50%;
+    min-height: fit-content;
+    max-height: 60%;
     overflow: scroll;
     padding: 10px;
-    border: 1px solid #312222;
-    border-radius: 5px;
 }
-#bar-plot .chart-axis {
-    font-size: 15px;
-}
-#bar-plot .diagram {
-    display: block;
-    margin: auto;
-}
-
     /*CONCLUSION*/
 #conclusion {
-    height: 50%;
-    font-size: 25px;
+    min-height: fit-content;
+    max-height: 40%;
+    font-size: 14px;
     padding: 10px;
-    border: 1px solid #312222;
-    border-radius: 5px;
+    overflow: auto;
 }

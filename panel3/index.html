@@ -12,30 +12,23 @@
     <h1>Student Performance Dashboard</h1>
 </div>
 <div class="container">
-    <div class="upper">
-        <h2 id="totalDisplay"></h2>
-        <h2 id="genderSelection">Gender:</h2>
-    </div>
-    <div class="lower">
     <!-- Left-side panel-->
-        <div id="left">
-            <div class="area" id="stack-plot">
-                <h2>Count of Students by TPC and Gender</h2>
-            </div>
-            <br>
-            <div class="area" id="avgTable">
-                <h2>Average of Total Marks</h2>
-            </div>
+    <div id="left">
+        <div class="area" id="total">
+            <h2 id="totalDisplay"></h2>
         </div>
-        <!-- Right-side panel-->
-        <div id="right">
-            <div class="area" id="bar-plot">
-                <h2>Distribution of Students as per Completion of TPC</h2>
-            </div>
-            <br>
-            <div class="area" id="conclusion">
-                <h2>Conclusion</h2>
-            </div>
+        <br>
+        <div class="area" id="stack-plot"></div>
+        <br>
+        <div class="area" id="avgTable"></div>
+    </div>
+    <!-- Right-side panel-->
+    <div id="right">
+        <div class="area" id="bar-plot"></div>
+        <br>
+        <div class="area" id="conclusion">
+            <h2>Conclusion</h2>
+            <p></p>
         </div>
     </div>
 </div>

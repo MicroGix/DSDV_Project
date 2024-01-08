@@ -30,10 +30,9 @@ function initPanel_3(data) {
     const margin = {top: 20, right: 10, bottom: 50, left: 70};
     const h = outer_h - margin.top - margin.bottom;
     const w = outer_w - margin.right - margin.left;
-    const p = 20;
 
     // SHOW TOTAL STUDENTS
-    document.getElementById("totalDisplay").innerHTML = "Total Students: " + data.length;
+    document.getElementById("totalDisplay").innerText= "Total Students: " + data.length;
 
     //--STACK BAR CHART--
     // set up svg container
@@ -42,7 +41,7 @@ function initPanel_3(data) {
         .append("svg")
         .attr("width", outer_w)
         .attr("height", outer_h)
-        .attr("class", "diagram")
+        .style("overflow", "center")
         .append("g")
         .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
 
@@ -132,7 +131,6 @@ function initPanel_3(data) {
         .append("svg")
         .attr("width", outer_w)
         .attr("height", outer_h)
-        .attr("class", "diagram")
         .append("g")
         .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
 
@@ -279,7 +277,6 @@ function initPanel_3(data) {
     const mmAvg = average(data.filter((d) => d.gender === "male"))
     // total
     const total = average(data)
-
 }
 
 
