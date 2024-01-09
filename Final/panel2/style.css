@@ -1,13 +1,27 @@
 h1 {
     text-align: center;
 }
-
-#panel2_row-count {
+.text {
+    font-size: 26px; 
+    margin: 30px;
+}
+.top-row {
     text-align: center;
     font-size: 24px;
-    margin-top: 20px;
+    margin-top: 10px;
+    
 }
-
+.row-count {
+    text-align: center;
+    font-size: 22px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+  .mangtren{
+    width: 50px;
+    margin: 5px;
+    
+}
 .header {
     background-color: #333;
     color: white;
@@ -15,108 +29,156 @@ h1 {
     text-align: center;
 }
 
-.panel2_container {
+.container {
     display: flex;
 }
 
-.panel2_left {
-    width: 40%;
+.left {
+    width: 50%;
     padding: 20px;
 }
 
-.panel2_right {
+.right {
+    
     width: 60%;
-    padding: 20px;
-}   
+    height: 60%;
 
-.panel2_left .panel2_row {
+
+}   
+.sub-right {
+    margin: 30px;
+    width: 700px;
+    height: 530px;
+    padding: 1px;
+    
+    overflow: auto;
+
+}  
+.sub-right1 {
+    margin: 30px;
+    width: 700px;
+    height: 250px;
+    padding: 1px;
+    
+    
+
+}  
+.sub-right2 {
+    margin: 30px;
+    width: 700px;
+    height: 50px;
+}  
+.left .row {
     display: flex;
     flex-wrap: wrap;
 }
 
-.panel2_left .panel2_box {
+.left .row .box {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
 }
 
-.panel2_right .panel2_row {
+.sub-right .row {
     display: flex;
 }
 
-.panel2_right .panel2_large-box {
+.right .large-box {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
 }
 
-.panel2_right .panel2_small-box {
+.right .small-box {
     width: 50%;
     padding: 10px;
-    border: 1px solid #ccc;
+   
 }
-
-.panel2_mangtren {
-    display: flex;
+ .mangtren{
+    display: flex ;
     width: 50%;
 }
-
-#panel2_rowtren {
+.rowtren{
     flex-wrap: nowrap;
 }
-
-.panel2_margintong {
+.margintong{
     margin: 10px;
 }
 
-#panel2_o1, #panel2_o2 {
-
+#olon{
+width: 100%; 
+height: 500px; 
+overflow: auto;
 }
-
-#panel2_olon {
-    width: 100%; 
-    height: 500px; 
-    overflow: auto;
+#olon .pvtRenderer {
+width: 70%;
 }
-
-#panel2_olon .pvtRenderer {
-    width: 70%;
+#olon .pvtRendererArea{
+width: 80%;
 }
-
-#panel2_olon .pvtRendererArea {
-    width: 80%;
-}
-
 .pvtTable {
-    width: 100%;
-    height: 100%;
+width: 100%;
+height: 100%;
 }
-
 .pvtRows {
-    width: 50px;
+width: 50px;
 }
 
-#panel2_on1 {
-    width: 80%;
+#on1 {
+width: 80%;
 }
-
-#panel2_olon table {
-    font-size: 16px; 
-    line-height: 1.5; 
-    padding: 10px; 
-    margin: 0;
+#olon table {
+font-size: 16px; 
+line-height: 1.5; 
+padding: 10px; 
+margin: 0;
 }
-
-.pvtAggregator {
+.pvtAggregator{
     width: 90px;
 }
-
-.pvtAxisContainer .pvtUnused .pvtUiCell .pvtVertList {
+.pvtAxisContainer pvtUnused pvtUiCell pvtVertList {
     width: 0px;
 }
-
-#panel2_o4 {
-    width: 100%; 
+.o4{
+    width: 670px; 
     height: 150px; 
-    overflow: auto;
+    
 }
+.person {
+    display: flex;
+    align-items: center;
+    
+    margin-bottom: 5px;
+  }
+  
+  .person-info {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+  }
+  
+  .color-box {
+    width: 20px;
+    height: 20px;
+    border: 2px solid black;
+    margin-right: 10px;
+  }
+  
+  .female {
+    background-color: pink;
+  }
+  
+  .male {
+    background-color: royalblue;
+  }
+  
+  .gender-label {
+    font-size: 16px;
+  }
+  
+  .additional-info {
+    font-size: 14px;
+    color: gray;
+  }
+
+  
