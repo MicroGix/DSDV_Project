@@ -58,17 +58,9 @@ body {
 .lower #left {
     width: 50%;
     height: 100%;
-    padding-right: 20px;
+    padding-right: 10px;
 }
-<<<<<<< Updated upstream
 #left.area {
-=======
-#right {
-    width: 50%;
-    height: 100%;
-}
-.area {
->>>>>>> Stashed changes
     display: block;
     flex-wrap: wrap;
 }
@@ -81,33 +73,13 @@ body {
     height: 50%;
     border: 1px solid #312222;
     border-radius: 5px;
-<<<<<<< Updated upstream
     text-align: left;
     padding: 10px;
-=======
-}
-/*CHART SETTING*/
-.chart-axis {
-    font-size: 14px;
-}
-h2 {
-    text-align: center;
-    margin: auto;
-    padding: 10px;
-    overflow: inherit;
-}
-/*LEFT*/
-    /*TOTAL AND GENDER*/
-#totalDisplay{
-    min-height: fit-content;
-    max-height: 10%;
->>>>>>> Stashed changes
     overflow: auto;
 }
 #stack-plot .diagram {
     margin: auto;
 }
-<<<<<<< Updated upstream
 #stack-plot .chart-axis {
     font-size: 15px;
 }
@@ -116,15 +88,6 @@ h2 {
 #avgTable {
     height: 50%;
     text-align: left;
-=======
-.tooltip {
-    position: absolute;
-}
-    /*TABLE*/
-#avgTable {
-    min-height: fit-content;
-    max-height: 40%;
->>>>>>> Stashed changes
     padding: 10px;
     font-family: "Segoe UI", serif;
     font-size: 20px;
@@ -187,14 +150,6 @@ h2 {
     height: 50%;
     font-size: 25px;
     padding: 10px;
-<<<<<<< Updated upstream
     border: 1px solid #312222;
     border-radius: 5px;
-=======
-    overflow: auto;
-}
-#conclusion p {
-    text-align: left;
-    font-size: 20px;
->>>>>>> Stashed changes
 }
