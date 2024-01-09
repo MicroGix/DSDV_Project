@@ -53,6 +53,7 @@ function drawGenderPieChart(csvFilePath, width, height) {
       .innerRadius(radius * 0.6)
       .outerRadius(radius);
 
+    console.log(pie(genderData))
     var arc = g
       .selectAll(".arc")
       .data(pie(genderData))

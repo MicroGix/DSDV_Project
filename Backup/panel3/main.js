@@ -133,7 +133,9 @@ function initPanel_3(data) {
         .append("div")
         .attr("class", "tooltip")
         .style("opacity", 0)
-        .style("background-color", "brown")
+        .style("background-color", "black")
+        .style("border", "1px solid black")
+        .style("border-radius", "5px")
         .style("padding", "10px");
 
     let stack_mouseover = function (d) {
@@ -148,7 +150,11 @@ function initPanel_3(data) {
             .style("opacity", 1)
     }
     let stack_mousemove = function (d) {
-        stack_tooltip.html("Testing")
+        const subgroupName = d3.select(this.parentNode).datum().key;
+        const subgroupValue = d.data[subgroupName];
+        stack_tooltip
+            .html("Gender: " + subgroupName + "<br>" + "Amount: " + subgroupValue)
+            .style("color", "white")
             .style("left", d3.event.pageX + 30 + "px")
             .style("top", d3.event.pageY + "px");
     }
@@ -268,7 +274,9 @@ function initPanel_3(data) {
         .append("div")
         .attr("class", "tooltip")
         .style("opacity", 0)
-        .style("background-color", "brown")
+        .style("background-color", "black")
+        .style("border", "1px solid black")
+        .style("border-radius", "5px")
         .style("padding", "10px");
 
     let bar_mouseover = function (d) {
@@ -283,7 +291,15 @@ function initPanel_3(data) {
             .style("opacity", 1)
     }
     let bar_mousemove = function (d) {
-        bar_tooltip.html("Testing")
+        const data = d3.select(this.parentNode).datum();
+        bar_tooltip
+            .data(function (data) {
+                return innerGroup.map(function (key) {
+                    return {key: key, value: d[key]};
+                });
+            })
+            .html("TPC: " + d.key + "<br>" + "Amount: " + d.value)
+            .style("color", "white")
             .style("left", d3.event.pageX + 30 + "px")
             .style("top", d3.event.pageY + "px");
     }
@@ -335,7 +351,9 @@ function initPanel_3(data) {
     }
 
     function createTable(data, columns) {
-        const table = d3.select('#avgTable').append('table')
+        const table = d3
+            .select('#avgTable').append('table')
+            .style('border', '1px solid black');
         const thead = table.append('thead')
         const tbody = table.append('tbody');
 
@@ -369,7 +387,7 @@ function initPanel_3(data) {
                 return d.value;
             })
             .style("text-align", "center")
-            .style('padding', '8px');
+            .style('padding', '8px')
 
         return table.node();
     }
@@ -389,9 +407,6 @@ function initPanel_3(data) {
         {TPC: 'None', Female: fnAvg, Male: mnAvg},
         {TPC: 'Completed', Female: fcAvg, Male: mcAvg},
         {TPC: 'Both', Female: fmAvg, Male: mmAvg}
-    ]
-    const tableDataTotal = [
-        {Total: total}
     ]
 
     createTable(tableData, ['TPC', 'Female', 'Male'])

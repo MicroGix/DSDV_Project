@@ -3,6 +3,7 @@ body {
     font-family: "Arial", serif;
     background: white;
 }
+
 .header {
     background-color: #12239EFF;
     color: white;
@@ -16,39 +17,46 @@ body {
     display: flex;
     padding: 20px;
 }
+
 /*LAYOUT SETTING*/
 #left {
     width: 50%;
     height: 100%;
     padding-right: 20px;
 }
+
 #right {
     width: 50%;
     height: 100%;
 }
+
 .area {
     display: block;
     border: 1px solid black;
     border-radius: 5px;
 }
+
 /*CHART SETTING*/
 .chart-axis {
     font-size: 14px;
 }
+
 h2 {
     text-align: center;
     margin: auto;
     padding: 10px;
     overflow: inherit;
 }
+
 /*LEFT*/
-    /*TOTAL AND GENDER*/
-#totalDisplay{
+/*TOTAL AND GENDER*/
+#totalDisplay {
     min-height: fit-content;
     max-height: 10%;
     overflow: auto;
 }
-    /*STACK-PLOT*/
+
+/*STACK-PLOT*/
 #stack-plot {
     min-height: fit-content;
     max-height: 50%;
@@ -56,20 +64,28 @@ h2 {
     padding: 10px;
     overflow: scroll;
 }
+
 .tooltip {
     position: absolute;
 }
-    /*TABLE*/
+
+/*TABLE*/
 #avgTable {
     min-height: fit-content;
     max-height: 40%;
-    padding: 10px;
+    padding: 14px;
     overflow: scroll;
+}
+#avgTable table {
+    border-collapse: collapse;
+}
+#avgTable th td {
+    padding: 5px 10px;;
 }
 #avgTable th {
     background: #12239e;
     color: white;
-    padding: 5px 10px;
+    font-weight: bold;
     min-width: 10%;
 }
 #avgTable tbody tr:nth-child(even) {
@@ -81,19 +97,17 @@ h2 {
 #avgTable tbody tr:hover {
     background-color: lightgrey;
 }
-#avgTable td {
-    padding: 5px 10px;
-}
 
 /*RIGHT*/
-    /*BAR-PLOT*/
+/*BAR-PLOT*/
 #bar-plot {
     min-height: fit-content;
     max-height: 60%;
     overflow: scroll;
     padding: 10px;
 }
-    /*CONCLUSION*/
+
+/*CONCLUSION*/
 #conclusion {
     min-height: fit-content;
     max-height: 40%;
@@ -101,7 +115,10 @@ h2 {
     padding: 10px;
     overflow: auto;
 }
+
 #conclusion p {
     text-align: left;
     font-size: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
