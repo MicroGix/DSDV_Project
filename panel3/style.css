@@ -20,11 +20,12 @@ body {
 #left {
     width: 50%;
     height: 100%;
-    padding-right: 20px;
+    padding-right: 10px;
 }
 #right {
     width: 50%;
     height: 100%;
+    padding-left: 10px;
 }
 .area {
     display: block;
@@ -35,17 +36,13 @@ body {
 .chart-axis {
     font-size: 14px;
 }
-h2 {
-    text-align: center;
-    margin: auto;
-    padding: 10px;
-    overflow: inherit;
-}
 /*LEFT*/
     /*TOTAL AND GENDER*/
 #totalDisplay{
     min-height: fit-content;
     max-height: 10%;
+    margin: auto;
+    padding: 10px;
     overflow: auto;
 }
     /*STACK-PLOT*/
@@ -56,13 +53,11 @@ h2 {
     padding: 10px;
     overflow: scroll;
 }
-.tooltip {
-    position: absolute;
-}
     /*TABLE*/
 #avgTable {
     min-height: fit-content;
     max-height: 40%;
+    text-align: left;
     padding: 10px;
     overflow: scroll;
 }
@@ -100,8 +95,4 @@ h2 {
     font-size: 14px;
     padding: 10px;
     overflow: auto;
-}
-#conclusion p {
-    text-align: left;
-    font-size: 20px;
 }
