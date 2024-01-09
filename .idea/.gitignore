@@ -3,3 +3,8 @@
 /workspace.xml
 # Editor-based HTTP Client requests
 /httpRequests/
+# ignore prevent conflict
+/panel1
+/panel2
+/panel3
+/panel4
