@@ -385,14 +385,6 @@ function initPanel_3(data) {
     // total
     const total = average(data)
 
-    // const tableData = [
-    //     {Gender: 'female', TPC: 'none', 'Average of Total Marks': fnAvg},
-    //     {Gender: 'female', TPC: 'completed', 'Average of Total Marks': fcAvg},
-    //     {Gender: 'female', TPC: 'both', 'Average of Total Marks': fmAvg},
-    //     {Gender: 'male', TPC: 'none', 'Average of Total Marks': mnAvg},
-    //     {Gender: 'male', TPC: 'completed', 'Average of Total Marks': mcAvg},
-    //     {Gender: 'male', TPC: 'both', 'Average of Total Marks': mmAvg}
-    // ]
     const tableData = [
         {TPC: 'None', Female: fnAvg, Male: mnAvg},
         {TPC: 'Completed', Female: fcAvg, Male: mcAvg},
