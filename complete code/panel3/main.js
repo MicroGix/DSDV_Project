@@ -30,7 +30,6 @@ function initPanel_3(data) {
     const margin = {top: 20, right: 10, bottom: 50, left: 70};
     const h = outer_h - margin.top - margin.bottom;
     const w = outer_w - margin.right - margin.left;
-    const p = 20;
 
     // SHOW TOTAL STUDENTS
     document.getElementById("totalDisplay").innerHTML = "Total Students: " + data.length;
