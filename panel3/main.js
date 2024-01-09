@@ -34,6 +34,35 @@ function initPanel_3(data) {
     // SHOW TOTAL STUDENTS
     document.getElementById("totalDisplay").innerText = "Total Students: " + data.length;
 
+    // REUSABLE FUNCTION
+    function createLegend(area, data, color_function) {
+        const legend = d3
+            .select(area)
+            .append('svg')
+            .attr("width", w)
+            .attr("height", 30)
+            .selectAll(".legend")
+            .data(data)
+            .enter().append("g")
+            .attr("class", "legend")
+            .attr("transform", function (d, i) {
+                return "translate(" + i * 100 + ")";
+            });
+        legend
+            .append("circle")
+            .attr("cx", w / 2)
+            .attr("cy", 15)
+            .attr("r", 5)
+            .attr("fill", color_function)
+        legend
+            .append("text")
+            .attr("x", w / 2 + 10)
+            .attr("y", 20)
+            .text(d => d)
+            .style("font-family", "Arial")
+            .style("font-size", "18px")
+    }
+
     //--STACK BAR CHART--
     // create function to count numbers of tpc by gender
     function countGenderbyTPC(data) {
@@ -57,6 +86,25 @@ function initPanel_3(data) {
         const male = Object.values(gender[1]);
         return {"tpc": tpc, "female": female[0], "male": male[0]};
     });
+    // set up scale
+    const tpcLabelStack = genderData.map((d) => d.tpc);
+    const subgroups = genderData.map(({female, male}) => {
+        return {female: female, male: male};
+    });
+    const after_stackData = d3.stack().keys(["female", "male"])(genderData);
+    const xStack = d3
+        .scaleBand()
+        .domain(tpcLabelStack)
+        .range([0, w])
+        .padding([0.2]);
+    const yStack = d3
+        .scaleLinear()
+        .domain([0, 1000])
+        .range([h, 0]);
+    const colorStack = d3
+        .scaleOrdinal()
+        .domain(subgroups)
+        .range(['#e41a1c', '#377eb8'])
 
     // set up svg container
     const stack = d3
@@ -68,19 +116,10 @@ function initPanel_3(data) {
         .append("g")
         .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
 
-    // set up scale
-    const tpcLabelStack = genderData.map((d) => d.tpc);
-    const subgroups = genderData.map(({female, male}) => {
-        return {female: female, male: male};
-    });
-
-    const after_stackData = d3.stack().keys(["female", "male"])(genderData);
-
-    const xStack = d3
-        .scaleBand()
-        .domain(tpcLabelStack)
-        .range([0, w])
-        .padding([0.2]);
+    stack
+        .append("g")
+        .call(d3.axisLeft(yStack))
+        .attr("class", "chart-axis");
 
     stack
         .append("g")
@@ -88,68 +127,70 @@ function initPanel_3(data) {
         .call(d3.axisBottom(xStack).tickSizeOuter(0))
         .attr("class", "chart-axis");
 
-    const yStack = d3
-        .scaleLinear()
-        .domain([0, 1000])
-        .range([h, 0]);
-    stack
-        .append("g")
-        .call(d3.axisLeft(yStack))
-        .attr("class", "chart-axis");
-
-    const colorStack = d3
-        .scaleOrdinal()
-        .domain(subgroups)
-        .range(['#e41a1c', '#377eb8'])
-
-    const tooltip = d3
+    // tooltip
+    const stack_tooltip = d3
         .select("#stack-plot")
         .append("div")
         .attr("class", "tooltip")
         .style("opacity", 0)
-        .style("background-color", "white");
+        .style("background-color", "brown")
+        .style("padding", "10px");
 
-    let mouseover = function(d) {
-        tooltip.style("opacity", 1)
-        d3.select(this).style("stroke", "black").style("padding", "5px")
+    let stack_mouseover = function (d) {
+        stack_tooltip.style("opacity", 1)
+        stack.selectAll('rect')
+            .transition()
+            .duration(700)
+            .style('opacity', 0.5)
+        d3.select(this)
+            .transition()
+            .duration(700)
+            .style("opacity", 1)
     }
-    let mousemove= function(d) {
-        tooltip.html("Testing")
-            .style("left", d3.event.pageX + 10 + "px")
-            .style("top", d3.event.pageY - 28 + "px");
+    let stack_mousemove = function (d) {
+        stack_tooltip.html("Testing")
+            .style("left", d3.event.pageX + 30 + "px")
+            .style("top", d3.event.pageY + "px");
     }
-    let mouseleave = function(d) {
-        tooltip.style("opacity", 0)
-        d3.select(this).style("stroke", "none").style("opacity", 0.8)
+    let stack_mouseleave = function (d) {
+        stack_tooltip.style("opacity", 0)
+        stack.selectAll('rect')
+            .transition()
+            .duration(700)
+            .style('opacity', 1)
+        d3.select(this)
+            .transition()
+            .duration(700)
+            .style("opacity", 1)
     }
 
-    // append rect element to chart
+    // create chart
     stack
         .append("g")
         .selectAll("g")
         .data(after_stackData)
         .enter().append("g")
-            .attr("fill", (d) => colorStack(d.key))
-            .selectAll("rect")
-            .data((d) => d)
+        .attr("fill", (d) => colorStack(d.key))
+        .selectAll("rect")
+        .data((d) => d)
         .enter().append("rect")
-            .attr("x", function (d) {
-                return xStack(d.data.tpc); // data here mean the .data(after_stackData) you add above
-            })
-            .attr("y", function (d) {
-                return yStack(d[1]);
-            })
-            .attr("height", function (d) {
-                return yStack(d[0]) - yStack(d[1]);
-            })
-            .attr("width", xStack.bandwidth())
-            .style("stroke-width", 4)
-            .style("stroke", "none")
-            .style("opacity", 0.8)
-        .on("mouseover", mouseover)
-        .on("mousemove", mousemove)
-        .on("mouseleave", mouseleave)
+        .attr("x", function (d) {
+            return xStack(d.data.tpc); // data here mean the .data(after_stackData) you add above
+        })
+        .attr("y", function (d) {
+            return yStack(d[1]);
+        })
+        .attr("height", function (d) {
+            return yStack(d[0]) - yStack(d[1]);
+        })
+        .attr("width", xStack.bandwidth())
+        .style("opacity", 1)
+        .on("mouseover", stack_mouseover)
+        .on("mousemove", stack_mousemove)
+        .on("mouseleave", stack_mouseleave)
 
+    // create legend
+    createLegend('#stack-plot', d3.map(data, (d) => d.gender).keys(), (d) => colorStack(d))
 
     //--HORIZONTAL GROUP BAR CHART--
     // create data set
@@ -183,7 +224,28 @@ function initPanel_3(data) {
         return result;
     });
 
-    // init svg container
+    //set up scale
+    const y0Bar = d3
+        .scaleBand()
+        .rangeRound([h, 0])
+        .domain(d3.map(groupData, (d) => d.groups).keys())
+        .paddingInner(0.2)
+    const xBar = d3
+        .scaleLinear()
+        .domain([0, 250])
+        .range([0, w])
+    const innerGroup = d3.keys(groupData[0]).filter((key) => key !== "groups")
+    const y1Bar = d3
+        .scaleBand()
+        .domain(innerGroup)
+        .range([y0Bar.bandwidth(), 0])
+        .padding([0.05]);
+    const colorBar = d3
+        .scaleOrdinal()
+        .domain(innerGroup)
+        .range(['#e41a1c', '#377eb8'])
+
+    // create bar chart
     const bar = d3
         .select("#bar-plot")
         .append("svg")
@@ -191,42 +253,53 @@ function initPanel_3(data) {
         .attr("height", outer_h)
         .append("g")
         .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
-
-    //set up scale
-    const y0Bar = d3
-        .scaleBand()
-        .rangeRound([h, 0])
-        .domain(d3.map(groupData, (d) => d.groups).keys())
-        .paddingInner(0.2)
-    bar
-        .append("g")
-        .call(d3.axisLeft(y0Bar))
-        .attr("class", "chart-axis");
-
-    const xBar = d3
-        .scaleLinear()
-        .domain([0, 250])
-        .range([0, w])
     bar
         .append("g")
         .attr("transform", "translate(0," + h + ")")
         .call(d3.axisBottom(xBar))
         .attr("class", "chart-axis");
+    bar
+        .append("g")
+        .call(d3.axisLeft(y0Bar))
+        .attr("class", "chart-axis");
+    // tooltip
+    const bar_tooltip = d3
+        .select("#bar-plot")
+        .append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0)
+        .style("background-color", "brown")
+        .style("padding", "10px");
 
-    const innerGroup = d3.keys(groupData[0]).filter((key) => key !== "groups")
-
-    const y1Bar = d3
-        .scaleBand()
-        .domain(innerGroup)
-        .range([y0Bar.bandwidth(), 0])
-        .padding([0.05]);
-
-    const colorBar = d3
-        .scaleOrdinal()
-        .domain(innerGroup)
-        .range(['#e41a1c', '#377eb8'])
-
-    bar.selectAll(".barchart")
+    let bar_mouseover = function (d) {
+        bar_tooltip.style("opacity", 1)
+        bar.selectAll('rect')
+            .transition()
+            .duration(700)
+            .style('opacity', 0.5)
+        d3.select(this)
+            .transition()
+            .duration(700)
+            .style("opacity", 1)
+    }
+    let bar_mousemove = function (d) {
+        bar_tooltip.html("Testing")
+            .style("left", d3.event.pageX + 30 + "px")
+            .style("top", d3.event.pageY + "px");
+    }
+    let bar_mouseleave = function (d) {
+        bar_tooltip.style("opacity", 0)
+        bar.selectAll('rect')
+            .transition()
+            .duration(700)
+            .style('opacity', 1)
+        d3.select(this)
+            .transition()
+            .duration(700)
+            .style("opacity", 1)
+    }
+    bar
+        .selectAll(".barchart")
         .data(groupData)
         .enter().append("g")
         .attr("transform", (d) => "translate(0, " + y0Bar(d.groups) + ")")
@@ -242,6 +315,13 @@ function initPanel_3(data) {
         .attr("height", y1Bar.bandwidth())
         .attr("width", (d) => xBar(d.value) - xBar(0))
         .attr("fill", (d) => colorBar(d.key))
+        .style("opacity", 1)
+        .on("mouseover", bar_mouseover)
+        .on("mousemove", bar_mousemove)
+        .on("mouseleave", bar_mouseleave)
+
+    // legend
+    createLegend('#bar-plot', d3.map(data, (d) => d.tpc).keys(), (d) => colorBar(d))
 
     //--TABLE OF AVERAGE OF TOTAL MARKS--
     //create dataset
@@ -254,9 +334,8 @@ function initPanel_3(data) {
         return avg.toFixed(2)
     }
 
-
     function createTable(data, columns) {
-        const table = d3.select('#avgTable').append('table');
+        const table = d3.select('#avgTable').append('table')
         const thead = table.append('thead')
         const tbody = table.append('tbody');
 
@@ -268,7 +347,8 @@ function initPanel_3(data) {
             .text(function (column) {
                 return column;
             })
-            .style("text-align", "left");
+            .style("text-align", "center")
+            .style('padding', '10px');
 
         // create a row for each object in the data
         const rows = tbody.selectAll('tr')
@@ -288,7 +368,8 @@ function initPanel_3(data) {
             .text(function (d) {
                 return d.value;
             })
-            .style("text-align", "left");
+            .style("text-align", "center")
+            .style('padding', '8px');
 
         return table.node();
     }
@@ -303,6 +384,26 @@ function initPanel_3(data) {
     const mmAvg = average(data.filter((d) => d.gender === "male"))
     // total
     const total = average(data)
+
+    // const tableData = [
+    //     {Gender: 'female', TPC: 'none', 'Average of Total Marks': fnAvg},
+    //     {Gender: 'female', TPC: 'completed', 'Average of Total Marks': fcAvg},
+    //     {Gender: 'female', TPC: 'both', 'Average of Total Marks': fmAvg},
+    //     {Gender: 'male', TPC: 'none', 'Average of Total Marks': mnAvg},
+    //     {Gender: 'male', TPC: 'completed', 'Average of Total Marks': mcAvg},
+    //     {Gender: 'male', TPC: 'both', 'Average of Total Marks': mmAvg}
+    // ]
+    const tableData = [
+        {TPC: 'None', Female: fnAvg, Male: mnAvg},
+        {TPC: 'Completed', Female: fcAvg, Male: mcAvg},
+        {TPC: 'Both', Female: fmAvg, Male: mmAvg}
+    ]
+    const tableDataTotal = [
+        {Total: total}
+    ]
+
+    createTable(tableData, ['TPC', 'Female', 'Male'])
 }
+
 
 
