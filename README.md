@@ -1,6 +1,6 @@
 <div id="header", align="center">
 <!-- PROJECT LOGO -->
-   <img src="./assets/logo/logo.png" alt="Logo" width="200" height="200">
+   <img src="Assets/logo/logo.png" alt="Logo" width="200" height="200">
 </div>
 </br>
 
