@@ -81,6 +81,55 @@ console.log(genderData);
       return { female: female, male: male };
     });
     const after_stackData = d3.stack().keys(["female", "male"])(genderData); 
+//-----------------------------------------------------------
+// tooltip
+const stack_tooltip = d3
+.select("#panel2_smbox2")
+.append("div")
+.attr("class", "tooltip")
+.style("opacity", 0)
+.style("background-color", "black")
+.style("border", "1px solid black")
+.style("border-radius", "5px")
+.style("padding", "10px");
+
+let stack_mouseover = function (d) {
+stack_tooltip.style("opacity", 1)
+stack.selectAll('rect')
+    .transition()
+    .duration(700)
+    .style('opacity', 0.5)
+d3.select(this)
+    .transition()
+    .duration(700)
+    .style("opacity", 1)
+    .attr("stroke", "black") // Set the border color to black
+    .attr("stroke-width", "2px");
+    
+}
+let stack_mousemove = function (d) {
+const subgroupName = d3.select(this.parentNode).datum().key;
+const subgroupValue = d.data[subgroupName];
+stack_tooltip
+    .html("Gender: " + subgroupName + "<br>" + "Amount: " + subgroupValue)
+    .style("color", "white")
+    .style("left", d3.event.pageX + 30 + "px")
+    .style("top", d3.event.pageY + "px");
+}
+let stack_mouseleave = function (d) {
+stack_tooltip.style("opacity", 0)
+stack.selectAll('rect')
+    .transition()
+    .duration(700)
+    .style('opacity', 1)
+d3.select(this)
+    .transition()
+    .duration(700)
+    .style("opacity", 1)
+    .attr("stroke", "black") // Set the border color to black
+    .attr("stroke-width", "0px");  
+}
+  //-----------------------------------------------------------
     const xStack = d3.scaleBand()
   .domain(lunchLabelStack.reverse()) // reverse order
   .range([0, w])
@@ -98,7 +147,7 @@ console.log(genderData);
     const color = d3
       .scaleOrdinal()
       .domain(subgroups)
-      .range([ 'pink','royalblue']);
+      .range(['#FFD966', '#6096B4']);
   
     // INITIATE STACK CHART (SOLVE)
     // New problems: how can i make it more beautiful
@@ -119,8 +168,12 @@ console.log(genderData);
       .attr("height", function (d) {
         return yStack(d[0]) - yStack(d[1]);
       })
+      .style("opacity", 1)
+      .on("mouseover", stack_mouseover)
+      .on("mousemove", stack_mousemove)
+      .on("mouseleave", stack_mouseleave)
       .attr("width", xStack.bandwidth());
-            stack
+  stack
       .selectAll(".bar-label")
       .data(after_stackData)
       .enter()
@@ -204,6 +257,54 @@ function initPanel_2_B(data) {
   });
 // Combine stacks
 const after_stackData = d3.stack().keys(["female", "male"])(genderData);
+//-----------------------------------------------------------
+// tooltip
+const stack_tooltip = d3
+.select("#panel2_smbox3")
+.append("div")
+.attr("class", "tooltip")
+.style("opacity", 0)
+.style("background-color", "black")
+.style("border", "1px solid black")
+.style("border-radius", "5px")
+.style("padding", "10px");
+
+let stack_mouseover = function (d) {
+stack_tooltip.style("opacity", 1)
+stack.selectAll('rect')
+    .transition()
+    .duration(700)
+    .style('opacity', 0.5)
+d3.select(this)
+    .transition()
+    .duration(700)
+    .style("opacity", 1)
+    .attr("stroke", "black") // Set the border color to black
+    .attr("stroke-width", "2px");
+    
+}
+let stack_mousemove = function (d) {
+const subgroupName = d3.select(this.parentNode).datum().key;
+const subgroupValue = d.data[subgroupName];
+stack_tooltip
+    .html("Gender: " + subgroupName + "<br>" + "Amount: " + subgroupValue)
+    .style("color", "white")
+    .style("left", d3.event.pageX + 30 + "px")
+    .style("top", d3.event.pageY + "px");
+}
+let stack_mouseleave = function (d) {
+stack_tooltip.style("opacity", 0)
+stack.selectAll('rect')
+    .transition()
+    .duration(700)
+    .style('opacity', 1)
+d3.select(this)
+    .transition()
+    .duration(700)
+    .style("opacity", 1)
+    .attr("stroke", "black") // Set the border color to black
+    .attr("stroke-width", "0px");  
+}
 // Draw charts
 stack.selectAll("g")
   .data(after_stackData)
@@ -226,7 +327,7 @@ stack.selectAll("g")
     .append("g")    
     const color = d3.scaleOrdinal()
     .domain(["female", "male"])  // Adjust the domain for group B categories
-    .range(['royalblue', 'pink']);  
+    .range(['#6096B4', '#FFD966']);  
     
   // INITIATE STACK CHART (SOLVE)
   // New problems: how can i make it more beautiful
@@ -247,6 +348,10 @@ stack.selectAll("g")
     .attr("height", function (d) {
       return yStack(d[0]) - yStack(d[1]);
     })
+    .style("opacity", 1)
+    .on("mouseover", stack_mouseover)
+    .on("mousemove", stack_mousemove)
+    .on("mouseleave", stack_mouseleave)
     .attr("width", xStack.bandwidth());
   stack
     .selectAll(".bar-label")
@@ -330,6 +435,54 @@ function initPanel_2_C(data) {
     return { female: female, male: male };
   });
   const after_stackData = d3.stack().keys(["female", "male"])(genderData);
+  //-----------------------------------------------------------
+// tooltip
+const stack_tooltip = d3
+.select("#panel2_smbox4")
+.append("div")
+.attr("class", "tooltip")
+.style("opacity", 0)
+.style("background-color", "black")
+.style("border", "1px solid black")
+.style("border-radius", "5px")
+.style("padding", "10px");
+
+let stack_mouseover = function (d) {
+stack_tooltip.style("opacity", 1)
+stack.selectAll('rect')
+    .transition()
+    .duration(700)
+    .style('opacity', 0.5)
+d3.select(this)
+    .transition()
+    .duration(700)
+    .style("opacity", 1)
+    .attr("stroke", "black") // Set the border color to black
+    .attr("stroke-width", "2px");
+    
+}
+let stack_mousemove = function (d) {
+const subgroupName = d3.select(this.parentNode).datum().key;
+const subgroupValue = d.data[subgroupName];
+stack_tooltip
+    .html("Gender: " + subgroupName + "<br>" + "Amount: " + subgroupValue)
+    .style("color", "white")
+    .style("left", d3.event.pageX + 30 + "px")
+    .style("top", d3.event.pageY + "px");
+}
+let stack_mouseleave = function (d) {
+stack_tooltip.style("opacity", 0)
+stack.selectAll('rect')
+    .transition()
+    .duration(700)
+    .style('opacity', 1)
+d3.select(this)
+    .transition()
+    .duration(700)
+    .style("opacity", 1)
+    .attr("stroke", "black") // Set the border color to black
+    .attr("stroke-width", "0px");  
+}
   const xStack = d3
     .scaleBand()
     .domain(lunchLabelStack)
@@ -348,7 +501,7 @@ function initPanel_2_C(data) {
   const color = d3
     .scaleOrdinal()
     .domain(subgroups)
-    .range([ 'pink','royalblue']);
+    .range(['#FFD966', '#6096B4']);
 
   // INITIATE STACK CHART (SOLVE)
   // New problems: how can i make it more beautiful
@@ -369,6 +522,10 @@ function initPanel_2_C(data) {
     .attr("height", function (d) {
       return yStack(d[0]) - yStack(d[1]);
     })
+    .style("opacity", 1)
+    .on("mouseover", stack_mouseover)
+    .on("mousemove", stack_mousemove)
+    .on("mouseleave", stack_mouseleave)
     .attr("width", xStack.bandwidth());
   stack
     .selectAll(".bar-label")
@@ -451,6 +608,54 @@ genderData.sort((a, b) => {
   });
   const after_stackData = d3.stack()
   .keys(["female","male"])(genderData.reverse());
+  //-----------------------------------------------------------
+// tooltip
+const stack_tooltip = d3
+.select("#panel2_smbox5")
+.append("div")
+.attr("class", "tooltip")
+.style("opacity", 0)
+.style("background-color", "black")
+.style("border", "1px solid black")
+.style("border-radius", "5px")
+.style("padding", "10px");
+
+let stack_mouseover = function (d) {
+stack_tooltip.style("opacity", 1)
+stack.selectAll('rect')
+    .transition()
+    .duration(700)
+    .style('opacity', 0.5)
+d3.select(this)
+    .transition()
+    .duration(700)
+    .style("opacity", 1)
+    .attr("stroke", "black") // Set the border color to black
+    .attr("stroke-width", "2px");
+    
+}
+let stack_mousemove = function (d) {
+const subgroupName = d3.select(this.parentNode).datum().key;
+const subgroupValue = d.data[subgroupName];
+stack_tooltip
+    .html("Gender: " + subgroupName + "<br>" + "Amount: " + subgroupValue)
+    .style("color", "white")
+    .style("left", d3.event.pageX + 30 + "px")
+    .style("top", d3.event.pageY + "px");
+}
+let stack_mouseleave = function (d) {
+stack_tooltip.style("opacity", 0)
+stack.selectAll('rect')
+    .transition()
+    .duration(700)
+    .style('opacity', 1)
+d3.select(this)
+    .transition()
+    .duration(700)
+    .style("opacity", 1)
+    .attr("stroke", "black") // Set the border color to black
+    .attr("stroke-width", "0px");  
+}
   const xStack = d3.scaleBand()
     .domain(lunchLabelStack.reverse())
     .range([0,w])
@@ -468,7 +673,7 @@ genderData.sort((a, b) => {
   const color = d3
     .scaleOrdinal()
     .domain(subgroups)
-    .range([ 'pink','royalblue']);
+    .range(['#FFD966', '#6096B4']);
 
   // INITIATE STACK CHART (SOLVE)
   // New problems: how can i make it more beautiful
@@ -487,6 +692,10 @@ genderData.sort((a, b) => {
     .attr("height", function (d) {
       return yStack(d[0]) - yStack(d[1]);
     })
+    .style("opacity", 1)
+    .on("mouseover", stack_mouseover)
+    .on("mousemove", stack_mousemove)
+    .on("mouseleave", stack_mouseleave)
     .attr("width", xStack.bandwidth());
   stack
     .selectAll(".bar-label")
@@ -574,6 +783,54 @@ function initPanel_2_E(data) {
   });
   const after_stackData = d3.stack()
   .keys(["female", "male"])(genderData.reverse());
+  //-----------------------------------------------------------
+// tooltip
+const stack_tooltip = d3
+.select("#panel2_smbox6")
+.append("div")
+.attr("class", "tooltip")
+.style("opacity", 0)
+.style("background-color", "black")
+.style("border", "1px solid black")
+.style("border-radius", "5px")
+.style("padding", "10px");
+
+let stack_mouseover = function (d) {
+stack_tooltip.style("opacity", 1)
+stack.selectAll('rect')
+    .transition()
+    .duration(700)
+    .style('opacity', 0.5)
+d3.select(this)
+    .transition()
+    .duration(700)
+    .style("opacity", 1)
+    .attr("stroke", "black") // Set the border color to black
+    .attr("stroke-width", "2px");
+    
+}
+let stack_mousemove = function (d) {
+const subgroupName = d3.select(this.parentNode).datum().key;
+const subgroupValue = d.data[subgroupName];
+stack_tooltip
+    .html("Gender: " + subgroupName + "<br>" + "Amount: " + subgroupValue)
+    .style("color", "white")
+    .style("left", d3.event.pageX + 30 + "px")
+    .style("top", d3.event.pageY + "px");
+}
+let stack_mouseleave = function (d) {
+stack_tooltip.style("opacity", 0)
+stack.selectAll('rect')
+    .transition()
+    .duration(700)
+    .style('opacity', 1)
+d3.select(this)
+    .transition()
+    .duration(700)
+    .style("opacity", 1)
+    .attr("stroke", "black") // Set the border color to black
+    .attr("stroke-width", "0px");  
+}
   const xStack = d3
     .scaleBand()
     .domain(lunchLabelStack.reverse()) 
@@ -592,7 +849,7 @@ function initPanel_2_E(data) {
   const color = d3
     .scaleOrdinal()
     .domain(subgroups)
-    .range([ 'pink','royalblue']);
+    .range(['#FFD966', '#6096B4']);
 
   // INITIATE STACK CHART (SOLVE)
   // New problems: how can i make it more beautiful
@@ -613,6 +870,10 @@ function initPanel_2_E(data) {
     .attr("height", function (d) {
       return yStack(d[0]) - yStack(d[1]);
     })
+    .style("opacity", 1)
+    .on("mouseover", stack_mouseover)
+    .on("mousemove", stack_mousemove)
+    .on("mouseleave", stack_mouseleave)
     .attr("width", xStack.bandwidth());
   stack
     .selectAll(".bar-label")
@@ -699,6 +960,54 @@ function initPanel_2(data) {
     return { female: female, male: male };
   });
   const after_stackData = d3.stack().keys(["female", "male"])(genderData.reverse());
+  //-----------------------------------------------------------
+// tooltip
+const stack_tooltip = d3
+.select("#panel2_smbox7")
+.append("div")
+.attr("class", "tooltip")
+.style("opacity", 0)
+.style("background-color", "black")
+.style("border", "1px solid black")
+.style("border-radius", "5px")
+.style("padding", "10px");
+
+let stack_mouseover = function (d) {
+stack_tooltip.style("opacity", 1)
+stack.selectAll('rect')
+    .transition()
+    .duration(700)
+    .style('opacity', 0.5) 
+d3.select(this)
+    .transition()
+    .duration(700)
+    .style("opacity", 1)
+    .attr("stroke", "black") // Set the border color to black
+    .attr("stroke-width", "2px");  
+}
+let stack_mousemove = function (d) {
+const subgroupName = d3.select(this.parentNode).datum().key;
+const subgroupValue = d.data[subgroupName];
+stack_tooltip
+    .html("Gender: " + subgroupName + "<br>" + "Amount: " + subgroupValue)
+    .style("color", "white")
+    .style("left", d3.event.pageX + 30 + "px")
+    .style("top", d3.event.pageY + "px");
+}
+let stack_mouseleave = function (d) {
+stack_tooltip.style("opacity", 0)
+stack.selectAll('rect')
+    .transition()
+    .duration(700)
+    .style('opacity', 1)
+d3.select(this)
+    .transition()
+    .duration(700)
+    .style("opacity", 1)
+    .attr("stroke", "black") // Set the border color to black
+    .attr("stroke-width", "0px");    
+}
+  //-----------------------------------------------------------
   const xStack = d3
     .scaleBand()
     .domain(lunchLabelStack)
@@ -717,7 +1026,7 @@ function initPanel_2(data) {
   const color = d3
     .scaleOrdinal()
     .domain(subgroups)
-    .range(['pink','royalblue']);
+    .range(['#FFD966', '#6096B4']);
 
   // INITIATE STACK CHART (SOLVE)
   // New problems: how can i make it more beautiful
@@ -738,6 +1047,10 @@ function initPanel_2(data) {
     .attr("height", function (d) {
       return yStack(d[0]) - yStack(d[1]);
     })
+    .style("opacity", 1)
+    .on("mouseover", stack_mouseover)
+    .on("mousemove", stack_mousemove)
+    .on("mouseleave", stack_mouseleave)
     .attr("width", xStack.bandwidth());
     stack
     .selectAll(".bar-label")
@@ -749,6 +1062,7 @@ function initPanel_2(data) {
     .enter()
     .append("text")
     .attr("class", "bar-label")
+    .attr('fill','black')
     .attr("x", function (d) {
       return xStack(d.data.lunch) + xStack.bandwidth() / 2;
     })
@@ -759,7 +1073,8 @@ function initPanel_2(data) {
       return d[1] - d[0]; // Display the numerical value of each segment
     })
     .attr("text-anchor", "middle")
-    .attr("alignment-baseline", "middle"); // Center the label horizontally within the segment   
+    .attr("alignment-baseline", "middle"); // Center the label horizontally within the segment  
+     
     d3.selectAll("path,line").remove(); 
   }  
 

@@ -165,11 +165,11 @@ margin: 0;
   }
   
   .female {
-    background-color: pink;
+    background-color: #FFD966;
   }
   
   .male {
-    background-color: royalblue;
+    background-color: #6096B4;
   }
   
   .gender-label {
@@ -181,4 +181,7 @@ margin: 0;
     color: gray;
   }
 
+  .tooltip {
+    position: absolute;
+}
   
