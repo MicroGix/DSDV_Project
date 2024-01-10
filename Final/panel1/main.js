@@ -81,7 +81,7 @@ function drawGenderPieChart(csvFilePath, width, height) {
         d3.select(this)
           .transition()
           .duration(700)
-          .attr("transform", "scale(1.25)");
+          .attr("transform", "scale(1.20)");
       })
       .on("mouseout", function (d) {
         // Hide tooltip on mouseout
