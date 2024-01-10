@@ -13,8 +13,8 @@ d3.csv("../panel4/main_data.csv")
         });
 
         // Define the width and height of the chart
-        var customWidth = 450;
-        var customHeight = 450;
+        var customWidth = 350;
+        var customHeight = 350;
 
         // Select the location to draw the chart
         var svg = d3
@@ -33,7 +33,7 @@ d3.csv("../panel4/main_data.csv")
             .attr("x", 0) // Center the text
             .attr("y", -customHeight / 2 + 50) // Position the text at the top
             .attr("text-anchor", "middle")
-            .style("font-size", "20px")
+            .style("font-size", "15px")
             .style("font-weight", "bold")
             .style("font-family", "Segoe UI")
             .text("Proportion of Students by Parent's Degree");
@@ -135,7 +135,7 @@ d3.csv("../panel4/main_data.csv")
         svgLegend.append("text") // Add this line
             .attr("x", 0)
             .attr("y", 20)
-            .style("font-size", "15px")
+            .style("font-size", "12px")
             .style("font-weight", "bold")
             .style("font-family", "Segoe UI")
             .text("Parental level of education");
@@ -146,17 +146,16 @@ d3.csv("../panel4/main_data.csv")
             .append("g")
             .attr("class", "legend2")
             .attr("transform", function (d, i) {
-                return "translate(" + (customWidth - 300) + "," + (i * 25 + 40) + ")"; // Adjust the translation as needed
+                return "translate(" + (customWidth - 220) + "," + (i * 25 + 40) + ")"; // Adjust the translation as needed
             });
 
-// Rest of your legend code...
 
 
         // Add colored squares to the legend
         legend2
             .append("rect")
-            .attr("width", 18)
-            .attr("height", 18)
+            .attr("width", 10)
+            .attr("height", 10)
             .attr("fill", function (d) {
                 return color(d.customGroup);
             });
@@ -164,9 +163,9 @@ d3.csv("../panel4/main_data.csv")
         // Add text labels to the legend
         legend2
             .append("text")
-            .attr("x", -25)
-            .attr("y", 9)
-            .attr("dy", ".35em")
+            .attr("x", -8)
+            .attr("y", 5)
+            .attr("dy", ".20em")
             .style("text-anchor", "end")
             .text(function (d) {
                 return d.customGroup.replace(/\b\w/g, function (l) {
@@ -325,50 +324,42 @@ d3.csv("../panel4/main_data.csv")
 // Load the data from the CSV file
 d3.csv("../panel4/main_data.csv").then(function (data) {
     // Calculate the total score for each student and add it to the data
-    data.forEach(function (d) {
-        d.totalScore = +d["math score"] + +d["reading score"] + +d["writing score"];
+    data.forEach(function(d) {
+      d.totalScore = +d["math score"] + +d["reading score"] + +d["writing score"];
     });
-
-    // Sort the data by total score in descending order and take the top 5
-    var topStudents = data.sort(function (a, b) {
-        return b.totalScore - a.totalScore;
-    }).slice(0, 5);
-
-    // Sort the data by total score in ascending order and take the top 5
-    var bottomStudents = data.sort(function (a, b) {
-        return a.totalScore - b.totalScore;
-    }).slice(0, 5);
-
+  
+    // Sort the data by total score in descending order
+    data.sort(function(a, b) {
+      return b.totalScore - a.totalScore;
+    });
+  
     // Create the DataTable
-    $('#panel4_box-4').DataTable({
-        data: topStudents,
-        columns: [
-            {data: "name", title: "Name"},
-            {data: "totalScore", title: "Total Score"},
-            {data: "parent degrees", title: "Parent's Degree"}
-        ],
-        order: [[1, 'desc']],
-        dom: 'Bfrtip',
-        buttons: [
-            {
-                text: 'Sort Ascending',
-                action: function (e, dt, node, config) {
-                    dt.clear();
-                    dt.rows.add(bottomStudents);
-                    dt.draw();
-                }
-            },
-            {
-                text: 'Sort Descending',
-                action: function (e, dt, node, config) {
-                    dt.clear();
-                    dt.rows.add(topStudents);
-                    dt.draw();
-                }
-            }
-        ],
-        paging: false,
-        info: false,
-        searching: false
+    var table = $('#panel4_box-4').DataTable({
+      data: data,
+      columns: [
+        { data: "name", title: "Name" },
+        { data: "totalScore", title: "Total Score" },
+        { data: "parent degrees", title: "Parent's Degree" }
+      ],
+      order: [[1, 'desc']],
+      dom: 'Bfrtip',
+      buttons: [
+        {
+          text: 'Sort Ascending',
+          action: function ( e, dt, node, config ) {
+              dt.order([1, 'asc']).draw();
+          }
+        },
+        {
+          text: 'Sort Descending',
+          action: function ( e, dt, node, config ) {
+              dt.order([1, 'desc']).draw();
+          }
+        }
+      ],
+      paging: true,
+      pageLength: 5,
+      info: false ,
+      searching: false
     });
-});
+  });
