@@ -1,187 +1,132 @@
 h1 {
     text-align: center;
 }
-.text {
+.panel2_margintong{
+    margin: 10px;
+}
+.panel2_text {
     font-size: 26px; 
     margin: 30px;
 }
-.top-row {
+.panel2_top-row {
     text-align: center;
     font-size: 24px;
     margin-top: 10px;
     
 }
-.row-count {
+.panel2_row-count {
     text-align: center;
     font-size: 22px;
     margin-top: 20px;
     margin-bottom: 20px;
 }
-  .mangtren{
+  .panel2_mangtren{
     width: 50px;
     margin: 5px;
     
 }
-.header {
+.panel2_header {
     background-color: #333;
     color: white;
     padding: 20px;
     text-align: center;
 }
 
-.container {
+.panel2_container {
     display: flex;
 }
 
-.left {
+.panel2_left {
     width: 50%;
     padding: 20px;
 }
 
-.right {
-    
+.panel2_right {  
     width: 60%;
     height: 60%;
-
-
 }   
-.sub-right {
+.panel2_sub-right {
     margin: 30px;
     width: 700px;
     height: 530px;
-    padding: 1px;
-    
+    padding: 1px;   
     overflow: auto;
-
 }  
-.sub-right1 {
+.panel2_sub-right1 {
     margin: 30px;
     width: 700px;
     height: 250px;
     padding: 1px;
-    
-    
-
 }  
-.sub-right2 {
+.panel2_sub-right2 {
     margin: 30px;
     width: 700px;
     height: 50px;
 }  
-.left .row {
+.panel2_left .panel2_row {
     display: flex;
     flex-wrap: wrap;
 }
 
-.left .row .box {
+.panel2_left .panel2_row .panel2_box {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
 }
 
-.sub-right .row {
+.panel2_sub-right .panel2_row {
     display: flex;
 }
 
-.right .large-box {
+.panel2_right .panel2_large-box {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
 }
 
-.right .small-box {
+.panel2_right .panel2_small-box {
     width: 50%;
     padding: 10px;
    
 }
- .mangtren{
-    display: flex ;
-    width: 50%;
-}
-.rowtren{
-    flex-wrap: nowrap;
-}
-.margintong{
-    margin: 10px;
-}
 
-#olon{
-width: 100%; 
-height: 500px; 
-overflow: auto;
-}
-#olon .pvtRenderer {
-width: 70%;
-}
-#olon .pvtRendererArea{
-width: 80%;
-}
-.pvtTable {
-width: 100%;
-height: 100%;
-}
-.pvtRows {
-width: 50px;
-}
-
-#on1 {
-width: 80%;
-}
-#olon table {
-font-size: 16px; 
-line-height: 1.5; 
-padding: 10px; 
-margin: 0;
-}
-.pvtAggregator{
-    width: 90px;
-}
-.pvtAxisContainer pvtUnused pvtUiCell pvtVertList {
-    width: 0px;
-}
-.o4{
-    width: 670px; 
-    height: 150px; 
-    
-}
-.person {
+.panel2_person {
     display: flex;
     align-items: center;
     
     margin-bottom: 5px;
   }
   
-  .person-info {
+  .panel2_person-info {
     display: flex;
     flex-direction: column;
     text-align: right;
   }
   
-  .color-box {
+  .panel2_color-box {
     width: 20px;
     height: 20px;
     border: 2px solid black;
     margin-right: 10px;
   }
   
-  .female {
+  .panel2_female {
     background-color: #FFD966;
   }
   
-  .male {
+  .panel2_male {
     background-color: #6096B4;
   }
   
-  .gender-label {
+  .panel2_gender-label {
     font-size: 16px;
   }
   
-  .additional-info {
+  .panel2_additional-info {
     font-size: 14px;
     color: gray;
   }
 
-  .tooltip {
+  .panel2_tooltip {
     position: absolute;
 }
-  
