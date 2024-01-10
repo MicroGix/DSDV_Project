@@ -86,7 +86,7 @@ console.log(genderData);
 const stack_tooltip = d3
 .select("#panel2_smbox2")
 .append("div")
-.attr("class", "tooltip")
+.attr("class", "panel2_tooltip" )
 .style("opacity", 0)
 .style("background-color", "black")
 .style("border", "1px solid black")
@@ -262,7 +262,7 @@ const after_stackData = d3.stack().keys(["female", "male"])(genderData);
 const stack_tooltip = d3
 .select("#panel2_smbox3")
 .append("div")
-.attr("class", "tooltip")
+.attr("class", "panel2_tooltip" )
 .style("opacity", 0)
 .style("background-color", "black")
 .style("border", "1px solid black")
@@ -440,7 +440,7 @@ function initPanel_2_C(data) {
 const stack_tooltip = d3
 .select("#panel2_smbox4")
 .append("div")
-.attr("class", "tooltip")
+.attr("class", "panel2_tooltip" )
 .style("opacity", 0)
 .style("background-color", "black")
 .style("border", "1px solid black")
@@ -613,7 +613,7 @@ genderData.sort((a, b) => {
 const stack_tooltip = d3
 .select("#panel2_smbox5")
 .append("div")
-.attr("class", "tooltip")
+.attr("class", "panel2_tooltip" )
 .style("opacity", 0)
 .style("background-color", "black")
 .style("border", "1px solid black")
@@ -788,7 +788,7 @@ function initPanel_2_E(data) {
 const stack_tooltip = d3
 .select("#panel2_smbox6")
 .append("div")
-.attr("class", "tooltip")
+.attr("class", "panel2_tooltip" )
 .style("opacity", 0)
 .style("background-color", "black")
 .style("border", "1px solid black")
@@ -965,7 +965,7 @@ function initPanel_2(data) {
 const stack_tooltip = d3
 .select("#panel2_smbox7")
 .append("div")
-.attr("class", "tooltip")
+.attr("class", "panel2_tooltip" )
 .style("opacity", 0)
 .style("background-color", "black")
 .style("border", "1px solid black")
