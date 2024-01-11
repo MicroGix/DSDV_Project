@@ -143,8 +143,8 @@ function initPanel_3(data) {
     stack_tooltip
       .html("Gender: " + subgroupName + "<br>" + "Amount: " + subgroupValue)
       .style("color", "white")
-      .style("left", d3.event.pageX + 30 + "px")
-      .style("top", d3.event.pageY + "px");
+      .style("left", d3.event.pageX - 20 + "px")
+      .style("top", d3.event.pageY - 120 + "px");
   };
   let stack_mouseleave = function (d) {
     stack_tooltip.style("opacity", 0);
@@ -272,8 +272,8 @@ function initPanel_3(data) {
       })
       .html("TPC: " + d.key + "<br>" + "Amount: " + d.value)
       .style("color", "white")
-      .style("left", d3.event.pageX + 30 + "px")
-      .style("top", d3.event.pageY + "px");
+      .style("left", d3.event.pageX - 20 + "px")
+      .style("top", d3.event.pageY - 120 + "px");
   };
   let bar_mouseleave = function (d) {
     bar_tooltip.style("opacity", 0);

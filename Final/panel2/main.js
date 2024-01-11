@@ -107,8 +107,8 @@ function initPanel_2_A(data) {
     stack_tooltip
       .html("Gender: " + subgroupName + "<br>" + "Amount: " + subgroupValue)
       .style("color", "white")
-      .style("left", d3.event.pageX + 30 + "px")
-      .style("top", d3.event.pageY + "px");
+      .style("left", d3.event.pageX - 20 + "px")
+      .style("top", d3.event.pageY - 120 + "px");
   };
   let stack_mouseleave = function (d) {
     stack_tooltip.style("opacity", 0);
@@ -276,8 +276,8 @@ function initPanel_2_B(data) {
     stack_tooltip
       .html("Gender: " + subgroupName + "<br>" + "Amount: " + subgroupValue)
       .style("color", "white")
-      .style("left", d3.event.pageX + 30 + "px")
-      .style("top", d3.event.pageY + "px");
+      .style("left", d3.event.pageX - 20 + "px")
+      .style("top", d3.event.pageY - 120 + "px");
   };
   let stack_mouseleave = function (d) {
     stack_tooltip.style("opacity", 0);
@@ -445,8 +445,8 @@ function initPanel_2_C(data) {
     stack_tooltip
       .html("Gender: " + subgroupName + "<br>" + "Amount: " + subgroupValue)
       .style("color", "white")
-      .style("left", d3.event.pageX + 30 + "px")
-      .style("top", d3.event.pageY + "px");
+      .style("left", d3.event.pageX - 20 + "px")
+      .style("top", d3.event.pageY - 120 + "px");
   };
   let stack_mouseleave = function (d) {
     stack_tooltip.style("opacity", 0);
@@ -611,8 +611,8 @@ function initPanel_2_D(data) {
     stack_tooltip
       .html("Gender: " + subgroupName + "<br>" + "Amount: " + subgroupValue)
       .style("color", "white")
-      .style("left", d3.event.pageX + 30 + "px")
-      .style("top", d3.event.pageY + "px");
+      .style("left", d3.event.pageX - 20 + "px")
+      .style("top", d3.event.pageY - 120 + "px");
   };
   let stack_mouseleave = function (d) {
     stack_tooltip.style("opacity", 0);
@@ -780,8 +780,8 @@ function initPanel_2_E(data) {
     stack_tooltip
       .html("Gender: " + subgroupName + "<br>" + "Amount: " + subgroupValue)
       .style("color", "white")
-      .style("left", d3.event.pageX + 30 + "px")
-      .style("top", d3.event.pageY + "px");
+      .style("left", d3.event.pageX - 20 + "px")
+      .style("top", d3.event.pageY - 120 + "px");
   };
   let stack_mouseleave = function (d) {
     stack_tooltip.style("opacity", 0);
@@ -950,8 +950,8 @@ function initPanel_2(data) {
     stack_tooltip
       .html("Gender: " + subgroupName + "<br>" + "Amount: " + subgroupValue)
       .style("color", "white")
-      .style("left", d3.event.pageX + 30 + "px")
-      .style("top", d3.event.pageY + "px");
+      .style("left", d3.event.pageX - 20 + "px")
+      .style("top", d3.event.pageY - 120 + "px");
   };
   let stack_mouseleave = function (d) {
     stack_tooltip.style("opacity", 0);
@@ -1182,28 +1182,27 @@ d3.csv(csvFilePath).then(function (data) {
   ]);
 
   // Render the Grid.js table
-  new gridjs.Grid({
-    columns: ["Group", "Female", "Male"],
-    data: processedData1,
-    pagination: {
-      limit: 6,
-      summary: false,
-    },
-    sort: true,
-    search: false,
-  }).render(document.getElementById("panel2_table-container1"));
+  $(document).ready(function () {
+    // Processed Data 1
+    $("#panel2_table-container1").DataTable({
+      data: processedData1,
+      columns: [{ title: "Group" }, { title: "Female" }, { title: "Male" }],
+      paging: false,
+      ordering: true,
+      searching: false,
+      info: false,
+    });
 
-  // Render the Grid.js table
-  new gridjs.Grid({
-    columns: ["Group", "Female", "Male"],
-    data: processedData2,
-    pagination: {
-      limit: 6,
-      summary: false,
-    },
-    sort: true,
-    search: false,
-  }).render(document.getElementById("panel2_table-container2"));
+    // Processed Data 2
+    $("#panel2_table-container2").DataTable({
+      data: processedData2,
+      columns: [{ title: "Group" }, { title: "Female" }, { title: "Male" }],
+      paging: false,
+      ordering: true,
+      searching: false,
+      info: false,
+    });
+  });
 });
 
 d3.csv(csvFilePath).then(function (data) {

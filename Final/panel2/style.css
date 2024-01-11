@@ -51,17 +51,18 @@ h1 {
     height: 530px;
     padding: 1px;   
     overflow: auto;
+    border: #333 solid 1px;
+    border-radius: 10px;
+    padding: 5%;
+
 }  
 .panel2_sub-right1 {
     margin: 30px;
     width: 700px;
-    height: 250px;
+    height: 100%;
     padding: 1px;
-}  
-.panel2_sub-right2 {
-    margin: 30px;
-    width: 700px;
-    height: 50px;
+    border: #333 solid 1px;
+    border-radius: 5%;
 }  
 .panel2_left .panel2_row {
     display: flex;
@@ -71,7 +72,8 @@ h1 {
 .panel2_left .panel2_row .panel2_box {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #333;
+    border-radius: 10px;
 }
 
 .panel2_sub-right .panel2_row {
@@ -129,4 +131,16 @@ h1 {
 
   .panel2_tooltip {
     position: absolute;
+}
+#panel2_table-container1{
+    width: 100%;
+}
+#panel2_table-container2{
+    width:  100%;
+}
+/* #panel2_bgbox4{
+    border: #333 1px solid;
+} */
+#panel2_bgbox4 h3 {
+    margin:0 auto ;
 }

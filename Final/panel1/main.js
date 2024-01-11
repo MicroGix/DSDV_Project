@@ -68,7 +68,15 @@ function drawGenderPieChart(csvFilePath, width, height) {
       })
       .on("mouseover", function (d) {
         // Display tooltip with gender and proportion information
-        tooltip.transition().duration(800).style("opacity", 1);
+        tooltip
+          .transition()
+          .duration(800)
+          .style("opacity", 1)
+          .style("background-color", "black")
+          .style("border", "1px solid black")
+          .style("border-radius", "5px")
+          .style("padding", "10px")
+          .style("color", "#fff");
         tooltip
           .html(d.data.gender + "<br/>" + getPercentage(d, genderData) + "%")
           .style("left", d3.event.pageX + 10 + "px")
@@ -184,7 +192,11 @@ function drawGenderPieChart(csvFilePath, width, height) {
 }
 
 // Pie chart
-drawGenderPieChart("https://raw.githubusercontent.com/MicroGix/Influence-of-factors-on-students-performence/main/main_data.csv", 500, 300);
+drawGenderPieChart(
+  "https://raw.githubusercontent.com/MicroGix/Influence-of-factors-on-students-performence/main/main_data.csv",
+  500,
+  300
+);
 
 function drawGroupPieChart(csvFilePath, width, height) {
   var customWidth = width;
@@ -233,7 +245,12 @@ function drawGroupPieChart(csvFilePath, width, height) {
         .select("body")
         .append("div")
         .attr("class", "tooltip")
-        .style("opacity", 0);
+        .style("opacity", 0)
+        .style("background-color", "black")
+        .style("border", "1px solid black")
+        .style("border-radius", "5px")
+        .style("padding", "10px")
+        .style("color", "#fff");
 
       var arc = svg
         .selectAll(".arc")
@@ -339,7 +356,11 @@ function drawGroupPieChart(csvFilePath, width, height) {
   }
 }
 // count the number of students in dataset
-drawGroupPieChart("https://raw.githubusercontent.com/MicroGix/Influence-of-factors-on-students-performence/main/main_data.csv", 500, 300);
+drawGroupPieChart(
+  "https://raw.githubusercontent.com/MicroGix/Influence-of-factors-on-students-performence/main/main_data.csv",
+  500,
+  300
+);
 
 function countRows(csvFilePath) {
   d3.csv(csvFilePath).then(function (data) {
@@ -352,4 +373,6 @@ function countRows(csvFilePath) {
       .style("text-align", "center");
   });
 }
-countRows("https://raw.githubusercontent.com/MicroGix/Influence-of-factors-on-students-performence/main/main_data.csv");
+countRows(
+  "https://raw.githubusercontent.com/MicroGix/Influence-of-factors-on-students-performence/main/main_data.csv"
+);

@@ -24,67 +24,111 @@ view
     <div class="panel2_container">
         <!-- Mảng trái -->
         <div class="panel2_left">
-            <div class="panel2_row" id="panel2_rowtren">
-                <div class="panel2_box panel2_mangtren panel2_margintong" id="panel2_bgbox1">
-                    <!-- <h1>CSV Data Row Count</h1> -->
-                    <div class="panel2_row-count"></div>
-                    <div class="panel2_text" id="text">Total Students</div>
-                    </div>               
+          <div class="panel2_row" id="panel2_rowtren">
+            <div
+              class="panel2_box panel2_mangtren panel2_margintong"
+              id="panel2_bgbox1"
+            >
+              <!-- <h1>CSV Data Row Count</h1> -->
+              <div class="panel2_row-count"></div>
+              <div class="panel2_text" id="text">Total Students</div>
             </div>
-            <div class="panel2_row">
-                <div class="panel2_box panel2_margintong" id="panel2_bgbox3">
-                    <div class="panel2_row-count">Average of Total Marks by Lunch, Gender and Group</div>  
-                    <div id="panel2_table-container1"></div>
-                    <div id="panel2_table-container2"></div>
-                </div>               
-                </div>
+          </div>
+          <div class="panel2_row">
+            <div class="panel2_box panel2_margintong" id="panel2_bgbox3">
+              <div class="panel2_row-count">
+                Average of Total Marks by Lunch, Gender and Group
+              </div>
+              <table id="panel2_table-container1" style="width: 100%">
+                <thead>
+                  <tr>
+                    <th>Group</th>
+                    <th>Female</th>
+                    <th>Male</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- DataTable content will be dynamically generated here -->
+                </tbody>
+              </table>
+              <table id="panel2_table-container2" style="width: 100%">
+                <thead>
+                  <tr>
+                    <th>Group</th>
+                    <th>Female</th>
+                    <th>Male</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- DataTable content will be dynamically generated here -->
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
         <!-- Mảng phải -->
-        <div class = 'panel2_right'>
-            <div class = 'panel2_sub-right2'>
-                <div class="panel2_top-row">Lunch type preferred by gender</div>
-                <div class="panel2_box-color">
-                    <div class="panel2_person">
-                        <div class="panel2_color-box panel2_female"></div>
-                        <div class="panel2_person-info">
-                          <span class="panel2_gender-label">Female</span>                         
-                        </div>                       
-                      </div>                   
-                      <div class="panel2_person">
-                        <div class="panel2_color-box panel2_male"></div>
-                        <div class="panel2_person-info">
-                          <span class="panel2_gender-label">Male</span>                        
-                        </div>                       
-                      </div>                    
+        <div class="panel2_right">
+          <div class="panel2_sub-right">
+            <div class="panel2_sub-right2">
+              <div class="panel2_top-row">Lunch type preferred by gender</div>
             </div>
-            </div>
-            <div class="panel2_sub-right">
-                <div class="panel2_row">
-                    <div class="panel2_small-box margintong" id="panel2_smbox2">
-                        Group A
-                    </div>
-                    <div class="panel2_small-box margintong" id="panel2_smbox3">Group B</div>
+            <div class="panel2_box-color">
+              <div class="panel2_person">
+                <div class="panel2_color-box panel2_female"></div>
+                <div class="panel2_person-info">
+                  <span class="panel2_gender-label">Female</span>
                 </div>
-                <div class="panel2_row">
-                    <div class="panel2_small-box margintong" id="panel2_smbox4">Group C</div>
-                    <div class="panel2_small-box margintong" id="panel2_smbox5">Group D</div>
+              </div>
+              <div class="panel2_person">
+                <div class="panel2_color-box panel2_male"></div>
+                <div class="panel2_person-info">
+                  <span class="panel2_gender-label">Male</span>
                 </div>
-                <div class="panel2_row">
-                    <div class="panel2_small-box margintong" id="panel2_smbox6">Group E</div>
-                    <div class="panel2_small-box margintong" id="panel2_smbox7">All Group</div>
-                </div>               
+              </div>
             </div>
-            <div class ='panel2_sub-right1'>
+            <div class="panel2_row">
+              <div class="panel2_small-box margintong" id="panel2_smbox2">
+                Group A
+              </div>
+              <div class="panel2_small-box margintong" id="panel2_smbox3">
+                Group B
+              </div>
+            </div>
+            <div class="panel2_row">
+              <div class="panel2_small-box margintong" id="panel2_smbox4">
+                Group C
+              </div>
+              <div class="panel2_small-box margintong" id="panel2_smbox5">
+                Group D
+              </div>
+            </div>
+            <div class="panel2_row">
+              <div class="panel2_small-box margintong" id="panel2_smbox6">
+                Group E
+              </div>
+              <div class="panel2_small-box margintong" id="panel2_smbox7">
+                All Group
+              </div>
+            </div>
+          </div>
+          <div class="panel2_sub-right1">
             <div class="panel2_box margintong" id="panel2_bgbox4">
-                <h3 style="font-size: 30px;">Conclusion  </h3>
-                <p1 class="panel2_text">• Students Prefer "Standard Lunch" over "Free/ Reduced".<br></p1>
-                <p1 class="panel2_text">• Group C has most number of Students opted for "Standard Lunch".<br></p1>
-                <p1 class="panel2_text">• Students who prefer "Standard Lunch" scored higher marks as compared to "Free/Reduced".<br></p1>
-             </div>
-        
+              <h3 style="font-size: 30px">Conclusion</h3>
+              <p1 class="panel2_text"
+                >• Students Prefer "Standard Lunch" over "Free/ Reduced".<br
+              /></p1>
+              <p1 class="panel2_text"
+                >• Group C has most number of Students opted for "Standard
+                Lunch".<br
+              /></p1>
+              <p1 class="panel2_text"
+                >• Students who prefer "Standard Lunch" scored higher marks as
+                compared to "Free/Reduced".<br
+              /></p1>
             </div>
+          </div>
         </div>
-    </div>
+      </div>
 
     <script src="./main.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>

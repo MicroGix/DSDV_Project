@@ -136,15 +136,39 @@
                 <div class="panel2_row-count">
                   Average of Total Marks by Lunch, Gender and Group
                 </div>
-                <div id="panel2_table-container1"></div>
-                <div id="panel2_table-container2"></div>
+                <table id="panel2_table-container1" style="width: 100%">
+                  <thead>
+                    <tr>
+                      <th>Group</th>
+                      <th>Female</th>
+                      <th>Male</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- DataTable content will be dynamically generated here -->
+                  </tbody>
+                </table>
+                <table id="panel2_table-container2" style="width: 100%">
+                  <thead>
+                    <tr>
+                      <th>Group</th>
+                      <th>Female</th>
+                      <th>Male</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- DataTable content will be dynamically generated here -->
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
           <!-- Mảng phải -->
           <div class="panel2_right">
-            <div class="panel2_sub-right2">
-              <div class="panel2_top-row">Lunch type preferred by gender</div>
+            <div class="panel2_sub-right">
+              <div class="panel2_sub-right2">
+                <div class="panel2_top-row">Lunch type preferred by gender</div>
+              </div>
               <div class="panel2_box-color">
                 <div class="panel2_person">
                   <div class="panel2_color-box panel2_female"></div>
@@ -159,8 +183,6 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="panel2_sub-right">
               <div class="panel2_row">
                 <div class="panel2_small-box margintong" id="panel2_smbox2">
                   Group A
@@ -251,7 +273,11 @@
           <div class="panel4_left">
             <!-- First row -->
             <div class="panel4_row" id="panel4_row-top">
-              <div class="panel4_box panel4_top-margin" id="panel4_box-1"></div>
+              <div class="panel4_box panel4_top-margin" id="panel4_box-1">
+                <h2 style="text-align: center; font-size: x-large">
+                  Proportion of Students by Parental Degrees
+                </h2>
+              </div>
             </div>
             <!-- Second row -->
             <div class="panel4_row">
@@ -312,7 +338,11 @@
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/gridjs-preset-default@latest"></script>
     <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sortable/0.9.13/jquery-sortable-min.js" integrity="sha512-9pm50HHbDIEyz2RV/g2tn1ZbBdiTlgV7FwcQhIhvykX6qbQitydd6rF19iLmOqmJVUYq90VL2HiIUHjUMQA5fw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-   
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sortable/0.9.13/jquery-sortable-min.js"
+      integrity="sha512-9pm50HHbDIEyz2RV/g2tn1ZbBdiTlgV7FwcQhIhvykX6qbQitydd6rF19iLmOqmJVUYq90VL2HiIUHjUMQA5fw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
   </body>
 </html>

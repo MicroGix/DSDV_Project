@@ -17,7 +17,6 @@ d3.csv("../panel4/main_data.csv").then(function (data) {
   // Define the width and height of the chart
   var customWidth = 365;
   var customHeight = 365;
-
   // Select the location to draw the chart
   var svg = d3
     .select("#panel4_box-1")
@@ -29,17 +28,6 @@ d3.csv("../panel4/main_data.csv").then(function (data) {
       "transform",
       "translate(" + customWidth / 2 + "," + customHeight / 2 + ")"
     );
-
-  // Add a title to the top of the pie chart
-  svg
-    .append("text")
-    .attr("x", 0) // Center the text
-    .attr("y", -customHeight / 2 + 40) // Position the text at the top
-    .attr("text-anchor", "middle")
-    .style("font-size", "18px")
-    .style("font-weight", "bold")
-    .style("font-family", "Segoe UI")
-    .text("Proportion of Students by Parental Degrees");
 
   // Create a pie chart
   var pie = d3.pie().value(function (d) {
@@ -69,7 +57,12 @@ d3.csv("../panel4/main_data.csv").then(function (data) {
     .select("body")
     .append("div")
     .attr("class", "tooltip")
-    .style("opacity", 0);
+    .style("opacity", 0)
+    .style("background-color", "black")
+    .style("border", "1px solid black")
+    .style("border-radius", "5px")
+    .style("padding", "10px")
+    .style("color", "#fff");
   var arc = svg
     .selectAll(".arc")
     .data(pie(pieData))
@@ -117,7 +110,15 @@ d3.csv("../panel4/main_data.csv").then(function (data) {
     })
     .on("mouseout", function (d) {
       // Hide tooltip on mouseout
-      tooltip.transition().duration(500).style("opacity", 0);
+      tooltip
+        .transition()
+        .duration(500)
+        .style("opacity", 0)
+        .style("background-color", "black")
+        .style("border", "1px solid black")
+        .style("border-radius", "5px")
+        .style("padding", "10px")
+        .style("color", "#fff");
 
       // Reset the color of the corresponding bar in the bar chart
       d3.select("#panel4_box-2")
@@ -141,16 +142,7 @@ d3.csv("../panel4/main_data.csv").then(function (data) {
     .select("#panel4_box-1") // Change the selection to the desired element
     .append("svg")
     .attr("width", customWidth - 200)
-    .attr("height", customHeight - 200 + 20); // Adjust the height as needed
-
-  svgLegend
-    .append("text")
-    .attr("x", 0)
-    .attr("y", 20)
-    .style("font-size", "12px")
-    .style("font-weight", "bold")
-    .style("font-family", "Segoe UI")
-    .text("Parental level of education");
+    .attr("height", customHeight - 100 + 20); // Adjust the height as needed
 
   var legend2 = svgLegend
     .selectAll(".legend2")
@@ -454,16 +446,16 @@ d3.csv("../panel4/main_data.csv").then(function (data) {
         },
       },
     ],
-    paging:true,
+    paging: true,
     pageLength: 5,
     info: false,
     searching: true,
   });
 });
-$('#panel4_box-4 tbody').on('mouseenter', 'tr', function () {
-  $(this).css('background-color', '#f5f5f5');
+$("#panel4_box-4 tbody").on("mouseenter", "tr", function () {
+  $(this).css("background-color", "#f5f5f5");
 });
 
-$('#panel4_box-4 tbody').on('mouseleave', 'tr', function () {
-  $(this).css('background-color', '');
+$("#panel4_box-4 tbody").on("mouseleave", "tr", function () {
+  $(this).css("background-color", "");
 });
