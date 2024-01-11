@@ -15,8 +15,8 @@ d3.csv("../panel4/main_data.csv").then(function (data) {
   });
 
   // Define the width and height of the chart
-  var customWidth = 450;
-  var customHeight = 450;
+  var customWidth = 365;
+  var customHeight = 365;
 
   // Select the location to draw the chart
   var svg = d3
@@ -34,12 +34,12 @@ d3.csv("../panel4/main_data.csv").then(function (data) {
   svg
     .append("text")
     .attr("x", 0) // Center the text
-    .attr("y", -customHeight / 2 + 50) // Position the text at the top
+    .attr("y", -customHeight / 2 + 40) // Position the text at the top
     .attr("text-anchor", "middle")
-    .style("font-size", "20px")
+    .style("font-size", "18px")
     .style("font-weight", "bold")
     .style("font-family", "Segoe UI")
-    .text("Proportion of Students by Parent's Degree");
+    .text("Proportion of Students by Parental Degrees");
 
   // Create a pie chart
   var pie = d3.pie().value(function (d) {
@@ -113,7 +113,7 @@ d3.csv("../panel4/main_data.csv").then(function (data) {
       d3.select(this)
         .transition()
         .duration(350)
-        .attr("transform", "scale(1.1)");
+        .attr("transform", "scale(1.125)");
     })
     .on("mouseout", function (d) {
       // Hide tooltip on mouseout
@@ -127,12 +127,8 @@ d3.csv("../panel4/main_data.csv").then(function (data) {
         });
 
       // Reset the scale
-    d3.select(this)
-    .transition()
-    .duration(350)
-    .attr("transform", "scale(1)");
-});
-
+      d3.select(this).transition().duration(350).attr("transform", "scale(1)");
+    });
 
   function getPercentage(d, data) {
     var totalCount = data.reduce(function (acc, curr) {
@@ -142,53 +138,53 @@ d3.csv("../panel4/main_data.csv").then(function (data) {
   }
 
   var svgLegend = d3
-.select("#panel4_box-1") // Change the selection to the desired element
-.append("svg")
-.attr("width", customWidth-200)
-.attr("height", customHeight-200); // Adjust the height as needed
+    .select("#panel4_box-1") // Change the selection to the desired element
+    .append("svg")
+    .attr("width", customWidth - 200)
+    .attr("height", customHeight - 200 + 20); // Adjust the height as needed
 
-svgLegend.append("text") // Add this line
-.attr("x", 30)
-.attr("y", 20)
-.style("font-size", "15px")
-.style("font-weight", "bold")
-.style("font-family", "Segoe UI")
-.text("Parental level of education");
+  svgLegend
+    .append("text")
+    .attr("x", 0)
+    .attr("y", 20)
+    .style("font-size", "12px")
+    .style("font-weight", "bold")
+    .style("font-family", "Segoe UI")
+    .text("Parental level of education");
 
-var legend2 = svgLegend.selectAll(".legend2")
-.data(pieData)
-.enter()
-.append("g")
-.attr("class", "legend2")
-.attr("transform", function (d, i) {
-  return "translate(" + (customWidth - 250) + "," + (i * 25 + 40) + ")"; // Adjust the translation as needed
-});
-
-// Rest of your legend code...
-
+  var legend2 = svgLegend
+    .selectAll(".legend2")
+    .data(pieData)
+    .enter()
+    .append("g")
+    .attr("class", "legend2")
+    .attr("transform", function (d, i) {
+      return "translate(" + (customWidth - 220) + "," + (i * 25 + 40) + ")"; // Adjust the translation as needed
+    });
 
   // Add colored squares to the legend
   legend2
     .append("rect")
-    .attr("width", 18)
-    .attr("height", 18)
+    .attr("width", 12)
+    .attr("height", 12)
     .attr("fill", function (d) {
       return color(d.customGroup);
     });
 
   // Add text labels to the legend
-legend2
-.append("text")
-.attr("x", -25)
-.attr("y", 9)
-.attr("dy", ".35em")
-.style("text-anchor", "end")
-.text(function (d) {
-return d.customGroup.replace(/\b\w/g, function(l){ return l.toUpperCase() });
+  legend2
+    .append("text")
+    .attr("x", -8)
+    .attr("y", 7)
+    .attr("dy", ".20em")
+    .style("font-family", "Segoe UI")
+    .style("text-anchor", "end")
+    .text(function (d) {
+      return d.customGroup.replace(/\b\w/g, function (l) {
+        return l.toUpperCase();
+      });
+    });
 });
-
-});
-
 
 // Create bar chart
 
@@ -287,7 +283,9 @@ d3.csv("../panel4/main_data.csv").then(function (data) {
     .append("g")
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(x))
-    .attr("color", "black"); // Change "red" to any color you want
+    .attr("color", "black")
+    .style("font-family", "Segoe UI")
+    .style("font-size", "10px");
 
   // Add the y-axis
   svg
@@ -299,8 +297,9 @@ d3.csv("../panel4/main_data.csv").then(function (data) {
         });
       })
     )
-    .style("font-size", "10px")
-    .attr("color", "black"); // Change "blue" to any color you want
+    .style("font-family", "Segoe UI")
+    .style("font-size", "11px")
+    .attr("color", "black");
 
   // Add the bars
   var bars = svg
@@ -309,7 +308,7 @@ d3.csv("../panel4/main_data.csv").then(function (data) {
     .enter()
     .append("rect")
     .attr("class", "bar")
-    .attr("x", 0)
+    .attr("x", 1.5)
     .attr("height", y.bandwidth())
     .attr("y", function (d) {
       return y(d.group);
@@ -327,13 +326,15 @@ d3.csv("../panel4/main_data.csv").then(function (data) {
     .enter()
     .append("text")
     .attr("class", "label")
+    .style("font-family", "Segoe UI")
+    .style("font-size", "12px")
     // Position text at the end of the bar
     .attr("y", function (d) {
       return y(d.group) + y.bandwidth() / 2 + 5;
-    }) // Adjust '5' as needed
+    })
     .attr("x", function (d) {
       return x(d.avg) + 5;
-    }) // Adjust '3' as needed
+    })
     // Align the text to the left
     .attr("text-anchor", "start")
     // Display the value
@@ -346,7 +347,7 @@ d3.csv("../panel4/main_data.csv").then(function (data) {
     .attr("x", width / 2) // Center the text
     .attr("y", -20) // Position the text at the very top
     .attr("text-anchor", "middle") // Ensure the text is centered
-    .style("font-size", "21px")
+    .style("font-size", "24px")
     .style("font-weight", "bold")
     .style("font-family", "Segoe UI")
     .text("The total mark of Student by Parent's Dergree");
@@ -374,29 +375,64 @@ d3.csv("../panel4/main_data.csv").then(function (data) {
 });
 
 // Load the data from the CSV file
+// d3.csv("../panel4/main_data.csv").then(function (data) {
+//   // Calculate the total score for each student and add it to the data
+//   data.forEach(function (d) {
+//     d.totalScore = +d["math score"] + +d["reading score"] + +d["writing score"];
+//   });
+
+//   // Sort the data by total score in descending order
+//   data.sort(function (a, b) {
+//     return b.totalScore - a.totalScore;
+//   });
+
+//   // Create the DataTable
+//   var table = $("#panel4_box-4").DataTable({
+//     data: data,
+//     columns: [
+//       { data: "name", title: "Name" },
+//       { data: "totalScore", title: "Total Score" },
+//       { data: "parent degrees", title: "Parent's Degree" },
+//     ],
+//     order: [[1, "desc"]],
+//     dom: "Bfrtip",
+//     buttons: [
+//       {
+//         text: "Sort Ascending",
+//         action: function (e, dt, node, config) {
+//           dt.order([1, "asc"]).draw();
+//         },
+//       },
+//       {
+//         text: "Sort Descending",
+//         action: function (e, dt, node, config) {
+//           dt.order([1, "desc"]).draw();
+//         },
+//       },
+//     ],
+//     paging: true,
+//     pageLength: 5,
+//     info: false,
+//     searching: false,
+//   });
+// });
 d3.csv("../panel4/main_data.csv").then(function (data) {
   // Calculate the total score for each student and add it to the data
   data.forEach(function (d) {
     d.totalScore = +d["math score"] + +d["reading score"] + +d["writing score"];
   });
 
-  // Sort the data by total score in descending order and take the top 5
-  var topStudents = data
-    .sort(function (a, b) {
-      return b.totalScore - a.totalScore;
-    })
-    .slice(0, 5);
+  // Sort the data by total score in descending order
+  data.sort(function (a, b) {
+    return b.totalScore - a.totalScore;
+  });
 
-  // Sort the data by total score in ascending order and take the top 5
-  var bottomStudents = data
-    .sort(function (a, b) {
-      return a.totalScore - b.totalScore;
-    })
-    .slice(0, 5);
+  // Keep only the top 5 and bottom 5 rows
+  var filteredData = data.slice(0, 5).concat(data.slice(-5));
 
   // Create the DataTable
-  $("#panel4_box-4").DataTable({
-    data: topStudents,
+  var table = $("#panel4_box-4").DataTable({
+    data: filteredData,
     columns: [
       { data: "name", title: "Name" },
       { data: "totalScore", title: "Total Score" },
@@ -408,22 +444,26 @@ d3.csv("../panel4/main_data.csv").then(function (data) {
       {
         text: "Sort Ascending",
         action: function (e, dt, node, config) {
-          dt.clear();
-          dt.rows.add(bottomStudents);
-          dt.draw();
+          dt.order([1, "asc"]).draw();
         },
       },
       {
         text: "Sort Descending",
         action: function (e, dt, node, config) {
-          dt.clear();
-          dt.rows.add(topStudents);
-          dt.draw();
+          dt.order([1, "desc"]).draw();
         },
       },
     ],
-    paging: false,
+    paging:true,
+    pageLength: 5,
     info: false,
-    searching: false,
+    searching: true,
   });
+});
+$('#panel4_box-4 tbody').on('mouseenter', 'tr', function () {
+  $(this).css('background-color', '#f5f5f5');
+});
+
+$('#panel4_box-4 tbody').on('mouseleave', 'tr', function () {
+  $(this).css('background-color', '');
 });

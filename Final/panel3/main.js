@@ -358,7 +358,7 @@ function initPanel_3(data) {
         return d.value;
       })
       .style("text-align", "center")
-      .style("padding", "8px");
+      .style("padding", "10px");
 
     return table.node();
   }

@@ -1,14 +1,31 @@
 h1 {
     text-align: center;
 }
-
-#panel2_row-count {
+.panel2_margintong{
+    margin: 10px;
+}
+.panel2_text {
+    font-size: 26px; 
+    margin: 30px;
+}
+.panel2_top-row {
     text-align: center;
     font-size: 24px;
-    margin-top: 20px;
+    margin-top: 10px;
+    
 }
-
-.header {
+.panel2_row-count {
+    text-align: center;
+    font-size: 22px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+  .panel2_mangtren{
+    width: 50px;
+    margin: 5px;
+    
+}
+.panel2_header {
     background-color: #333;
     color: white;
     padding: 20px;
@@ -20,27 +37,44 @@ h1 {
 }
 
 .panel2_left {
-    width: 40%;
+    width: 50%;
     padding: 20px;
 }
 
-.panel2_right {
+.panel2_right {  
     width: 60%;
-    padding: 20px;
+    height: 60%;
 }   
-
+.panel2_sub-right {
+    margin: 30px;
+    width: 700px;
+    height: 530px;
+    padding: 1px;   
+    overflow: auto;
+}  
+.panel2_sub-right1 {
+    margin: 30px;
+    width: 700px;
+    height: 250px;
+    padding: 1px;
+}  
+.panel2_sub-right2 {
+    margin: 30px;
+    width: 700px;
+    height: 50px;
+}  
 .panel2_left .panel2_row {
     display: flex;
     flex-wrap: wrap;
 }
 
-.panel2_left .panel2_box {
+.panel2_left .panel2_row .panel2_box {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
 }
 
-.panel2_right .panel2_row {
+.panel2_sub-right .panel2_row {
     display: flex;
 }
 
@@ -53,70 +87,46 @@ h1 {
 .panel2_right .panel2_small-box {
     width: 50%;
     padding: 10px;
-    border: 1px solid #ccc;
+   
 }
 
-.panel2_mangtren {
+.panel2_person {
     display: flex;
-    width: 50%;
-}
+    align-items: center;
+    
+    margin-bottom: 5px;
+  }
+  
+  .panel2_person-info {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+  }
+  
+  .panel2_color-box {
+    width: 20px;
+    height: 20px;
+    border: 2px solid black;
+    margin-right: 10px;
+  }
+  
+  .panel2_female {
+    background-color: #FFD966;
+  }
+  
+  .panel2_male {
+    background-color: #6096B4;
+  }
+  
+  .panel2_gender-label {
+    font-size: 16px;
+  }
+  
+  .panel2_additional-info {
+    font-size: 14px;
+    color: gray;
+  }
 
-#panel2_rowtren {
-    flex-wrap: nowrap;
-}
-
-.panel2_margintong {
-    margin: 10px;
-}
-
-#panel2_o1, #panel2_o2 {
-
-}
-
-#panel2_olon {
-    width: 100%; 
-    height: 500px; 
-    overflow: auto;
-}
-
-#panel2_olon .pvtRenderer {
-    width: 70%;
-}
-
-#panel2_olon .pvtRendererArea {
-    width: 80%;
-}
-
-.pvtTable {
-    width: 100%;
-    height: 100%;
-}
-
-.pvtRows {
-    width: 50px;
-}
-
-#panel2_on1 {
-    width: 80%;
-}
-
-#panel2_olon table {
-    font-size: 16px; 
-    line-height: 1.5; 
-    padding: 10px; 
-    margin: 0;
-}
-
-.pvtAggregator {
-    width: 90px;
-}
-
-.pvtAxisContainer .pvtUnused .pvtUiCell .pvtVertList {
-    width: 0px;
-}
-
-#panel2_o4 {
-    width: 100%; 
-    height: 150px; 
-    overflow: auto;
+  .panel2_tooltip {
+    position: absolute;
 }

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./slider.css" />
     <!-- link to Panel2 css -->
+    <link rel="stylesheet" href="../panel2/style.css" />
     <!-- link to Panel3 css -->
     <link rel="stylesheet" href="../panel3/style.css" />
     <!-- link to Panel4 css -->
@@ -114,7 +115,96 @@
           </div>
         </div>
       </div>
+
       <!-- Panel 2 here -->
+      <div class="mySlides fade" style="height: 900px">
+        <div class="panel2_container">
+          <!-- Mảng trái -->
+          <div class="panel2_left">
+            <div class="panel2_row" id="panel2_rowtren">
+              <div
+                class="panel2_box panel2_mangtren panel2_margintong"
+                id="panel2_bgbox1"
+              >
+                <!-- <h1>CSV Data Row Count</h1> -->
+                <div class="panel2_row-count"></div>
+                <div class="panel2_text" id="text">Total Students</div>
+              </div>
+            </div>
+            <div class="panel2_row">
+              <div class="panel2_box panel2_margintong" id="panel2_bgbox3">
+                <div class="panel2_row-count">
+                  Average of Total Marks by Lunch, Gender and Group
+                </div>
+                <div id="panel2_table-container1"></div>
+                <div id="panel2_table-container2"></div>
+              </div>
+            </div>
+          </div>
+          <!-- Mảng phải -->
+          <div class="panel2_right">
+            <div class="panel2_sub-right2">
+              <div class="panel2_top-row">Lunch type preferred by gender</div>
+              <div class="panel2_box-color">
+                <div class="panel2_person">
+                  <div class="panel2_color-box panel2_female"></div>
+                  <div class="panel2_person-info">
+                    <span class="panel2_gender-label">Female</span>
+                  </div>
+                </div>
+                <div class="panel2_person">
+                  <div class="panel2_color-box panel2_male"></div>
+                  <div class="panel2_person-info">
+                    <span class="panel2_gender-label">Male</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel2_sub-right">
+              <div class="panel2_row">
+                <div class="panel2_small-box margintong" id="panel2_smbox2">
+                  Group A
+                </div>
+                <div class="panel2_small-box margintong" id="panel2_smbox3">
+                  Group B
+                </div>
+              </div>
+              <div class="panel2_row">
+                <div class="panel2_small-box margintong" id="panel2_smbox4">
+                  Group C
+                </div>
+                <div class="panel2_small-box margintong" id="panel2_smbox5">
+                  Group D
+                </div>
+              </div>
+              <div class="panel2_row">
+                <div class="panel2_small-box margintong" id="panel2_smbox6">
+                  Group E
+                </div>
+                <div class="panel2_small-box margintong" id="panel2_smbox7">
+                  All Group
+                </div>
+              </div>
+            </div>
+            <div class="panel2_sub-right1">
+              <div class="panel2_box margintong" id="panel2_bgbox4">
+                <h3 style="font-size: 30px">Conclusion</h3>
+                <p1 class="panel2_text"
+                  >• Students Prefer "Standard Lunch" over "Free/ Reduced".<br
+                /></p1>
+                <p1 class="panel2_text"
+                  >• Group C has most number of Students opted for "Standard
+                  Lunch".<br
+                /></p1>
+                <p1 class="panel2_text"
+                  >• Students who prefer "Standard Lunch" scored higher marks as
+                  compared to "Free/Reduced".<br
+                /></p1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!-- Panel 3 here -->
       <div class="mySlides fade" style="height: 900px">
@@ -209,7 +299,7 @@
     <script src="./table.js"></script>
     <script src="./slider.js"></script>
     <!-- Link to panel2 -->
-
+    <script src="../panel2/main.js"></script>
     <!-- Link to panel3 -->
     <script src="../panel3/main.js"></script>
     <!-- Link to panel4 -->
@@ -220,5 +310,9 @@
       charset="utf8"
       src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/gridjs-preset-default@latest"></script>
+    <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sortable/0.9.13/jquery-sortable-min.js" integrity="sha512-9pm50HHbDIEyz2RV/g2tn1ZbBdiTlgV7FwcQhIhvykX6qbQitydd6rF19iLmOqmJVUYq90VL2HiIUHjUMQA5fw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+   
   </body>
 </html>
