@@ -152,3 +152,10 @@ h1 {
     font-size: 25px;
     font-weight: bold;
 }
+/* add mouse hover for row*/
+#panel2_table-container1 tbody tr:hover {
+    background-color: #d1ed7c;
+}
+#panel2_table-container2 tbody tr:hover {
+    background-color: #d1ed7c;
+}
