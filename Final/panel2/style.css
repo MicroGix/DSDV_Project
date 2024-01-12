@@ -5,7 +5,7 @@ h1 {
     margin: 10px;
 }
 .panel2_text {
-    font-size: 26px; 
+    font-size: 25px; 
     margin: 30px;
 }
 .panel2_top-row {
@@ -125,7 +125,7 @@ h1 {
   }
   
   .panel2_additional-info {
-    font-size: 14px;
+    font-size: 20px;
     color: gray;
   }
 
@@ -143,4 +143,12 @@ h1 {
 } */
 #panel2_bgbox4 h3 {
     margin:0 auto ;
+}
+.panel2_row-count {
+    font-size: 25px;
+    font-weight: bold;
+}
+.panel2_top-row {
+    font-size: 25px;
+    font-weight: bold;
 }

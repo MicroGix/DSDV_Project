@@ -366,48 +366,7 @@ d3.csv("../panel4/main_data.csv").then(function (data) {
     });
 });
 
-// Load the data from the CSV file
-// d3.csv("../panel4/main_data.csv").then(function (data) {
-//   // Calculate the total score for each student and add it to the data
-//   data.forEach(function (d) {
-//     d.totalScore = +d["math score"] + +d["reading score"] + +d["writing score"];
-//   });
 
-//   // Sort the data by total score in descending order
-//   data.sort(function (a, b) {
-//     return b.totalScore - a.totalScore;
-//   });
-
-//   // Create the DataTable
-//   var table = $("#panel4_box-4").DataTable({
-//     data: data,
-//     columns: [
-//       { data: "name", title: "Name" },
-//       { data: "totalScore", title: "Total Score" },
-//       { data: "parent degrees", title: "Parent's Degree" },
-//     ],
-//     order: [[1, "desc"]],
-//     dom: "Bfrtip",
-//     buttons: [
-//       {
-//         text: "Sort Ascending",
-//         action: function (e, dt, node, config) {
-//           dt.order([1, "asc"]).draw();
-//         },
-//       },
-//       {
-//         text: "Sort Descending",
-//         action: function (e, dt, node, config) {
-//           dt.order([1, "desc"]).draw();
-//         },
-//       },
-//     ],
-//     paging: true,
-//     pageLength: 5,
-//     info: false,
-//     searching: false,
-//   });
-// });
 d3.csv("../panel4/main_data.csv").then(function (data) {
   // Calculate the total score for each student and add it to the data
   data.forEach(function (d) {

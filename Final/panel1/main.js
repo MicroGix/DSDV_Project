@@ -133,9 +133,9 @@ function drawGenderPieChart(csvFilePath, width, height) {
     svg
       .append("text")
       .attr("x", width / 2)
-      .attr("y", 20)
+      .attr("y", 24)
       .attr("text-anchor", "middle")
-      .style("font-size", "25px")
+      .style("font-size", "28px")
       .style("font-weight", "bold")
       .text("Proportion of student genders");
     // add number label
@@ -331,7 +331,7 @@ function drawGroupPieChart(csvFilePath, width, height) {
         .attr("x", customWidth - 490)
         .attr("y", -125)
         .attr("text-anchor", "middle")
-        .style("font-size", "25px")
+        .style("font-size", "28px")
         .style("font-weight", "bold")
         .text("Proportion of student groups");
       slices
@@ -368,7 +368,7 @@ function countRows(csvFilePath) {
     // Update the DOM element with the row count and apply styling
     d3.select("#row-count")
       .html("<strong>Total Students:</strong> " + rowCount)
-      .style("font-size", "18px")
+      .style("font-size", "20px")
       .style("font-weight", "bold")
       .style("text-align", "center");
   });

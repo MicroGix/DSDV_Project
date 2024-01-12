@@ -132,7 +132,7 @@ width: 80%;
   }
 
   #data-table tbody tr:hover {
-    background-color: #ddd; /* Hover row background color */
+    background-color: #4aba89; /* Hover row background color */
   }
   
   .bold-row {
@@ -156,7 +156,7 @@ width: 80%;
   }
 
   #data_table_degree tbody tr:hover {
-    background-color: #ddd; /* Hover row background color */
+    background-color: #4aba89; /* Hover row background color */
   }
   .box1 #row-count {
     text-align: center;
@@ -208,4 +208,10 @@ tr.hovered-row:hover {
 
 tr.hovered-row:hover td {
     height: 70px; /* Set the desired height for the hovered cells */
+}
+strong {
+  font-size: 25px;
+  font-weight: bold;
+  /* make it central */
+  text-align: center;
 }

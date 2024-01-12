@@ -1208,5 +1208,9 @@ d3.csv(csvFilePath).then(function (data) {
 d3.csv(csvFilePath).then(function (data) {
   // Count the number of rows in the dataset
   var rowCount = data.length;
-  d3.select("#text").text("Total students: " + rowCount);
+  d3.select("#text").text("Total students: " + rowCount)
+  .style("font-size", "25x")
+  .style("font-weight", "bold");
 });
+d3.select("#text")
+  .style("text-align", "center");
