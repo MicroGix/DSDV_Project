@@ -34,7 +34,6 @@
     <li><a href="#Tool-Used">Tool Used</a></li>
     <li><a href="#features">Features</a></li>
     <li><a href="#challenges">Challenges</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
     <li><a href="#references">References</a></li>
   </ol>
 
