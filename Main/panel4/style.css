@@ -1,0 +1,158 @@
+/* CSS file */
+
+/* Header */
+.header {
+    background-color: rgb(18 35 158);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-family: "Segoe UI";
+    border-radius: 15px;
+    border-radius: 15px;
+    font-size: large;
+}
+
+/* Container */
+/* Custom Container */
+.panel4_container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* This will make the container take up the full height of the viewport */
+}
+
+/* First part (60%) */
+.panel4_container .panel4_left {
+    flex: 0.5; /* This will make the first part take up 60% of the container's height */
+    display: flex; /* This will make the first part's children lay out in a row */
+}
+
+/* First part's children */
+.panel4_container .panel4_left .panel4_row {
+    padding: 20px;
+    flex: 1; /* This will make the first part's children each take up an equal amount of space */
+    display: flex; /* This will make the row's children lay out in a row */
+}
+
+.panel4_container .panel4_left .panel4_row .panel4_box {
+    flex: 1; /* This will make the boxes each take up an equal amount of space */
+}
+
+/* Second part (40%) */
+.panel4_container .panel4_right {
+    padding: 20px;
+    flex: 0.5; /* This will make the second part take up 40% of the container's height */
+    display: flex; /* This will make the second part's children lay out in a row */
+    
+}
+
+.panel4_container .panel4_right #panel4_box-3 {
+    border: 1px solid #312222;
+    border-radius: 10px;
+    width:47%; /* This will make the #o3 take up less space */
+}
+
+.panel4_container .panel4_right #panel4_box-4 {
+    border: 1px solid #312222;
+    border-radius: 10px;
+    padding: 20px;
+
+}
+
+/* Content boxes */
+.panel4_box, .panel4_large-box, .panel4_small-box, .panel4_half-box {
+    border: 1px solid #ccc;
+    padding: 20px;
+    
+}
+
+.panel4_left .panel4_row .panel4_box {
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #312222;
+    border-radius: 10px;
+}
+.panel4_half-box {
+    border: 1px solid #312222;
+    border-radius: 10px;
+}
+
+.panel4_box {
+    border: 1px solid #312222;
+    border-radius: 10px; 
+    
+}
+
+.panel4_tooltip {
+    position: absolute;
+    text-align: center;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #312222;
+    border-radius: 5px;
+    
+}
+
+th {
+    background-color: rgb(18 35 158); /* Header background color */
+    color: white; /* Header text color */
+    font-size: 20px;
+    text-align: left;
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+}
+
+td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Sorting buttons */
+button.sort-asc, button.sort-desc {
+    border: none;
+    color: black;
+    padding: 3px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 8px;
+    margin: 3px 3px;
+    cursor: pointer;
+}
+
+#panel4_box-4 {
+    padding: 0;
+    margin: 0;
+    width: 205%;
+}
+
+.panel4_table-title {
+    text-align: center;
+    font-family: "Segoe UI", wf_segoe-ui_normal, helvetica, arial, sans-serif;
+}
+#panel4_box-4 {
+    font-family: 'Segoe UI';
+}
+.dataTable {
+    font-family: 'Segoe UI';
+}
+#panel4_box-4 tbody tr:hover {
+    background-color: #d1ed7c;
+}
+
+    
+
+  
+  
