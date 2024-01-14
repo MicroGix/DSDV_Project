@@ -123,11 +123,11 @@ Another challenge we faced was ensuring that our visualization was accurately re
 
 <!-- REFERENCES -->
 # References
-1. Seshapanpu, J. (2019). Student Performance In Exams. Available at: https://www.kaggle.com/code/spscientist/student-performance-in-exams/notebook (Accessed: 10 August 2023)
+1. Seshapanpu, J. (2019). Student Performance In Exams. Available at: https://www.kaggle.com/code/spscientist/student-performance-in-exams/notebook (Accessed: 25 Sept 2023)
 2. Holtz, Y. (n.d.). The D3 Graph Gallery – Simple charts made in d3.js. Available at: https://d3-graph-gallery.com/ (Accessed: 14 August 2023)
-3. PoojaSharma. (2023) Student Performance Dashboard. Available at: https://www.novypro.com/project/student-performance-dashboard-power-bi  (Accessed: 16 August 2023)
-4. W3Schools. (n.d.). Learn to Code - With the world's largest web developer site. Available at: https://www.w3schools.com/ai/ai_d3js.asp (Accessed: 16 August 2023)
-5. Observable. (n.d.). The JavaScript library for bespoke data visualization. Available at: https://d3js.org/ (Accessed: 16 August 2023)
+3. PoojaSharma. (2023) Student Performance Dashboard. Available at: https://www.novypro.com/project/student-performance-dashboard-power-bi  (Accessed: 29 Sept 2023)
+4. W3Schools. (n.d.). Learn to Code - With the world's largest web developer site. Available at: https://www.w3schools.com/ai/ai_d3js.asp (Accessed: 21 Sept 2023)
+5. Observable. (n.d.). The JavaScript library for bespoke data visualization. Available at: https://d3js.org/ (Accessed: 30 Sept 2023)
 <p align="right">(<a href="#header">Back to top</a>)</p>
 
 <!-- Badges link-->
