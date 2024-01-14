@@ -63,7 +63,7 @@
 - CSS
 - Web Browsers (Edge, Chrome, Firefox)
 
-**Install Game**: Navigate to your local project directory and add necessary packages (link D3 library and other CSS libraries)
+**Install Project**: Navigate to your local project directory, open main folder and add necessary packages (link D3 library and other CSS libraries).
 
 <!-- MOTIVATION -->
 ## Motivation 
