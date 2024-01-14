@@ -17,7 +17,7 @@
 
 <!-- Welcome line -->
 <p align="center">
-  Welcome to our repository  
+ This repository is the home of our exciting project on student performance visualization. Dive in to explore!  
 </p>
 
 <!-- TABLE OF CONTENTS -->
