@@ -29,7 +29,6 @@
         <li><a href="#Team-members">Team Members</a></li>
 	<li><a href="#installation">Installation</a></li>
 	<li><a href="#motivation">Motivation</a></li>
-	<li><a href="#task-allocation">Task Allocation</a></li>      
       </ul>
     </li>
     <li><a href="#Tool-Used">Tool Used</a></li>
@@ -86,14 +85,6 @@ By visualizing these factors, we aim to provide a comprehensive, intuitive, and 
 
 </p>
 
-<!-- TASK ALLOCATION -->
-## Task Allocation 
-| Order | Task                                  |  Person   | Contribution (%) |
-| :---- |:--------------------------------------| :-------: | :----------: |
-| 1     |  | Hong Son  |      25      |
-| 2     |  | Nhat Khiem |      25      |
-| 3     |  | Tri Tin |      25      |
-| 4     |  | Binh Nguyen  |      25      |
 
 <!-- TOOL USED -->
 # Tool Used
@@ -118,11 +109,13 @@ This data visualization project is designed to provide an insightful and interac
 3. **User-friendly Interface**: The interface is designed to be intuitive and easy to use, even for non-technical users. It includes clear labels, tooltips, and a help guide to assist users in navigating the dashboard.
 <!-- CHALLENGES -->
 # Challenges
-1. **Data Quality**: Ensuring the quality of the data being visualized is a significant challenge. The data needs to be accurate, complete, and relevant to provide meaningful insights.
-2.  **Creating Interactive Visualizations**: Designing and implementing interactive features in the visualizations can be technically challenging, especially when dealing with complex data and ensuring a smooth user experience.
-3.  
-<!-- ACKNOWLEDGMENTS -->
-# Acknowledgments
+1. **Familiarity to Web development suit**:
+As newcomers to JavaScript and web development, we faced a steep learning curve. Understanding the syntax, functionalities, and nuances of JavaScript, along with grasping the fundamentals of web development, was a significant challenge. We had to spend considerable time and effort in learning and practicing these skills before we could effectively apply them to our project.
+2. **Project size and control**:
+The sheer size of the project posed another difficulty. With multiple components and layers to manage, it was challenging to maintain control over each part. Ensuring that all parts worked together seamlessly required careful planning, coordination, and thorough testing. We had to adopt a systematic approach to break down the project into manageable tasks and monitor the progress of each task closely.
+3. **Cross device compatibility**:
+Another challenge we faced was ensuring that our visualization was accurately represented across different devices. Given the varying screen sizes and resolutions of devices, it was difficult to create a design that looked and functioned consistently. We had to consider factors like scalability and responsiveness to ensure that our visualization provided a uniform user experience, regardless of the device used.
+
 
 <p align="justify">
 
@@ -130,7 +123,11 @@ This data visualization project is designed to provide an insightful and interac
 
 <!-- REFERENCES -->
 # References
-
+1. Seshapanpu, J. (2019). Student Performance In Exams. Available at: https://www.kaggle.com/code/spscientist/student-performance-in-exams/notebook (Accessed: 10 August 2023)
+2. Holtz, Y. (n.d.). The D3 Graph Gallery – Simple charts made in d3.js. Available at: https://d3-graph-gallery.com/ (Accessed: 14 August 2023)
+3. PoojaSharma. (2023) Student Performance Dashboard. Available at: https://www.novypro.com/project/student-performance-dashboard-power-bi  (Accessed: 16 August 2023)
+4. W3Schools. (n.d.). Learn to Code - With the world's largest web developer site. Available at: https://www.w3schools.com/ai/ai_d3js.asp (Accessed: 16 August 2023)
+5. Observable. (n.d.). The JavaScript library for bespoke data visualization. Available at: https://d3js.org/ (Accessed: 16 August 2023)
 <p align="right">(<a href="#header">Back to top</a>)</p>
 
 <!-- Badges link-->
